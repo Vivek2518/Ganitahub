@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Privacy Policy — GanitaHub",
-  description: "Our privacy policy for GanitaHub calculators.",
+  title: "Privacy Policy — InsightCalculator",
+  description: "Our privacy policy for InsightCalculator calculators.",
 };
 
 export default function PrivacyPage() {
@@ -8,7 +8,7 @@ export default function PrivacyPage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-16 lg:px-8">
       <h1 className="text-3xl font-semibold">Privacy Policy</h1>
       <p className="mt-4 text-base text-muted-foreground">
-        GanitaHub is built with privacy in mind. We do not collect or store any
+        InsightCalculator is built with privacy in mind. We do not collect or store any
         personal information from users of our calculators. All calculations run
         locally in your browser.
       </p>

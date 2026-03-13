@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Terms & Conditions — GanitaHub",
-  description: "Terms and conditions for using GanitaHub.",
+  title: "Terms & Conditions — InsightCalculator",
+  description: "Terms and conditions for using InsightCalculator.",
 };
 
 export default function TermsPage() {
@@ -8,7 +8,7 @@ export default function TermsPage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-16 lg:px-8">
       <h1 className="text-3xl font-semibold">Terms & Conditions</h1>
       <p className="mt-4 text-base text-muted-foreground">
-        By using GanitaHub, you agree to use the calculators for informational
+        By using InsightCalculator, you agree to use the calculators for informational
         purposes only. While we strive for accuracy, the results are estimates
         and should not replace professional advice.
       </p>

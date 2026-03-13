@@ -4,11 +4,11 @@ import { calculators } from "@/data/calculators";
 import { CalculatorCard } from "@/components/CalculatorCard";
 
 export const metadata = {
-  title: "Calculators — GanitaHub",
+  title: "Calculators — InsightCalculator",
   description: "Browse all available calculators for finance, taxation, investment, and more.",
   keywords: "calculators, financial calculators, online tools, business calculators, investment calculators, tax calculators, loan calculators, free calculators",
   alternates: {
-    canonical: "https://ganitahub.vercel.app/calculators",
+    canonical: "https://insightcalculator.vercel.app/calculators",
   },
 };
 
@@ -18,7 +18,7 @@ export default function CalculatorsPage() {
       <header className="space-y-2">
         <h1 className="text-3xl font-semibold">All Calculators</h1>
         <p className="text-sm text-muted-foreground">
-          Search, filter, and explore all tools available at GanitaHub.
+          Search, filter, and explore all tools available at InsightCalculator.
         </p>
       </header>
       <div className="mt-8">

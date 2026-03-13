@@ -26,7 +26,7 @@ export function Navbar() {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             G
           </span>
-          <span className="text-lg">GanitaHub</span>
+          <span className="text-lg">InsightCalculator</span>
         </Link>
 
         <nav className="hidden items-center gap-4 md:flex">

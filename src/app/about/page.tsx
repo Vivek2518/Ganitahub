@@ -6,9 +6,9 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-16 lg:px-8">
-      <h1 className="text-3xl font-semibold">About GanitaHub</h1>
+      <h1 className="text-3xl font-semibold">About InsightCalculator</h1>
       <p className="mt-4 text-base text-muted-foreground">
-        GanitaHub is a collection of free, easy-to-use calculators to help you make
+        InsightCalculator is a collection of free, easy-to-use calculators to help you make
         better financial and business decisions. Whether you're tracking loans,
         planning investments, or optimizing creator revenue, our goal is to make
         complex formulas easy to understand.
@@ -17,7 +17,7 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold">Our mission</h2>
         <p className="text-base text-muted-foreground">
           We believe that everyone should have access to tools that help them
-          understand their finances and growth opportunities. GanitaHub is built
+          understand their finances and growth opportunities. InsightCalculator is built
           to be fast, mobile-friendly, and privacy focused.
         </p>
       </section>

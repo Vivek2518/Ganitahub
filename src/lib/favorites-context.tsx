@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-const STORAGE_KEY = "ganitahub:favorites";
+const STORAGE_KEY = "insightcalculator:favorites";
 
 type FavoritesContextType = {
   favorites: string[];

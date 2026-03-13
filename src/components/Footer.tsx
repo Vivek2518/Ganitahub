@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-border bg-background/80 py-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 sm:flex-row sm:items-start sm:justify-between lg:px-8">
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">GanitaHub</h3>
+          <h3 className="text-lg font-semibold">InsightCalculator</h3>
           <p className="max-w-sm text-sm text-muted-foreground">
             Smart online calculators for finance, business and creators—built with
             simplicity and accuracy in mind.
@@ -61,7 +61,7 @@ export function Footer() {
         </div>
       </div>
       <div className="mt-10 border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} GanitaHub. All rights reserved.
+        © {new Date().getFullYear()} InsightCalculator. All rights reserved.
       </div>
     </footer>
   );

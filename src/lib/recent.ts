@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useLocalStorage } from "@/lib/useLocalStorage";
 
-const STORAGE_KEY = "ganitahub:recent";
+const STORAGE_KEY = "insightcalculator:recent";
 const MAX_RECENT = 8;
 
 export function useRecent() {

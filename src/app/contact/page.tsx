@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Contact — GanitaHub",
-  description: "Get in touch with the GanitaHub team.",
+  title: "Contact — InsightCalculator",
+  description: "Get in touch with the InsightCalculator team.",
 };
 
 export default function ContactPage() {
@@ -14,7 +14,7 @@ export default function ContactPage() {
         <div className="rounded-2xl border border-border bg-card p-6">
           <h2 className="text-lg font-semibold">Support</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Send an email to <span className="text-foreground">support@ganitahub.com</span>
+            Send an email to <span className="text-foreground">support@insightcalculator.com</span>
           </p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-6">

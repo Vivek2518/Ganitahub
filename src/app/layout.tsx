@@ -6,23 +6,23 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "GanitaHub — Smart Calculators for Finance, Business & Creators",
+  title: "InsightCalculator — Smart Calculators for Finance, Business & Creators",
   description:
     "Free online calculators for finance, taxes, investments, business planning, and creator economy tools.",
   keywords: "free online calculators, financial calculators, business calculators, investment tools, tax calculators, loan calculators, EMI calculator, SIP calculator, GST calculator, savings calculator, creator tools",
   alternates: {
-    canonical: "https://ganitahub.vercel.app",
+    canonical: "https://insightcalculator.vercel.app",
   },
   openGraph: {
-    title: "GanitaHub — Smart Calculators",
+    title: "InsightCalculator — Smart Calculators",
     description:
       "Free online calculators for finance, taxes, investments, business planning, and creator economy tools.",
     type: "website",
-    url: "https://ganitahub.vercel.app",
+    url: "https://insightcalculator.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GanitaHub — Smart Calculators",
+    title: "InsightCalculator — Smart Calculators",
     description:
       "Free online calculators for finance, taxes, investments, business planning, and creator economy tools.",
   },

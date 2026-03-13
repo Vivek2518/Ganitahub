@@ -36,21 +36,21 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
   ].join(", ");
 
   return {
-    title: `${calculator.name} — GanitaHub`,
+    title: `${calculator.name} — InsightCalculator`,
     description: calculator.description,
     keywords,
     alternates: {
-      canonical: `https://ganitahub.vercel.app/calculators/${slug}`,
+      canonical: `https://insightcalculator.vercel.app/calculators/${slug}`,
     },
     openGraph: {
-      title: `${calculator.name} — GanitaHub`,
+      title: `${calculator.name} — InsightCalculator`,
       description: calculator.description,
       type: "website",
-      url: `https://ganitahub.vercel.app/calculators/${slug}`,
+      url: `https://insightcalculator.vercel.app/calculators/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${calculator.name} — GanitaHub`,
+      title: `${calculator.name} — InsightCalculator`,
       description: calculator.description,
     },
   };
@@ -65,7 +65,7 @@ export default async function CalculatorPage({ params }: { params: any }) {
   }
 
   const config = getCalculatorConfig(slug);
-  const canonicalUrl = `https://ganitahub.vercel.app/calculators/${slug}`;
+  const canonicalUrl = `https://insightcalculator.vercel.app/calculators/${slug}`;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -82,7 +82,7 @@ export default async function CalculatorPage({ params }: { params: any }) {
     },
     "creator": {
       "@type": "Organization",
-      "name": "GanitaHub",
+      "name": "InsightCalculator",
     },
     "featureList": config?.fields.map(field => field.label) || [],
   };
