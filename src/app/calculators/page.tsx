@@ -25,7 +25,7 @@ export default function CalculatorsPage() {
         <CalculatorSearch />
       </div>
       <div className="mt-10">
-        <CategorySection />
+        {/* <CategorySection /> */}
       </div>
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Explore everything</h2>
