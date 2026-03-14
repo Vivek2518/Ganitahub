@@ -1,0 +1,53 @@
+{
+  "slug": "startup-runway",
+  "name": "Startup Runway Calculator",
+  "description": "Show months of runway before funds run out.",
+  "category": "Business",
+  "fields": [
+    {
+      "key": "cash",
+      "label": "Cash Balance (₹)",
+      "type": "number",
+      "placeholder": "2500000"
+    },
+    {
+      "key": "burn",
+      "label": "Monthly Burn (₹)",
+      "type": "number",
+      "placeholder": "200000"
+    }
+  ],
+  "formula": "Runway (months) = Cash Balance / Monthly Burn",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "months",
+      "label": "Runway (months)",
+      "format": "number"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "cash": 2500000,
+      "burn": 200000
+    },
+    "outputs": {
+      "months": 12.5
+    },
+    "explanation": "Runway estimates how many months your startup can operate at current burn."
+  },
+  "faqs": [
+    {
+      "question": "What is burn rate?",
+      "answer": "It is the amount of cash spent each month to run the business."
+    },
+    {
+      "question": "How can I extend runway?",
+      "answer": "Reduce burn or increase funding / revenue."
+    },
+    {
+      "question": "Why is runway important?",
+      "answer": "It tells you how much time you have to reach profitability or secure funding."
+    }
+  ]
+}

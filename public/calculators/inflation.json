@@ -1,0 +1,66 @@
+{
+  "slug": "inflation",
+  "name": "Inflation Calculator",
+  "description": "Understand purchasing power changes over time.",
+  "category": "Savings",
+  "fields": [
+    {
+      "key": "amount",
+      "label": "Current Amount (₹)",
+      "type": "number",
+      "placeholder": "100000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Inflation (%)",
+      "type": "percentage",
+      "placeholder": "6"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "Future Value = Current Value * (1 + inflation)^years",
+  "computationType": "inflation",
+  "outputs": [
+    {
+      "key": "futureAmount",
+      "label": "Amount Needed in Future (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "purchasingPowerLoss",
+      "label": "Purchasing Power Loss (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "amount": 100000,
+      "rate": 6,
+      "years": 10
+    },
+    "outputs": {
+      "futureAmount": 179085.28,
+      "purchasingPowerLoss": 79085.28
+    },
+    "explanation": "This shows how much money you'll need in the future to match today's purchasing power."
+  },
+  "faqs": [
+    {
+      "question": "Why does inflation matter?",
+      "answer": "It reduces buying power over time, meaning you need more money to buy the same things."
+    },
+    {
+      "question": "Does this account for investment returns?",
+      "answer": "No, it only models the effect of inflation on purchasing power."
+    },
+    {
+      "question": "How can I beat inflation?",
+      "answer": "By investing in assets that return more than the inflation rate."
+    }
+  ]
+}

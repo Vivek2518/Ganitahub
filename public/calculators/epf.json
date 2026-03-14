@@ -1,0 +1,60 @@
+{
+  "slug": "epf",
+  "name": "EPF Calculator",
+  "description": "Estimate employee provident fund accumulation.",
+  "category": "Government",
+  "fields": [
+    {
+      "key": "salary",
+      "label": "Monthly Salary (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "10"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest (%)",
+      "type": "percentage",
+      "placeholder": "8.5"
+    }
+  ],
+  "formula": "EPF Balance ≈ (Employee + Employer) * years * 12 + interest",
+  "computationType": "epf",
+  "outputs": [
+    {
+      "key": "epfBalance",
+      "label": "EPF Balance (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "salary": 50000,
+      "years": 10,
+      "rate": 8.5
+    },
+    "outputs": {
+      "epfBalance": 1387500
+    },
+    "explanation": "This gives a rough projection of EPF with employee+employer contributions and interest."
+  },
+  "faqs": [
+    {
+      "question": "What is EPF?",
+      "answer": "Employee Provident Fund is a retirement savings scheme where both employer and employee contribute."
+    },
+    {
+      "question": "How is interest calculated?",
+      "answer": "Interest is calculated on the yearly running balance and credited annually."
+    },
+    {
+      "question": "Can I withdraw EPF before retirement?",
+      "answer": "Partial withdrawals are allowed for specific purposes like home purchase, education, or medical emergencies."
+    }
+  ]
+}

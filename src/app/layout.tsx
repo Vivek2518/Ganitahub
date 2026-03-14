@@ -5,20 +5,22 @@ import { FavoritesProvider } from "@/lib/favorites-context";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
+
 export const metadata: Metadata = {
   title: "InsightCalculator — Smart Calculators for Finance, Business & Creators",
   description:
     "Free online calculators for finance, taxes, investments, business planning, and creator economy tools.",
   keywords: "free online calculators, financial calculators, business calculators, investment tools, tax calculators, loan calculators, EMI calculator, SIP calculator, GST calculator, savings calculator, creator tools",
   alternates: {
-    canonical: "https://insightcalculator.vercel.app",
+    canonical: CANONICAL_DOMAIN,
   },
   openGraph: {
     title: "InsightCalculator — Smart Calculators",
     description:
       "Free online calculators for finance, taxes, investments, business planning, and creator economy tools.",
     type: "website",
-    url: "https://insightcalculator.vercel.app",
+    url: CANONICAL_DOMAIN,
   },
   twitter: {
     card: "summary_large_image",

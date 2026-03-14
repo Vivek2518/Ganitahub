@@ -1,8 +1,8 @@
 "use client";
 
-import { Calculator, getCalculatorBySlug } from "@/data/calculators";
 import { CalculatorCard } from "@/components/CalculatorCard";
 import { useFavorites } from "@/lib/favorites-context";
+import { getCalculatorBySlug } from "@/data/calculators";
 
 export function FavoriteCalculators() {
   const { favorites } = useFavorites();
@@ -13,7 +13,7 @@ export function FavoriteCalculators() {
 
   const favoriteCalculators = favorites
     .map((slug) => getCalculatorBySlug(slug))
-    .filter((calculator): calculator is Calculator => Boolean(calculator));
+    .filter((calc) => !!calc);
 
   if (favoriteCalculators.length === 0) return null;
 
@@ -27,7 +27,7 @@ export function FavoriteCalculators() {
       </header>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {favoriteCalculators.map((calculator) => (
-          <CalculatorCard key={calculator.slug} calculator={calculator} />
+          <CalculatorCard key={calculator!.slug} calculator={calculator!} />
         ))}
       </div>
     </section>

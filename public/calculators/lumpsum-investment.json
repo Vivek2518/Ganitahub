@@ -1,0 +1,67 @@
+{
+  "slug": "lumpsum-investment",
+  "name": "Lumpsum Investment Calculator",
+  "description": "Project the future value of a one-time investment.",
+  "category": "Investment",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Investment Amount (₹)",
+      "type": "number",
+      "placeholder": "100000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Return (%)",
+      "type": "percentage",
+      "placeholder": "12"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "5"
+    }
+  ],
+  "formula": "Future Value = P * (1 + r)^n",
+  "formulaDescription": "Simple compound growth formula",
+  "computationType": "lumpsum",
+  "outputs": [
+    {
+      "key": "futureValue",
+      "label": "Future Value (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "gain",
+      "label": "Gain (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 100000,
+      "rate": 12,
+      "years": 5
+    },
+    "outputs": {
+      "futureValue": 176234.17,
+      "gain": 76234.17
+    },
+    "explanation": "A one-time investment of ₹1,00,000 growing at 12% annually for 5 years reaches ₹1,76,234.17."
+  },
+  "faqs": [
+    {
+      "question": "Is return guaranteed?",
+      "answer": "Actual returns may vary; this calculator assumes a steady annual rate."
+    },
+    {
+      "question": "Does it account for inflation?",
+      "answer": "No, it shows nominal growth without adjusting for inflation."
+    },
+    {
+      "question": "Is this better than SIP?",
+      "answer": "Lumpsum can offer higher returns if markets perform well, but SIP provides more stability through cost averaging."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "slug": "income-split",
+  "name": "Income Split Calculator",
+  "description": "Split income based on percentage share.",
+  "category": "Business",
+  "fields": [
+    {
+      "key": "income",
+      "label": "Total Income (₹)",
+      "type": "number",
+      "placeholder": "1000000"
+    },
+    {
+      "key": "share",
+      "label": "Share (%)",
+      "type": "percentage",
+      "placeholder": "30"
+    }
+  ],
+  "formula": "Share = Total Income * Share Percentage",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "shareAmount",
+      "label": "Share Amount (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "remainingAmount",
+      "label": "Remaining Amount (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "income": 1000000,
+      "share": 30
+    },
+    "outputs": {
+      "shareAmount": 300000,
+      "remainingAmount": 700000
+    },
+    "explanation": "Split income based on percentage share between collaborators."
+  },
+  "faqs": [
+    {
+      "question": "What is this for?",
+      "answer": "Useful for splitting revenue, commissions, or ownership-based payouts."
+    },
+    {
+      "question": "Can shares exceed 100%?",
+      "answer": "No, shares should add up to 100% across participants."
+    },
+    {
+      "question": "Can I split multiple ways?",
+      "answer": "Yes, calculate each share separately and ensure they sum to 100%."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "slug": "fd",
+  "name": "Fixed Deposit (FD) Calculator",
+  "description": "Estimate maturity amount of fixed deposits.",
+  "category": "Savings",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Investment (₹)",
+      "type": "number",
+      "placeholder": "100000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest (%)",
+      "type": "percentage",
+      "placeholder": "7"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "5"
+    },
+    {
+      "key": "frequency",
+      "label": "Compounding Frequency (per year)",
+      "type": "number",
+      "placeholder": "4"
+    }
+  ],
+  "formula": "Maturity = P * (1 + r/n)^(n*t)",
+  "computationType": "compound",
+  "outputs": [
+    {
+      "key": "maturityAmount",
+      "label": "Maturity Amount (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "interestEarned",
+      "label": "Interest Earned (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 100000,
+      "rate": 7,
+      "years": 5,
+      "frequency": 4
+    },
+    "outputs": {
+      "maturityAmount": 141478.34,
+      "interestEarned": 41478.34
+    },
+    "explanation": "Fixed deposits compound periodically (e.g., quarterly) to grow the maturity amount."
+  },
+  "faqs": [
+    {
+      "question": "What is compounding frequency?",
+      "answer": "It is how often interest is added to the principal (e.g., quarterly or yearly)."
+    },
+    {
+      "question": "Can I withdraw early?",
+      "answer": "Early withdrawal usually attracts penalties and lower rates."
+    },
+    {
+      "question": "Is FD safe?",
+      "answer": "Yes, FD is a safe investment backed by bank deposits insurance up to certain limits."
+    }
+  ]
+}

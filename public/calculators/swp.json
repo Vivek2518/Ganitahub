@@ -1,0 +1,73 @@
+{
+  "slug": "swp",
+  "name": "SWP Calculator",
+  "description": "Plan systematic withdrawal plan from investments.",
+  "category": "Investment",
+  "fields": [
+    {
+      "key": "corpus",
+      "label": "Investment Corpus (₹)",
+      "type": "number",
+      "placeholder": "1000000"
+    },
+    {
+      "key": "rate",
+      "label": "Expected Annual Return (%)",
+      "type": "percentage",
+      "placeholder": "8"
+    },
+    {
+      "key": "years",
+      "label": "Withdrawal Period (years)",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "Withdrawal = (PV * r) / (1 - (1 + r)^-n)",
+  "formulaDescription": "Annuity withdrawal formula",
+  "computationType": "swp",
+  "outputs": [
+    {
+      "key": "monthlyWithdrawal",
+      "label": "Monthly Withdrawal (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "annualWithdrawal",
+      "label": "Annual Withdrawal (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalWithdrawn",
+      "label": "Total Withdrawn (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "corpus": 1000000,
+      "rate": 8,
+      "years": 10
+    },
+    "outputs": {
+      "monthlyWithdrawal": 9366.51,
+      "annualWithdrawal": 112398.12,
+      "totalWithdrawn": 1123981.20
+    },
+    "explanation": "A ₹10,00,000 corpus at 8% return supports ₹9,366.51 monthly withdrawals for 10 years."
+  },
+  "faqs": [
+    {
+      "question": "What is SWP?",
+      "answer": "Systematic Withdrawal Plan lets you withdraw a fixed amount periodically while keeping the rest invested."
+    },
+    {
+      "question": "Will corpus run out?",
+      "answer": "The plan assumes withdrawals and returns are consistent; actual results may vary."
+    },
+    {
+      "question": "Is SWP good for retirement?",
+      "answer": "Yes, SWP provides regular income while maintaining capital growth."
+    }
+  ]
+}

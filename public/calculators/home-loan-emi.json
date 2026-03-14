@@ -1,0 +1,79 @@
+{
+  "slug": "home-loan-emi",
+  "name": "Home Loan EMI Calculator",
+  "description": "Estimate monthly EMI payments for home loans.",
+  "category": "Finance",
+  "popular": true,
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "5000000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "7.5"
+    },
+    {
+      "key": "tenure",
+      "label": "Loan Tenure (years)",
+      "type": "number",
+      "placeholder": "20"
+    }
+  ],
+  "formula": "EMI = P * r * (1+r)^n / ((1+r)^n - 1)",
+  "formulaDescription": "Where P is principal, r is monthly rate, n is number of months",
+  "computationType": "emi",
+  "computeParams": {
+    "principalKey": "principal",
+    "rateKey": "rate",
+    "tenureKey": "tenure"
+  },
+  "outputs": [
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount Payable (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalInterest",
+      "label": "Total Interest Payable (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 5000000,
+      "rate": 7.5,
+      "tenure": 20
+    },
+    "outputs": {
+      "emi": 39901.42,
+      "totalAmount": 9576341.42,
+      "totalInterest": 4576341.42
+    },
+    "explanation": "For a ₹50,00,000 loan at 7.5% annual interest over 20 years, the EMI is ₹39,901.42 per month."
+  },
+  "faqs": [
+    {
+      "question": "What is EMI?",
+      "answer": "EMI stands for Equated Monthly Installment–the fixed payment made every month to repay a loan."
+    },
+    {
+      "question": "Can I adjust the loan tenure?",
+      "answer": "Yes, increasing tenure reduces monthly EMI but increases total interest paid."
+    },
+    {
+      "question": "How is EMI calculated?",
+      "answer": "EMI is calculated using the standard loan amortization formula: EMI = P * r * (1+r)^n / ((1+r)^n - 1)"
+    }
+  ]
+}

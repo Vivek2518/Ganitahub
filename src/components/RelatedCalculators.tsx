@@ -1,22 +1,59 @@
-import { getRelatedCalculators } from "@/data/calculators";
-import { CalculatorCard } from "@/components/CalculatorCard";
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { getRelatedCalculators } from "@/lib/getRelatedCalculators";
 
 type RelatedCalculatorsProps = {
   slug: string;
   category: string;
 };
 
-export function RelatedCalculators({ slug, category }: RelatedCalculatorsProps) {
-  const related = getRelatedCalculators(slug, category as any, 4);
+interface RelatedCalc {
+  slug: string;
+  name: string;
+  description: string;
+  category: string;
+}
 
-  if (related.length === 0) return null;
+export function RelatedCalculators({ slug, category }: RelatedCalculatorsProps) {
+  const [related, setRelated] = useState<RelatedCalc[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchRelated() {
+      try {
+        const results = await getRelatedCalculators(slug, category, 4);
+        setRelated(results);
+      } catch (error) {
+        console.error("Error fetching related calculators:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchRelated();
+  }, [slug, category]);
+
+  if (isLoading || related.length === 0) return null;
 
   return (
     <section className="space-y-4">
-      <h3 className="text-xl font-semibold">Related calculators</h3>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <h3 className="text-lg font-semibold">Related Calculators</h3>
+      <div className="grid gap-3 grid-cols-1">
         {related.map((calculator) => (
-          <CalculatorCard key={calculator.slug} calculator={calculator} />
+          <Link
+            key={calculator.slug}
+            href={`/calculators/${calculator.slug}`}
+            className="block p-3 border rounded-lg hover:shadow-md transition-shadow hover:border-blue-400"
+          >
+            <h4 className="font-medium text-blue-600 hover:text-blue-700">
+              {calculator.name}
+            </h4>
+            <p className="text-sm text-gray-600 line-clamp-2">
+              {calculator.description}
+            </p>
+          </Link>
         ))}
       </div>
     </section>

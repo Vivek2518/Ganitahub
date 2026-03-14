@@ -1,0 +1,72 @@
+{
+  "slug": "nps",
+  "name": "NPS Calculator",
+  "description": "Estimate growth of National Pension Scheme investments.",
+  "category": "Government",
+  "fields": [
+    {
+      "key": "contribution",
+      "label": "Annual Contribution (₹)",
+      "type": "number",
+      "placeholder": "100000"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "20"
+    },
+    {
+      "key": "rate",
+      "label": "Expected Annual Return (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "Future Value = Contribution * ((1+r)^n - 1) / r * (1+r)",
+  "computationType": "annuity",
+  "outputs": [
+    {
+      "key": "futureValue",
+      "label": "Future Value (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalContributed",
+      "label": "Total Contributed (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "gainedAmount",
+      "label": "Gain (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "contribution": 100000,
+      "years": 20,
+      "rate": 10
+    },
+    "outputs": {
+      "futureValue": 6531649.59,
+      "totalContributed": 2000000,
+      "gainedAmount": 4531649.59
+    },
+    "explanation": "NPS investments grow with compounding returns over the investment period."
+  },
+  "faqs": [
+    {
+      "question": "Can I withdraw before retirement?",
+      "answer": "Withdrawals are limited before retirement; most funds are locked in until retirement."
+    },
+    {
+      "question": "What is the tax benefit?",
+      "answer": "NPS contributions can qualify for tax deductions under Section 80C and 80CCD."
+    },
+    {
+      "question": "What tax treatment does NPS have?",
+      "answer": "NPS offers EEE (Exempt-Exempt-Exempt) tax treatment in many cases."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "income-tax",
+  "name": "Income Tax Calculator",
+  "description": "Compare old vs new tax regimes for salaried individuals.",
+  "category": "Tax",
+  "popular": true,
+  "fields": [
+    {
+      "key": "income",
+      "label": "Annual Income (₹)",
+      "type": "number",
+      "placeholder": "1200000"
+    },
+    {
+      "key": "regime",
+      "label": "Tax Regime",
+      "type": "select",
+      "options": [
+        {"value": 0, "label": "New Regime"},
+        {"value": 1, "label": "Old Regime"}
+      ]
+    }
+  ],
+  "formula": "Tax = Σ (taxableAmount in slab * slab rate)",
+  "formulaDescription": "Progressive tax calculation based on income slabs",
+  "computationType": "incomeTax",
+  "outputs": [
+    {
+      "key": "tax",
+      "label": "Income Tax (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "afterTax",
+      "label": "Income After Tax (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "income": 1200000,
+      "regime": 0
+    },
+    "outputs": {
+      "tax": 92500,
+      "afterTax": 1107500
+    },
+    "explanation": "For an annual income of ₹12,00,000 under the new tax regime, the estimated tax is ₹92,500."
+  },
+  "faqs": [
+    {
+      "question": "What is the difference between old and new regime?",
+      "answer": "New regime offers lower tax slabs but removes most deductions; old regime keeps deductions."
+    },
+    {
+      "question": "Does this include cess?",
+      "answer": "No, this is a simplified tax estimate without cess and surcharge."
+    },
+    {
+      "question": "Which regime should I choose?",
+      "answer": "It depends on your deductions. New regime is beneficial if you have minimal deductions."
+    }
+  ]
+}

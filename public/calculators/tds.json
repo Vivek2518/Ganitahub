@@ -1,0 +1,59 @@
+{
+  "slug": "tds",
+  "name": "TDS Calculator",
+  "description": "Estimate tax deducted at source for payments.",
+  "category": "Tax",
+  "fields": [
+    {
+      "key": "amount",
+      "label": "Amount (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "rate",
+      "label": "TDS Rate (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "TDS = Amount * (TDS Rate / 100)",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "tds",
+      "label": "TDS Deducted (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "netAmount",
+      "label": "Net Amount (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "amount": 50000,
+      "rate": 10
+    },
+    "outputs": {
+      "tds": 5000,
+      "netAmount": 45000
+    },
+    "explanation": "Tax deducted at source on ₹50,000 at 10% rate is ₹5,000, leaving ₹45,000."
+  },
+  "faqs": [
+    {
+      "question": "What is TDS?",
+      "answer": "Tax Deducted at Source is a means of collecting tax on income at the point it is generated."
+    },
+    {
+      "question": "Can I claim it back?",
+      "answer": "Yes, you can claim TDS refunds when filing your income tax return if excess tax is deducted."
+    },
+    {
+      "question": "What are common TDS rates?",
+      "answer": "Common TDS rates are 10%, 20%, and 30% depending on the transaction type and income."
+    }
+  ]
+}

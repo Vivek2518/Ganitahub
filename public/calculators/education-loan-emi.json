@@ -1,0 +1,72 @@
+{
+  "slug": "education-loan-emi",
+  "name": "Education Loan EMI Calculator",
+  "description": "Plan education loan payments with interest and tenure.",
+  "category": "Finance",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "1000000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    },
+    {
+      "key": "tenure",
+      "label": "Loan Tenure (years)",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "EMI = P * r * (1+r)^n / ((1+r)^n - 1)",
+  "computationType": "emi",
+  "outputs": [
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount Payable (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalInterest",
+      "label": "Total Interest Payable (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 1000000,
+      "rate": 10,
+      "tenure": 10
+    },
+    "outputs": {
+      "emi": 13228.08,
+      "totalAmount": 1587370.8,
+      "totalInterest": 587370.80
+    },
+    "explanation": "Education loans often have longer tenures; for ₹10,00,000 at 10% over 10 years, EMI is ₹13,228.08."
+  },
+  "faqs": [
+    {
+      "question": "What is a moratorium period?",
+      "answer": "It is a period during which you may not have to pay principal, but interest can still accrue."
+    },
+    {
+      "question": "Can interest be capitalized?",
+      "answer": "Some lenders add accrued interest to the principal, which increases EMI."
+    },
+    {
+      "question": "Are education loans tax-deductible?",
+      "answer": "Interest on education loans can qualify for tax deduction under Section 80E of the Income Tax Act."
+    }
+  ]
+}

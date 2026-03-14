@@ -1,0 +1,73 @@
+{
+  "slug": "affiliate-commission",
+  "name": "Affiliate Commission Calculator",
+  "description": "Calculate affiliate payouts via conversion rate.",
+  "category": "Creator Economy",
+  "fields": [
+    {
+      "key": "sales",
+      "label": "Monthly Visitors",
+      "type": "number",
+      "placeholder": "10000"
+    },
+    {
+      "key": "conversion",
+      "label": "Conversion Rate (%)",
+      "type": "percentage",
+      "placeholder": "2"
+    },
+    {
+      "key": "aov",
+      "label": "Avg Order Value (₹)",
+      "type": "number",
+      "placeholder": "1500"
+    },
+    {
+      "key": "commission",
+      "label": "Commission Rate (%)",
+      "type": "percentage",
+      "placeholder": "8"
+    }
+  ],
+  "formula": "Earnings = Sales * ConversionRate * AOV * CommissionRate",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "monthlyEarnings",
+      "label": "Monthly Earnings (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "annualEarnings",
+      "label": "Annual Earnings (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "sales": 10000,
+      "conversion": 2,
+      "aov": 1500,
+      "commission": 8
+    },
+    "outputs": {
+      "monthlyEarnings": 24000,
+      "annualEarnings": 288000
+    },
+    "explanation": "Estimate affiliate earnings based on visitors, conversion, and commission rate."
+  },
+  "faqs": [
+    {
+      "question": "What is AOV?",
+      "answer": "Average order value is the average amount customers spend per purchase."
+    },
+    {
+      "question": "What affects commission?",
+      "answer": "Commission rates depend on partner programs and product categories."
+    },
+    {
+      "question": "How can I increase earnings?",
+      "answer": "Improve traffic, increase conversion rate, promote higher-AOV products, or find programs with better commission."
+    }
+  ]
+}

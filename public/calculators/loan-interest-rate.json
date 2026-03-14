@@ -1,0 +1,60 @@
+{
+  "slug": "loan-interest-rate",
+  "name": "Loan Interest Rate Calculator",
+  "description": "Compare interest costs across different loan rates.",
+  "category": "Finance",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "type": "number",
+      "placeholder": "10624"
+    },
+    {
+      "key": "tenure",
+      "label": "Tenure (years)",
+      "type": "number",
+      "placeholder": "5"
+    }
+  ],
+  "formula": "Rate found via iterative approximation solving the EMI formula",
+  "computationType": "loanRate",
+  "outputs": [
+    {
+      "key": "annualRate",
+      "label": "Annual Interest Rate (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 500000,
+      "emi": 10624,
+      "tenure": 5
+    },
+    "outputs": {
+      "annualRate": 12.5
+    },
+    "explanation": "Given a loan of ₹5,00,000 with EMI of ₹10,624 for 5 years, the implied rate is 12.5% p.a."
+  },
+  "faqs": [
+    {
+      "question": "Why estimate interest rate?",
+      "answer": "It helps compare loan offers when you know the EMI and tenure but not the rate."
+    },
+    {
+      "question": "Is this exact?",
+      "answer": "This uses a numeric approximation and may vary slightly depending on rounding."
+    },
+    {
+      "question": "How can I use this?",
+      "answer": "Use this to reverse-calculate the interest rate from a quoted EMI to compare loan offers."
+    }
+  ]
+}

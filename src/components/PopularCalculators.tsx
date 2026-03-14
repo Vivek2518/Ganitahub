@@ -1,8 +1,36 @@
-import { getPopularCalculators } from "@/data/calculators";
+"use client";
+
+import { useEffect, useState } from "react";
 import { CalculatorCard } from "@/components/CalculatorCard";
+import { getPopularCalculators } from "@/lib/getRelatedCalculators";
+
+interface Calculator {
+  slug: string;
+  name: string;
+  description: string;
+  category: string;
+}
 
 export function PopularCalculators() {
-  const popular = getPopularCalculators(6);
+  const [popular, setPopular] = useState<Calculator[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetch() {
+      try {
+        const results = await getPopularCalculators(6);
+        setPopular(results);
+      } catch (error) {
+        console.error("Error fetching popular calculators:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetch();
+  }, []);
+
+  if (isLoading || popular.length === 0) return null;
 
   return (
     <section className="space-y-4">
@@ -13,9 +41,17 @@ export function PopularCalculators() {
         </p>
       </header>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {popular.map((calculator) => (
-          <CalculatorCard key={calculator.slug} calculator={calculator} />
-        ))}
+        {popular.map((calculator) => {
+          // Convert to Calculator type for CalculatorCard
+          const calc = {
+            slug: calculator.slug,
+            name: calculator.name,
+            description: calculator.description,
+            category: calculator.category as any,
+            added: new Date().toISOString(),
+          };
+          return <CalculatorCard key={calculator.slug} calculator={calc} />;
+        })}
       </div>
     </section>
   );

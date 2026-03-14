@@ -1,0 +1,73 @@
+{
+  "slug": "capital-gains",
+  "name": "Capital Gains Tax Calculator",
+  "description": "Calculate tax on capital gains for assets.",
+  "category": "Tax",
+  "fields": [
+    {
+      "key": "sale",
+      "label": "Sale Price (₹)",
+      "type": "number",
+      "placeholder": "1500000"
+    },
+    {
+      "key": "cost",
+      "label": "Purchase Price (₹)",
+      "type": "number",
+      "placeholder": "1000000"
+    },
+    {
+      "key": "expense",
+      "label": "Expenses/Invoicing (₹)",
+      "type": "number",
+      "placeholder": "20000"
+    },
+    {
+      "key": "years",
+      "label": "Holding Period (years)",
+      "type": "number",
+      "placeholder": "3"
+    }
+  ],
+  "formula": "Capital Gain = Sale - Cost - Expense; Tax = Gain * Rate",
+  "computationType": "capitalGains",
+  "outputs": [
+    {
+      "key": "gain",
+      "label": "Capital Gain (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "tax",
+      "label": "Tax Payable (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "sale": 1500000,
+      "cost": 1000000,
+      "expense": 20000,
+      "years": 3
+    },
+    "outputs": {
+      "gain": 480000,
+      "tax": 96000
+    },
+    "explanation": "Long-term capital gains (over 2 years) are taxed at 20%. Gain of ₹4,80,000 results in ₹96,000 tax."
+  },
+  "faqs": [
+    {
+      "question": "What is capital gains tax?",
+      "answer": "Tax on profit earned from selling capital assets like property or stocks."
+    },
+    {
+      "question": "What is long-term vs short-term?",
+      "answer": "Long-term is based on holding period; rates differ from short-term."
+    },
+    {
+      "question": "Is there any exemption?",
+      "answer": "Yes, there are exemptions for certain assets and reinvestment conditions."
+    }
+  ]
+}

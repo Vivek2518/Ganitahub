@@ -1,0 +1,72 @@
+{
+  "slug": "personal-loan-emi",
+  "name": "Personal Loan EMI Calculator",
+  "description": "Calculate EMI for personal loans across rates and tenures.",
+  "category": "Finance",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "14"
+    },
+    {
+      "key": "tenure",
+      "label": "Loan Tenure (years)",
+      "type": "number",
+      "placeholder": "5"
+    }
+  ],
+  "formula": "EMI = P * r * (1+r)^n / ((1+r)^n - 1)",
+  "computationType": "emi",
+  "outputs": [
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount Payable (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalInterest",
+      "label": "Total Interest Payable (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 500000,
+      "rate": 14,
+      "tenure": 5
+    },
+    "outputs": {
+      "emi": 11370.49,
+      "totalAmount": 682229.4,
+      "totalInterest": 182229.40
+    },
+    "explanation": "A personal loan of ₹5,00,000 at 14% per annum for 5 years gives an EMI of ₹11,370.49 per month."
+  },
+  "faqs": [
+    {
+      "question": "What affects my EMI?",
+      "answer": "The loan amount, interest rate, and tenure determine the monthly EMI."
+    },
+    {
+      "question": "Can I pay off the loan early?",
+      "answer": "Early repayment may reduce interest but could include prepayment charges depending on the lender."
+    },
+    {
+      "question": "Is the interest rate fixed?",
+      "answer": "This calculator assumes a fixed rate. Floating rates can change, affecting your EMI."
+    }
+  ]
+}

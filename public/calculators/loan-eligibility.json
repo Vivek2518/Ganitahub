@@ -1,0 +1,67 @@
+{
+  "slug": "loan-eligibility",
+  "name": "Loan Eligibility Calculator",
+  "description": "Estimate your loan eligibility based on income & expenses.",
+  "category": "Finance",
+  "fields": [
+    {
+      "key": "monthlyIncome",
+      "label": "Monthly Income (₹)",
+      "type": "number",
+      "placeholder": "80000"
+    },
+    {
+      "key": "monthlyObligations",
+      "label": "Monthly Obligations (₹)",
+      "type": "number",
+      "placeholder": "15000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "8"
+    },
+    {
+      "key": "tenure",
+      "label": "Tenure (years)",
+      "type": "number",
+      "placeholder": "20"
+    }
+  ],
+  "formula": "Eligible Loan = EMI Capacity * ((1+r)^n - 1) / (r * (1+r)^n)",
+  "computationType": "loanEligibility",
+  "outputs": [
+    {
+      "key": "eligibleLoan",
+      "label": "Eligible Loan Amount (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "monthlyIncome": 80000,
+      "monthlyObligations": 15000,
+      "rate": 8,
+      "tenure": 20
+    },
+    "outputs": {
+      "eligibleLoan": 3255609
+    },
+    "explanation": "With ₹80,000 income and ₹15,000 obligations, at 8% for 20 years, loan eligibility is ₹32,55,609."
+  },
+  "faqs": [
+    {
+      "question": "What is loan eligibility?",
+      "answer": "It is the maximum loan amount a lender may approve based on your income and obligations."
+    },
+    {
+      "question": "Why do obligations matter?",
+      "answer": "Existing EMIs or debts reduce the amount you can pay toward a new loan."
+    },
+    {
+      "question": "Is this the actual approved amount?",
+      "answer": "No, this is an estimate. Actual approval depends on credit score, employment, and other factors."
+    }
+  ]
+}

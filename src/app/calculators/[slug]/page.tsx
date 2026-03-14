@@ -1,32 +1,43 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
-import { CalculatorTool } from "@/components/CalculatorTool";
+import { CalculatorEngine } from "@/components/CalculatorEngine";
 import { FavoriteToggle } from "@/components/FavoriteToggle";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
-import { getCalculatorBySlug, calculators } from "@/data/calculators";
-import { getCalculatorConfig } from "@/lib/calculatorConfigs";
+import { loadCalculator, getAllCalculatorSlugs } from "@/lib/loadCalculator";
+import {
+  generateIntro,
+  generateFormulaExplanation,
+  generateExample,
+  generateFaqSections,
+  formatFaqForSchema,
+} from "@/lib/seoTemplates";
+
+const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
 
 export async function generateStaticParams() {
-  return calculators.map((calculator) => ({
-    slug: calculator.slug,
+  const slugs = await getAllCalculatorSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
   const { slug } = await params;
-  const calculator = getCalculatorBySlug(slug);
-  if (!calculator) {
+  const config = await loadCalculator(slug);
+  
+  if (!config) {
     return {
       title: "Calculator not found",
     };
   }
 
+  const canonicalUrl = `${CANONICAL_DOMAIN}/calculators/${slug}`;
   const keywords = [
     "free online calculator",
     "financial calculator",
-    calculator.name.toLowerCase(),
-    calculator.category.toLowerCase(),
+    config.name.toLowerCase(),
+    config.category.toLowerCase(),
     "calculator tool",
     "business calculator",
     "investment calculator",
@@ -36,44 +47,55 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
   ].join(", ");
 
   return {
-    title: `${calculator.name} — InsightCalculator`,
-    description: calculator.description,
+    title: `${config.name} — InsightCalculator`,
+    description: config.description,
     keywords,
     alternates: {
-      canonical: `https://insightcalculator.vercel.app/calculators/${slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${calculator.name} — InsightCalculator`,
-      description: calculator.description,
+      title: `${config.name} — InsightCalculator`,
+      description: config.description,
       type: "website",
-      url: `https://insightcalculator.vercel.app/calculators/${slug}`,
+      url: canonicalUrl,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${calculator.name} — InsightCalculator`,
-      description: calculator.description,
+      title: `${config.name} — InsightCalculator`,
+      description: config.description,
     },
   };
 }
 
-export default async function CalculatorPage({ params }: { params: any }) {
-  const { slug } = await params;
-  const calculator = getCalculatorBySlug(slug);
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
-  if (!calculator) {
+export default async function CalculatorPage({ params }: PageProps) {
+  const { slug } = await params;
+  const config = await loadCalculator(slug);
+
+  if (!config) {
     notFound();
   }
 
-  const config = getCalculatorConfig(slug);
-  const canonicalUrl = `https://insightcalculator.vercel.app/calculators/${slug}`;
+  const canonicalUrl = `${CANONICAL_DOMAIN}/calculators/${slug}`;
 
+  // Generate SEO content from calculator metadata
+  const intro = generateIntro(config);
+  const formulaExplanation = generateFormulaExplanation(config);
+  const example = generateExample(config);
+  const faqs = generateFaqSections(config);
+
+  // Enhanced structured data with additional fields
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": calculator.name,
-    "description": calculator.description,
+    "name": config.name,
+    "description": config.description,
     "url": canonicalUrl,
     "applicationCategory": "FinanceApplication",
+    "applicationSubCategory": config.category,
     "operatingSystem": "Web Browser",
     "offers": {
       "@type": "Offer",
@@ -83,22 +105,18 @@ export default async function CalculatorPage({ params }: { params: any }) {
     "creator": {
       "@type": "Organization",
       "name": "InsightCalculator",
+      "url": CANONICAL_DOMAIN,
     },
-    "featureList": config?.fields.map(field => field.label) || [],
+    "featureList": config.fields.map((field) => field.label),
+    "interactionStatistic": {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/UseAction",
+      "userInteractionCount": 1,
+    },
   };
 
-  const faqStructuredData = config?.faqs && config.faqs.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": config.faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer,
-      },
-    })),
-  } : null;
+  // FAQ structured data
+  const faqStructuredData = formatFaqForSchema(faqs);
 
   return (
     <>
@@ -108,21 +126,19 @@ export default async function CalculatorPage({ params }: { params: any }) {
           __html: JSON.stringify(structuredData),
         }}
       />
-      {faqStructuredData && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqStructuredData),
-          }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData),
+        }}
+      />
       <CalculatorLayout
-        title={calculator.name}
-        description={calculator.description}
-        actions={<FavoriteToggle slug={calculator.slug} />}
-        aside={<RelatedCalculators slug={calculator.slug} category={calculator.category} />}
+        title={config.name}
+        description={config.description}
+        actions={<FavoriteToggle slug={slug} />}
+        aside={<RelatedCalculators slug={slug} category={config.category} />}
       >
-        <CalculatorTool calculator={calculator} />
+        <CalculatorEngine config={config} />
       </CalculatorLayout>
     </>
   );

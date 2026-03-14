@@ -1,0 +1,67 @@
+{
+  "slug": "instagram-engagement",
+  "name": "Instagram Engagement Rate Calculator",
+  "description": "Measure engagement percentage for your posts.",
+  "category": "Creator Economy",
+  "fields": [
+    {
+      "key": "followers",
+      "label": "Followers",
+      "type": "number",
+      "placeholder": "20000"
+    },
+    {
+      "key": "likes",
+      "label": "Likes",
+      "type": "number",
+      "placeholder": "1200"
+    },
+    {
+      "key": "comments",
+      "label": "Comments",
+      "type": "number",
+      "placeholder": "80"
+    },
+    {
+      "key": "shares",
+      "label": "Shares",
+      "type": "number",
+      "placeholder": "20"
+    }
+  ],
+  "formula": "Engagement Rate (%) = (Likes + Comments + Shares) / Followers * 100",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "engagementRate",
+      "label": "Engagement Rate (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "followers": 20000,
+      "likes": 1200,
+      "comments": 80,
+      "shares": 20
+    },
+    "outputs": {
+      "engagementRate": 6.5
+    },
+    "explanation": "Engagement rate measures how actively followers interact with posts."
+  },
+  "faqs": [
+    {
+      "question": "What is a good engagement rate?",
+      "answer": "It varies by audience size, but 1–5% is generally considered healthy."
+    },
+    {
+      "question": "How can I improve engagement?",
+      "answer": "Post consistently, interact with followers, and use content formats your audience likes."
+    },
+    {
+      "question": "Does this include saves?",
+      "answer": "This calculator uses likes, comments, and shares. Saves may also be counted in some metrics."
+    }
+  ]
+}

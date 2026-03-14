@@ -1,0 +1,61 @@
+{
+  "slug": "cagr",
+  "name": "CAGR Calculator",
+  "description": "Calculate compound annual growth rate for investments.",
+  "category": "Investment",
+  "fields": [
+    {
+      "key": "start",
+      "label": "Starting Value (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "end",
+      "label": "Ending Value (₹)",
+      "type": "number",
+      "placeholder": "120000"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "5"
+    }
+  ],
+  "formula": "CAGR = (End / Start)^(1/n) - 1",
+  "formulaDescription": "Annualized growth rate considering compounding",
+  "computationType": "cagr",
+  "outputs": [
+    {
+      "key": "cagr",
+      "label": "CAGR (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "start": 50000,
+      "end": 120000,
+      "years": 5
+    },
+    "outputs": {
+      "cagr": 19.17
+    },
+    "explanation": "An investment growing from ₹50,000 to ₹1,20,000 in 5 years has a CAGR of 19.17%."
+  },
+  "faqs": [
+    {
+      "question": "Why use CAGR?",
+      "answer": "CAGR smooths out volatility to show the average annual growth rate."
+    },
+    {
+      "question": "Is it actual return?",
+      "answer": "It is a theoretical rate and does not reflect year-to-year variation."
+    },
+    {
+      "question": "How is CAGR useful?",
+      "answer": "It helps compare investment performance across different time periods fairly."
+    }
+  ]
+}

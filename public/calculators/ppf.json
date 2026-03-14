@@ -1,0 +1,72 @@
+{
+  "slug": "ppf",
+  "name": "PPF Calculator",
+  "description": "Project returns from Public Provident Fund investments.",
+  "category": "Government",
+  "fields": [
+    {
+      "key": "contribution",
+      "label": "Annual Contribution (₹)",
+      "type": "number",
+      "placeholder": "150000"
+    },
+    {
+      "key": "years",
+      "label": "Years (min 15)",
+      "type": "number",
+      "placeholder": "15"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest (%)",
+      "type": "percentage",
+      "placeholder": "7.1"
+    }
+  ],
+  "formula": "Maturity = Contribution * ((1+r)^n - 1) / r * (1+r)",
+  "computationType": "annuity",
+  "outputs": [
+    {
+      "key": "maturityAmount",
+      "label": "Maturity Amount (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalContributed",
+      "label": "Total Contributed (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "interestEarned",
+      "label": "Interest Earned (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "contribution": 150000,
+      "years": 15,
+      "rate": 7.1
+    },
+    "outputs": {
+      "maturityAmount": 4237523.75,
+      "totalContributed": 2250000,
+      "interestEarned": 1987523.75
+    },
+    "explanation": "PPF grows your annual deposits at a fixed government interest rate."
+  },
+  "faqs": [
+    {
+      "question": "Is PPF safe?",
+      "answer": "Yes, it is backed by the government and offers guaranteed returns."
+    },
+    {
+      "question": "Can I withdraw early?",
+      "answer": "Partial withdrawals are allowed after the 5th financial year."
+    },
+    {
+      "question": "Is there a tax benefit?",
+      "answer": "Yes, PPF contributions and returns are tax-exempt under Section 80C and EAC."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "slug": "mutual-fund-return",
+  "name": "Mutual Fund Return Calculator",
+  "description": "Estimate returns from mutual funds over time.",
+  "category": "Investment",
+  "fields": [
+    {
+      "key": "initial",
+      "label": "Initial Investment (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "final",
+      "label": "Final Value (₹)",
+      "type": "number",
+      "placeholder": "82000"
+    }
+  ],
+  "formula": "Return (%) = ((Final - Initial) / Initial) * 100",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "returnPercent",
+      "label": "Return (%)",
+      "format": "percentage"
+    },
+    {
+      "key": "gainAmount",
+      "label": "Gain (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "initial": 50000,
+      "final": 82000
+    },
+    "outputs": {
+      "returnPercent": 64,
+      "gainAmount": 32000
+    },
+    "explanation": "An investment growing from ₹50,000 to ₹82,000 represents a 64% return or ₹32,000 gain."
+  },
+  "faqs": [
+    {
+      "question": "What return does this show?",
+      "answer": "It shows the percentage gain or loss between the starting and ending values."
+    },
+    {
+      "question": "Does it include costs?",
+      "answer": "No, this assumes the values already include any fees or charges."
+    },
+    {
+      "question": "How is this useful?",
+      "answer": "It helps you evaluate mutual fund performance and compare different investments."
+    }
+  ]
+}

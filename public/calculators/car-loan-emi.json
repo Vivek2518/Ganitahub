@@ -1,0 +1,72 @@
+{
+  "slug": "car-loan-emi",
+  "name": "Car Loan EMI Calculator",
+  "description": "Find out your car loan monthly installments.",
+  "category": "Finance",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "800000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "9"
+    },
+    {
+      "key": "tenure",
+      "label": "Loan Tenure (years)",
+      "type": "number",
+      "placeholder": "5"
+    }
+  ],
+  "formula": "EMI = P * r * (1+r)^n / ((1+r)^n - 1)",
+  "computationType": "emi",
+  "outputs": [
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount Payable (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalInterest",
+      "label": "Total Interest Payable (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 800000,
+      "rate": 9,
+      "tenure": 5
+    },
+    "outputs": {
+      "emi": 16103.49,
+      "totalAmount": 966209.4,
+      "totalInterest": 166209.40
+    },
+    "explanation": "Car loans are typically shorter; for ₹8,00,000 at 9% over 5 years, the EMI is ₹16,103.49."
+  },
+  "faqs": [
+    {
+      "question": "Does loan tenure affect interest?",
+      "answer": "Longer tenure lowers EMI but increases total interest paid over the loan period."
+    },
+    {
+      "question": "What is the principal?",
+      "answer": "Principal is the total amount borrowed from the lender."
+    },
+    {
+      "question": "Can I negotiate the interest rate?",
+      "answer": "Yes, interest rates vary by lender and your credit profile. Always compare offers."
+    }
+  ]
+}

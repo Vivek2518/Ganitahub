@@ -1,0 +1,59 @@
+{
+  "slug": "saas-revenue",
+  "name": "SaaS Revenue Calculator",
+  "description": "Estimate monthly recurring revenue and growth.",
+  "category": "Business",
+  "fields": [
+    {
+      "key": "customers",
+      "label": "Active Customers",
+      "type": "number",
+      "placeholder": "500"
+    },
+    {
+      "key": "arpu",
+      "label": "Avg Revenue per Customer (₹)",
+      "type": "number",
+      "placeholder": "2000"
+    }
+  ],
+  "formula": "MRR = Customers * ARPU; ARR = MRR * 12",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "mrr",
+      "label": "Monthly Recurring Revenue (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "arr",
+      "label": "Annual Recurring Revenue (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "customers": 500,
+      "arpu": 2000
+    },
+    "outputs": {
+      "mrr": 1000000,
+      "arr": 12000000
+    },
+    "explanation": "Annual recurring revenue is monthly revenue times 12."
+  },
+  "faqs": [
+    {
+      "question": "What is ARPU?",
+      "answer": "Average Revenue Per User indicates revenue generated per customer."
+    },
+    {
+      "question": "Is churn included?",
+      "answer": "This is a snapshot; churn reduces customers over time."
+    },
+    {
+      "question": "Why is ARR important?",
+      "answer": "ARR helps investors and stakeholders understand the value and growth potential of the business."
+    }
+  ]
+}

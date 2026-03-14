@@ -1,0 +1,53 @@
+{
+  "slug": "gratuity",
+  "name": "Gratuity Calculator",
+  "description": "Calculate gratuity based on salary and service years.",
+  "category": "Government",
+  "fields": [
+    {
+      "key": "salary",
+      "label": "Last Drawn Monthly Salary (₹)",
+      "type": "number",
+      "placeholder": "60000"
+    },
+    {
+      "key": "years",
+      "label": "Years of Service",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "Gratuity = (Last Salary * Years * 15) / 26",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "gratuity",
+      "label": "Gratuity Amount (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "salary": 60000,
+      "years": 10
+    },
+    "outputs": {
+      "gratuity": 346153.85
+    },
+    "explanation": "Gratuity is typically calculated based on last salary, years of service, and a 15/26 factor."
+  },
+  "faqs": [
+    {
+      "question": "Who is eligible for gratuity?",
+      "answer": "Employees with 5+ years of continuous service are generally eligible."
+    },
+    {
+      "question": "Is gratuity taxable?",
+      "answer": "A portion may be tax-exempt; consult tax rules for exact treatment."
+    },
+    {
+      "question": "What is the 15/26 factor?",
+      "answer": "It's a standard formula used to calculate gratuity under the Payment of Gratuity Act."
+    }
+  ]
+}

@@ -349,40 +349,20 @@ export const categories: { name: CalculatorCategory; description: string }[] = [
   },
 ];
 
+// NOTE: Calculator loading and discovery now uses:
+// - @/lib/loadCalculator (for JSON config loading)
+// - @/lib/getRelatedCalculators (for related/popular/search queries)
+//
+// The helper functions below operate on the static calculators array
+// and are used by components for basic metadata lookup.
+
 export function getCalculatorBySlug(slug: string) {
   return calculators.find((calculator) => calculator.slug === slug);
-}
-
-export function getRelatedCalculators(
-  slug: string,
-  category: CalculatorCategory,
-  limit = 4
-) {
-  return calculators
-    .filter(
-      (calculator) =>
-        calculator.slug !== slug && calculator.category === category
-    )
-    .slice(0, limit);
-}
-
-export function getPopularCalculators(limit = 6) {
-  return calculators
-    .filter((calculator) => calculator.popular)
-    .slice(0, limit);
 }
 
 export function getRecentCalculators(limit = 6) {
   return calculators
     .slice()
-    .sort((a, b) => (a.added < b.added ? 1 : -1))
+    .sort((a, b) => new Date(b.added).getTime() - new Date(a.added).getTime())
     .slice(0, limit);
-}
-
-export function searchCalculators(query: string) {
-  const normalized = query.trim().toLowerCase();
-  if (!normalized) return calculators;
-  return calculators.filter((calculator) =>
-    calculator.name.toLowerCase().includes(normalized)
-  );
 }

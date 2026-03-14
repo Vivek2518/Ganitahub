@@ -1,0 +1,66 @@
+{
+  "slug": "break-even",
+  "name": "Break-Even Calculator",
+  "description": "Calculate units needed to cover fixed costs.",
+  "category": "Business",
+  "fields": [
+    {
+      "key": "fixed",
+      "label": "Fixed Costs (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "price",
+      "label": "Price per Unit (₹)",
+      "type": "number",
+      "placeholder": "1500"
+    },
+    {
+      "key": "variable",
+      "label": "Variable Cost per Unit (₹)",
+      "type": "number",
+      "placeholder": "700"
+    }
+  ],
+  "formula": "Break-even Units = Fixed Costs / (Price - Variable Cost)",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "breakEvenUnits",
+      "label": "Break-Even Units",
+      "format": "number"
+    },
+    {
+      "key": "breakEvenRevenue",
+      "label": "Break-Even Revenue (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "fixed": 500000,
+      "price": 1500,
+      "variable": 700
+    },
+    "outputs": {
+      "breakEvenUnits": 714,
+      "breakEvenRevenue": 1071429
+    },
+    "explanation": "Break-even is the number of units needed to cover fixed costs."
+  },
+  "faqs": [
+    {
+      "question": "What is break-even?",
+      "answer": "It's the point where total revenue equals total costs."
+    },
+    {
+      "question": "Can I reduce break-even?",
+      "answer": "Lower fixed costs or increase margin (price - variable cost) to reduce it."
+    },
+    {
+      "question": "Why is break-even important?",
+      "answer": "It helps you understand the minimum sales needed to avoid losses."
+    }
+  ]
+}

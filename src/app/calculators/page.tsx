@@ -3,12 +3,14 @@ import { CategorySection } from "@/components/CategorySection";
 import { calculators } from "@/data/calculators";
 import { CalculatorCard } from "@/components/CalculatorCard";
 
+const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
+
 export const metadata = {
   title: "Calculators — InsightCalculator",
   description: "Browse all available calculators for finance, taxation, investment, and more.",
   keywords: "calculators, financial calculators, online tools, business calculators, investment calculators, tax calculators, loan calculators, free calculators",
   alternates: {
-    canonical: "https://insightcalculator.vercel.app/calculators",
+    canonical: `${CANONICAL_DOMAIN}/calculators`,
   },
 };
 

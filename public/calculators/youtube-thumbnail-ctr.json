@@ -1,0 +1,53 @@
+{
+  "slug": "youtube-thumbnail-ctr",
+  "name": "YouTube Thumbnail CTR Calculator",
+  "description": "Estimate click-through-rate impact from thumbnails.",
+  "category": "Creator Economy",
+  "fields": [
+    {
+      "key": "impressions",
+      "label": "Impressions",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "clicks",
+      "label": "Clicks",
+      "type": "number",
+      "placeholder": "2500"
+    }
+  ],
+  "formula": "CTR = (Clicks / Impressions) * 100",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "ctr",
+      "label": "Click-Through Rate (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "impressions": 50000,
+      "clicks": 2500
+    },
+    "outputs": {
+      "ctr": 5
+    },
+    "explanation": "Click-through rate indicates how often viewers click your thumbnail after seeing it."
+  },
+  "faqs": [
+    {
+      "question": "What is a good CTR?",
+      "answer": "On YouTube, 2–10% is common; higher means your thumbnail is compelling."
+    },
+    {
+      "question": "How can I improve CTR?",
+      "answer": "Use clear titles, bold thumbnails, and test different designs."
+    },
+    {
+      "question": "Why is CTR important?",
+      "answer": "Higher CTR signals to YouTube that your content is appealing, boosting recommendations."
+    }
+  ]
+}

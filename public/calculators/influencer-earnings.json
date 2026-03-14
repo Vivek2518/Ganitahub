@@ -1,0 +1,66 @@
+{
+  "slug": "influencer-earnings",
+  "name": "Influencer Earnings Calculator",
+  "description": "Project earnings based on audience and rates.",
+  "category": "Creator Economy",
+  "fields": [
+    {
+      "key": "followers",
+      "label": "Followers",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "engagement",
+      "label": "Engagement Rate (%)",
+      "type": "percentage",
+      "placeholder": "3"
+    },
+    {
+      "key": "rate",
+      "label": "Rate per 1% Engagement (₹)",
+      "type": "number",
+      "placeholder": "1000"
+    }
+  ],
+  "formula": "Estimated Earnings = Followers * EngagementRate * RatePerEngagement",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "monthlyEarnings",
+      "label": "Monthly Earnings (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "annualEarnings",
+      "label": "Annual Earnings (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "followers": 50000,
+      "engagement": 3,
+      "rate": 1000
+    },
+    "outputs": {
+      "monthlyEarnings": 150000,
+      "annualEarnings": 1800000
+    },
+    "explanation": "Fine-tune earnings estimates using follower count and engagement rate."
+  },
+  "faqs": [
+    {
+      "question": "Is engagement more important than follower count?",
+      "answer": "Yes, brands often value active audiences over raw follower numbers."
+    },
+    {
+      "question": "How accurate is this estimate?",
+      "answer": "It provides a rough ballpark and should be adjusted per campaign."
+    },
+    {
+      "question": "What affects influencer rates?",
+      "answer": "Niche, engagement quality, audience demographics, and brand fit all affect rates."
+    }
+  ]
+}

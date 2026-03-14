@@ -1,0 +1,79 @@
+{
+  "slug": "step-up-sip",
+  "name": "Step-Up SIP Calculator",
+  "description": "Model SIPs with periodic increase in contributions.",
+  "category": "Investment",
+  "fields": [
+    {
+      "key": "monthly",
+      "label": "Starting Monthly SIP (₹)",
+      "type": "number",
+      "placeholder": "5000"
+    },
+    {
+      "key": "rate",
+      "label": "Expected Annual Return (%)",
+      "type": "percentage",
+      "placeholder": "12"
+    },
+    {
+      "key": "step",
+      "label": "Step-Up (%) per year",
+      "type": "percentage",
+      "placeholder": "10"
+    },
+    {
+      "key": "years",
+      "label": "Tenure (years)",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "FV = Σ (monthlyContribution * (1+step)^(year-1) * ((1+r)^(remainingMonths)-1)/r)",
+  "computationType": "stepupSip",
+  "outputs": [
+    {
+      "key": "futureValue",
+      "label": "Future Value (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalInvested",
+      "label": "Total Invested (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "gainedAmount",
+      "label": "Gain (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "monthly": 5000,
+      "rate": 12,
+      "step": 10,
+      "years": 10
+    },
+    "outputs": {
+      "futureValue": 1624621.95,
+      "totalInvested": 813000,
+      "gainedAmount": 811621.95
+    },
+    "explanation": "Starting with ₹5,000 and increasing by 10% yearly at 12% returns over 10 years grows to ₹16,24,622."
+  },
+  "faqs": [
+    {
+      "question": "What is step-up SIP?",
+      "answer": "It increases your monthly investment periodically to keep pace with rising income."
+    },
+    {
+      "question": "How is it different from regular SIP?",
+      "answer": "Regular SIP keeps contributions constant while step-up SIP increases them over time."
+    },
+    {
+      "question": "When should I use step-up SIP?",
+      "answer": "Use it if you expect your income to grow over time and want to invest additional savings."
+    }
+  ]
+}

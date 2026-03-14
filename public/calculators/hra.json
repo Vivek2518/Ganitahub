@@ -1,0 +1,66 @@
+{
+  "slug": "hra",
+  "name": "HRA Calculator",
+  "description": "Estimate HRA exemption based on rent and salary.",
+  "category": "Tax",
+  "fields": [
+    {
+      "key": "hra",
+      "label": "HRA Received (₹)",
+      "type": "number",
+      "placeholder": "30000"
+    },
+    {
+      "key": "rent",
+      "label": "Rent Paid (₹)",
+      "type": "number",
+      "placeholder": "25000"
+    },
+    {
+      "key": "salary",
+      "label": "Basic Salary (₹)",
+      "type": "number",
+      "placeholder": "80000"
+    }
+  ],
+  "formula": "Exemption = min(HRA received, rent - 10% salary, 50% salary)",
+  "computationType": "hra",
+  "outputs": [
+    {
+      "key": "exemption",
+      "label": "HRA Exemption (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "taxableHra",
+      "label": "Taxable HRA (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "hra": 30000,
+      "rent": 25000,
+      "salary": 80000
+    },
+    "outputs": {
+      "exemption": 15000,
+      "taxableHra": 15000
+    },
+    "explanation": "HRA exemption is the minimum of HRA received (₹30,000), rent minus 10% salary (₹15,000), and 50% salary (₹40,000)."
+  },
+  "faqs": [
+    {
+      "question": "What is HRA exemption?",
+      "answer": "It is the portion of House Rent Allowance that is not taxable."
+    },
+    {
+      "question": "Do I need rent receipts?",
+      "answer": "Yes, most employers require rent proofs to claim HRA exemption."
+    },
+    {
+      "question": "What if I don't have rent receipts?",
+      "answer": "Without proof, the entire HRA may be considered taxable income."
+    }
+  ]
+}

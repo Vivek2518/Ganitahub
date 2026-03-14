@@ -1,0 +1,61 @@
+{
+  "slug": "gst",
+  "name": "GST Calculator",
+  "description": "Compute GST amounts for invoices and billing.",
+  "category": "Tax",
+  "popular": true,
+  "fields": [
+    {
+      "key": "amount",
+      "label": "Base Amount (₹)",
+      "type": "number",
+      "placeholder": "1000"
+    },
+    {
+      "key": "rate",
+      "label": "GST Rate (%)",
+      "type": "percentage",
+      "placeholder": "18"
+    }
+  ],
+  "formula": "GST Amount = Amount * (GST Rate / 100)",
+  "formulaDescription": "Simple percentage calculation of GST on the base amount",
+  "computationType": "gst",
+  "outputs": [
+    {
+      "key": "gstAmount",
+      "label": "GST Amount (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "amount": 1000,
+      "rate": 18
+    },
+    "outputs": {
+      "gstAmount": 180,
+      "totalAmount": 1180
+    },
+    "explanation": "For a base amount of ₹1,000 with 18% GST, the tax amount is ₹180, making the total ₹1,180."
+  },
+  "faqs": [
+    {
+      "question": "What is GST?",
+      "answer": "GST is a value-added tax applied on the supply of goods and services in India."
+    },
+    {
+      "question": "How do I calculate total amount?",
+      "answer": "Add the GST amount to the base amount to get the total invoice value."
+    },
+    {
+      "question": "What are common GST rates?",
+      "answer": "Common rates are 5%, 12%, 18%, and 28% depending on the product/service category."
+    }
+  ]
+}

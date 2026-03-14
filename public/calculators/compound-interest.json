@@ -1,0 +1,74 @@
+{
+  "slug": "compound-interest",
+  "name": "Compound Interest Calculator",
+  "description": "See how your investment grows with compounding.",
+  "category": "Savings",
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Principal (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest (%)",
+      "type": "percentage",
+      "placeholder": "6"
+    },
+    {
+      "key": "years",
+      "label": "Years",
+      "type": "number",
+      "placeholder": "5"
+    },
+    {
+      "key": "frequency",
+      "label": "Compounding Frequency (per year)",
+      "type": "number",
+      "placeholder": "12"
+    }
+  ],
+  "formula": "A = P * (1 + r/n)^(n*t)",
+  "formulaDescription": "Compound interest formula where P is principal, r is rate, n is frequency, t is time",
+  "computationType": "compound",
+  "outputs": [
+    {
+      "key": "amount",
+      "label": "Final Amount (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "interest",
+      "label": "Interest Earned (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 50000,
+      "rate": 6,
+      "years": 5,
+      "frequency": 12
+    },
+    "outputs": {
+      "amount": 67449.05,
+      "interest": 17449.05
+    },
+    "explanation": "₹50,000 at 6% annual interest compounded monthly for 5 years grows to ₹67,449.05."
+  },
+  "faqs": [
+    {
+      "question": "How does compounding work?",
+      "answer": "Interest is added to the principal, and future interest is earned on the new total."
+    },
+    {
+      "question": "Is compounding annual?",
+      "answer": "It depends; many products compound quarterly or monthly for faster growth."
+    },
+    {
+      "question": "Does higher frequency always give more returns?",
+      "answer": "Yes, more frequent compounding results in slightly higher returns over time."
+    }
+  ]
+}

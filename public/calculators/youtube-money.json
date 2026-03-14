@@ -1,0 +1,61 @@
+{
+  "slug": "youtube-money",
+  "name": "YouTube Money Calculator",
+  "description": "Estimate earnings based on views and RPM.",
+  "category": "Creator Economy",
+  "popular": true,
+  "fields": [
+    {
+      "key": "views",
+      "label": "Monthly Views",
+      "type": "number",
+      "placeholder": "200000"
+    },
+    {
+      "key": "rpm",
+      "label": "RPM (₹ per 1000 views)",
+      "type": "number",
+      "placeholder": "50"
+    }
+  ],
+  "formula": "Estimated Earnings = (Views / 1000) * RPM",
+  "formulaDescription": "Revenue per mille (RPM) calculation",
+  "computationType": "simple",
+  "outputs": [
+    {
+      "key": "earnings",
+      "label": "Monthly Earnings (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "annualEarnings",
+      "label": "Annual Earnings (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "views": 200000,
+      "rpm": 50
+    },
+    "outputs": {
+      "earnings": 10000,
+      "annualEarnings": 120000
+    },
+    "explanation": "200,000 monthly views at ₹50 RPM generates ₹10,000 per month (₹1,20,000 annually)."
+  },
+  "faqs": [
+    {
+      "question": "What is RPM?",
+      "answer": "RPM is revenue per 1000 monetized views after YouTube's share."
+    },
+    {
+      "question": "Are views equal to earnings?",
+      "answer": "Not all views are monetized; RPM accounts for that by estimating average earnings."
+    },
+    {
+      "question": "What factors affect RPM?",
+      "answer": "RPM varies by geography, content type, season, and audience demographics."
+    }
+  ]
+}

@@ -1,14 +1,44 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { searchCalculators } from "@/data/calculators";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { searchCalculators } from "@/lib/getRelatedCalculators";
 import { Input } from "@/components/ui/input";
-import { CalculatorCard } from "@/components/CalculatorCard";
 import { Search } from "lucide-react";
+
+interface SearchResult {
+  slug: string;
+  name: string;
+  description: string;
+  category: string;
+}
 
 export function CalculatorSearch({ className }: { className?: string }) {
   const [query, setQuery] = useState("");
-  const results = useMemo(() => searchCalculators(query), [query]);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    if (query.trim().length === 0) {
+      setResults([]);
+      return;
+    }
+
+    setIsSearching(true);
+    const timer = setTimeout(async () => {
+      try {
+        const searchResults = await searchCalculators(query, 10);
+        setResults(searchResults);
+      } catch (error) {
+        console.error("Search error:", error);
+        setResults([]);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 300); // Debounce 300ms
+
+    return () => clearTimeout(timer);
+  }, [query]);
 
   const showResults = query.trim().length > 0;
 
@@ -24,26 +54,40 @@ export function CalculatorSearch({ className }: { className?: string }) {
             className="pl-10"
           />
         </div>
-        {showResults && (
+        {showResults && !isSearching && (
           <p className="text-sm text-muted-foreground">
             {results.length} calculator{results.length === 1 ? "" : "s"} found.
           </p>
+        )}
+        {showResults && isSearching && (
+          <p className="text-sm text-muted-foreground">Searching...</p>
         )}
       </div>
       {showResults ? (
         results.length > 0 ? (
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {results.map((calculator) => (
-              <CalculatorCard key={calculator.slug} calculator={calculator} />
+              <Link
+                key={calculator.slug}
+                href={`/calculators/${calculator.slug}`}
+                className="rounded-lg border bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-blue-600 mb-2 line-clamp-1">
+                  {calculator.name}
+                </h3>
+                <p className="text-sm text-gray-600 line-clamp-2">
+                  {calculator.description}
+                </p>
+              </Link>
             ))}
           </div>
-        ) : (
+        ) : !isSearching ? (
           <div className="mt-6 rounded-xl border border-border bg-card p-6 text-center">
             <p className="text-sm text-muted-foreground">
               No calculators match "{query}". Try different keywords.
             </p>
           </div>
-        )
+        ) : null
       ) : null}
     </section>
   );
