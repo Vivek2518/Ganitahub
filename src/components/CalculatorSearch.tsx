@@ -28,8 +28,12 @@ export function CalculatorSearch({ className }: { className?: string }) {
       try {
         const response = await fetch(`/api/calculators/search?query=${encodeURIComponent(query)}&limit=10`);
         if (response.ok) {
-          const searchResults = await response.json();
-          setResults(searchResults);
+          const payload = await response.json();
+          if (payload.success) {
+            setResults(payload.data);
+          } else {
+            setResults([]);
+          }
         } else {
           setResults([]);
         }

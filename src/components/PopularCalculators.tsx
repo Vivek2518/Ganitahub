@@ -19,8 +19,12 @@ export function PopularCalculators() {
       try {
         const response = await fetch('/api/calculators/popular');
         if (response.ok) {
-          const results = await response.json();
-          setPopular(results);
+          const payload = await response.json();
+          if (payload.success) {
+            setPopular(payload.data);
+          } else {
+            console.error("Error fetching popular calculators:", payload.error);
+          }
         } else {
           console.error("Error fetching popular calculators");
         }

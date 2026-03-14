@@ -4,7 +4,9 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { CalculatorEngine } from "@/components/CalculatorEngine";
 import { FavoriteToggle } from "@/components/FavoriteToggle";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
-import { loadCalculator, getAllCalculatorSlugs } from "@/lib/loadCalculator";
+import { loadCalculator } from "@/lib/loadCalculator";
+import { getPopularCalculators } from "@/lib/getRelatedCalculators";
+import type { CalculatorConfig } from "@/lib/loadCalculator";
 import {
   generateIntro,
   generateFormulaExplanation,
@@ -16,11 +18,13 @@ import {
 const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
 
 export async function generateStaticParams() {
-  const slugs = await getAllCalculatorSlugs();
-  return slugs.map((slug) => ({
-    slug,
+  const popular = await getPopularCalculators(10);
+  return popular.map((calculator) => ({
+    slug: calculator.slug,
   }));
 }
+
+export const revalidate = 60; // ISR: regenerate pages every 60 seconds
 
 export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
   const { slug } = await params;

@@ -24,8 +24,12 @@ export function RelatedCalculators({ slug, category }: RelatedCalculatorsProps) 
       try {
         const response = await fetch(`/api/calculators/related?slug=${encodeURIComponent(slug)}&category=${encodeURIComponent(category)}`);
         if (response.ok) {
-          const results = await response.json();
-          setRelated(results);
+          const payload = await response.json();
+          if (payload.success) {
+            setRelated(payload.data);
+          } else {
+            console.error("Error fetching related calculators:", payload.error);
+          }
         } else {
           console.error("Error fetching related calculators");
         }
