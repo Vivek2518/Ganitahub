@@ -3,6 +3,7 @@
   "name": "Education Loan EMI Calculator",
   "description": "Plan education loan payments with interest and tenure.",
   "category": "Finance",
+  "tags": ["education-loan", "student-loan", "emi", "loan", "finance", "interest", "repayment", "calculator"],
   "fields": [
     {
       "key": "principal",

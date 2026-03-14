@@ -165,9 +165,22 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
           <CardContent>
             <div className="grid gap-4">
               {config.outputs.map((output) => {
-                const value = Array.isArray(result)
-                  ? result[0]
-                  : result[output.key];
+const value = (() => {
+                if (result === null || result === undefined) return null;
+
+                // If the calculation produced a single scalar value and the UI expects
+                // just one output, use that scalar directly.
+                if (typeof result === "number" || typeof result === "string") {
+                  if (config.outputs.length === 1) return result;
+                  return null;
+                }
+
+                if (Array.isArray(result)) {
+                  return result[0];
+                }
+
+                return (result as any)[output.key];
+              })();
 
                 return (
                   <div

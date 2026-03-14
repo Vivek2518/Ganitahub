@@ -3,6 +3,8 @@
   "name": "SIP Calculator",
   "description": "Plan your systematic investment plan returns.",
   "category": "Investment",
+  "subcategory": "mutual-fund",
+  "tags": ["sip", "investment", "mutual-fund", "returns", "finance", "wealth", "growth", "calculator"],
   "popular": true,
   "fields": [
     {

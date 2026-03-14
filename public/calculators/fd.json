@@ -3,6 +3,7 @@
   "name": "Fixed Deposit (FD) Calculator",
   "description": "Estimate maturity amount of fixed deposits.",
   "category": "Savings",
+  "tags": ["fixed-deposit", "fd", "investment", "savings", "interest", "finance", "returns", "calculator"],
   "fields": [
     {
       "key": "principal",

@@ -3,6 +3,7 @@
   "name": "Compound Interest Calculator",
   "description": "See how your investment grows with compounding.",
   "category": "Savings",
+  "tags": ["compound-interest", "interest", "investment", "finance", "growth", "savings", "returns", "calculator"],
   "fields": [
     {
       "key": "principal",

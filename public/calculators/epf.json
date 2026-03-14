@@ -3,6 +3,7 @@
   "name": "EPF Calculator",
   "description": "Estimate employee provident fund accumulation.",
   "category": "Government",
+  "tags": ["epf", "provident-fund", "retirement", "savings", "finance", "interest", "pf", "calculator"],
   "fields": [
     {
       "key": "salary",

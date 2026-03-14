@@ -33,6 +33,7 @@ export interface CalculatorConfig {
   name: string;
   description: string;
   category: string;
+  subcategory?: string;
   popular?: boolean;
   tags?: string[];
   fields: CalculatorField[];

@@ -3,6 +3,7 @@
   "name": "SWP Calculator",
   "description": "Plan systematic withdrawal plan from investments.",
   "category": "Investment",
+  "tags": ["swp", "withdrawal", "investment", "mutual-fund", "finance", "income", "returns", "calculator"],
   "fields": [
     {
       "key": "corpus",

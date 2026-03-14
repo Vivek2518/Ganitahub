@@ -3,6 +3,8 @@
   "name": "Income Tax Calculator",
   "description": "Compare old vs new tax regimes for salaried individuals.",
   "category": "Tax",
+  "subcategory": "income-tax",
+  "tags": ["income-tax", "tax", "salary", "finance", "india", "returns", "deductions", "calculator"],
   "popular": true,
   "fields": [
     {

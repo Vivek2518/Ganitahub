@@ -3,6 +3,7 @@
   "name": "Gratuity Calculator",
   "description": "Calculate gratuity based on salary and service years.",
   "category": "Government",
+  "tags": ["gratuity", "salary", "retirement", "benefits", "employment", "finance", "payout", "calculator"],
   "fields": [
     {
       "key": "salary",

@@ -3,6 +3,7 @@
   "name": "SaaS Revenue Calculator",
   "description": "Estimate monthly recurring revenue and growth.",
   "category": "Business",
+  "tags": ["saas", "revenue", "subscription", "business", "income", "metrics", "growth", "calculator"],
   "fields": [
     {
       "key": "customers",
@@ -19,6 +20,12 @@
   ],
   "formula": "MRR = Customers * ARPU; ARR = MRR * 12",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "mrr",
+    "multipliers": {
+      "arr": 12
+    }
+  },
   "outputs": [
     {
       "key": "mrr",

@@ -3,6 +3,7 @@
   "name": "YouTube Thumbnail CTR Calculator",
   "description": "Estimate click-through-rate impact from thumbnails.",
   "category": "Creator Economy",
+  "tags": ["youtube", "ctr", "thumbnail", "analytics", "video", "marketing", "click-rate", "calculator"],
   "fields": [
     {
       "key": "impressions",

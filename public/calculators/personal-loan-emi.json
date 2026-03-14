@@ -3,6 +3,7 @@
   "name": "Personal Loan EMI Calculator",
   "description": "Calculate EMI for personal loans across rates and tenures.",
   "category": "Finance",
+  "tags": ["personal-loan", "emi", "loan", "finance", "interest", "credit", "repayment", "calculator"] ,
   "fields": [
     {
       "key": "principal",

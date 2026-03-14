@@ -3,6 +3,7 @@
   "name": "Instagram Engagement Rate Calculator",
   "description": "Measure engagement percentage for your posts.",
   "category": "Creator Economy",
+  "tags": ["instagram", "engagement", "social-media", "influencer", "analytics", "marketing", "rate", "calculator"],
   "fields": [
     {
       "key": "followers",

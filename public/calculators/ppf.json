@@ -3,6 +3,7 @@
   "name": "PPF Calculator",
   "description": "Project returns from Public Provident Fund investments.",
   "category": "Government",
+  "tags": ["ppf", "savings", "investment", "tax", "finance", "india", "returns", "calculator"] ,
   "fields": [
     {
       "key": "contribution",

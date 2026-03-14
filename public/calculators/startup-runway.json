@@ -3,6 +3,7 @@
   "name": "Startup Runway Calculator",
   "description": "Show months of runway before funds run out.",
   "category": "Business",
+  "tags": ["startup", "runway", "burn-rate", "funding", "finance", "business", "cashflow", "calculator"],
   "fields": [
     {
       "key": "cash",

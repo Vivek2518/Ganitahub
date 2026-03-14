@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Calculator } from "@/data/calculators";
+import { CalculatorConfig } from "@/lib/loadCalculator";
 import {
   Card,
   CardContent,
@@ -15,7 +16,7 @@ import { Calculator as CalculatorIcon } from "lucide-react";
 import { FavoriteToggle } from "@/components/FavoriteToggle";
 
 type CalculatorCardProps = {
-  calculator: Calculator;
+  calculator: Calculator | CalculatorConfig;
 };
 
 export function CalculatorCard({ calculator }: CalculatorCardProps) {

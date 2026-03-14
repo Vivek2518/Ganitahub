@@ -7,6 +7,9 @@ export type ComputeParams = {
   principalKey?: string;
   rateKey?: string;
   tenureKey?: string;
+  // For simple calculators that need derived outputs (e.g., annual vs monthly)
+  baseKey?: string;
+  multipliers?: Record<string, number>;
   [key: string]: any;
 };
 
@@ -323,10 +326,73 @@ export function evaluateCalculator(input: CalculatorInput): any {
     }
 
     case "simple": {
-      // Generic simple percentage/multiplication calculations
+      // Generic simple multiplier calculation.
+      // This is used for calculators that multiply input values together.
       let result = 1;
       Object.values(values).forEach((v) => (result *= v));
-      return round(result);
+      const baseResult = round(result);
+
+      // Allow calculators to opt into derived outputs (e.g. monthly -> annual) via computeParams.
+      if (input.computeParams?.baseKey && input.computeParams?.multipliers) {
+        const output: Record<string, any> = {
+          [input.computeParams.baseKey]: baseResult,
+        };
+
+        for (const [key, multiplier] of Object.entries(
+          input.computeParams.multipliers
+        )) {
+          output[key] = round(baseResult * multiplier);
+        }
+
+        return output;
+      }
+
+      return baseResult;
+    }
+
+    case "tds": {
+      const amount = values.amount || 0;
+      const rate = values.rate || 0;
+      const tds = round((amount * rate) / 100);
+      return {
+        tds,
+        netAmount: round(amount - tds),
+      };
+    }
+
+    case "breakEven": {
+      const fixed = values.fixed || 0;
+      const price = values.price || 0;
+      const variable = values.variable || 0;
+      const denominator = price - variable;
+      const units = denominator === 0 ? 0 : fixed / denominator;
+      const revenue = units * price;
+      return {
+        breakEvenUnits: round(units),
+        breakEvenRevenue: round(revenue),
+      };
+    }
+
+    case "mutualFundReturn": {
+      const initial = values.initial || 0;
+      const final = values.final || 0;
+      const gain = final - initial;
+      const returnPercent = initial === 0 ? 0 : (gain / initial) * 100;
+      return {
+        returnPercent: round(returnPercent),
+        gainAmount: round(gain),
+      };
+    }
+
+    case "incomeSplit": {
+      const income = values.income || 0;
+      const sharePct = values.share || 0;
+      const shareAmount = round((income * sharePct) / 100);
+      const remainingAmount = round(income - shareAmount);
+      return {
+        shareAmount,
+        remainingAmount,
+      };
     }
 
     case "gst": {

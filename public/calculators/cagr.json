@@ -3,6 +3,7 @@
   "name": "CAGR Calculator",
   "description": "Calculate compound annual growth rate for investments.",
   "category": "Investment",
+  "tags": ["cagr", "growth", "investment", "finance", "returns", "annual", "rate", "calculator"],
   "fields": [
     {
       "key": "start",

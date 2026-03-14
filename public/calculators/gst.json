@@ -3,6 +3,7 @@
   "name": "GST Calculator",
   "description": "Compute GST amounts for invoices and billing.",
   "category": "Tax",
+  "tags": ["gst", "tax", "india", "invoice", "price", "finance", "vat", "calculator"],
   "popular": true,
   "fields": [
     {

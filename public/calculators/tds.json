@@ -3,6 +3,7 @@
   "name": "TDS Calculator",
   "description": "Estimate tax deducted at source for payments.",
   "category": "Tax",
+   "tags": ["tds", "tax", "deduction", "income", "finance", "india", "salary", "calculator"],
   "fields": [
     {
       "key": "amount",
@@ -18,7 +19,7 @@
     }
   ],
   "formula": "TDS = Amount * (TDS Rate / 100)",
-  "computationType": "simple",
+  "computationType": "tds",
   "outputs": [
     {
       "key": "tds",

@@ -3,6 +3,7 @@
   "name": "Loan Interest Rate Calculator",
   "description": "Compare interest costs across different loan rates.",
   "category": "Finance",
+  "tags": ["loan", "interest", "rate", "finance", "bank", "credit", "borrowing", "calculator"],
   "fields": [
     {
       "key": "principal",

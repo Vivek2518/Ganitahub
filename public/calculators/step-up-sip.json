@@ -3,6 +3,7 @@
   "name": "Step-Up SIP Calculator",
   "description": "Model SIPs with periodic increase in contributions.",
   "category": "Investment",
+  "tags": ["sip", "step-up", "investment", "returns", "finance", "mutual-fund", "growth", "calculator"],
   "fields": [
     {
       "key": "monthly",

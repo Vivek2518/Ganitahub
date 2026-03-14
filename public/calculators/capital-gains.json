@@ -3,6 +3,7 @@
   "name": "Capital Gains Tax Calculator",
   "description": "Calculate tax on capital gains for assets.",
   "category": "Tax",
+  "tags": ["capital-gains", "tax", "investment", "finance", "profit", "assets", "returns", "calculator"],
   "fields": [
     {
       "key": "sale",

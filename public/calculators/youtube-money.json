@@ -3,6 +3,7 @@
   "name": "YouTube Money Calculator",
   "description": "Estimate earnings based on views and RPM.",
   "category": "Creator Economy",
+  "tags": ["youtube", "earnings", "adsense", "creator", "revenue", "video", "income", "calculator"],
   "popular": true,
   "fields": [
     {
@@ -21,6 +22,12 @@
   "formula": "Estimated Earnings = (Views / 1000) * RPM",
   "formulaDescription": "Revenue per mille (RPM) calculation",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "earnings",
+    "multipliers": {
+      "annualEarnings": 12
+    }
+  },
   "outputs": [
     {
       "key": "earnings",

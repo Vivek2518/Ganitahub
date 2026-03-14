@@ -3,6 +3,7 @@
   "name": "NPS Calculator",
   "description": "Estimate growth of National Pension Scheme investments.",
   "category": "Government",
+   "tags": ["nps", "retirement", "pension", "investment", "india", "finance", "savings", "calculator"],
   "fields": [
     {
       "key": "contribution",

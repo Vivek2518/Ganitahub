@@ -3,6 +3,7 @@
   "name": "Freelance Hourly Rate Calculator",
   "description": "Set rates by covering costs and desired income.",
   "category": "Business",
+  "tags": ["freelance", "hourly-rate", "pricing", "income", "work", "earnings", "business", "calculator"],
   "fields": [
     {
       "key": "target",

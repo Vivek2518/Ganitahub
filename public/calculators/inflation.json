@@ -3,6 +3,7 @@
   "name": "Inflation Calculator",
   "description": "Understand purchasing power changes over time.",
   "category": "Savings",
+  "tags": ["inflation", "price", "economy", "value", "money", "finance", "rate", "calculator"],
   "fields": [
     {
       "key": "amount",

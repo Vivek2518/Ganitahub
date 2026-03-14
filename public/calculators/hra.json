@@ -3,6 +3,7 @@
   "name": "HRA Calculator",
   "description": "Estimate HRA exemption based on rent and salary.",
   "category": "Tax",
+  "tags": ["hra", "salary", "tax", "allowance", "income", "finance", "rent", "calculator"],
   "fields": [
     {
       "key": "hra",

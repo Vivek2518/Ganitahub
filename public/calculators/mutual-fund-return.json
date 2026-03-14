@@ -3,6 +3,7 @@
   "name": "Mutual Fund Return Calculator",
   "description": "Estimate returns from mutual funds over time.",
   "category": "Investment",
+  "tags": ["mutual-fund", "investment", "returns", "finance", "fund", "wealth", "growth", "calculator"],
   "fields": [
     {
       "key": "initial",
@@ -18,7 +19,7 @@
     }
   ],
   "formula": "Return (%) = ((Final - Initial) / Initial) * 100",
-  "computationType": "simple",
+  "computationType": "mutualFundReturn",
   "outputs": [
     {
       "key": "returnPercent",

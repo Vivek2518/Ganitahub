@@ -3,6 +3,7 @@
   "name": "Loan Eligibility Calculator",
   "description": "Estimate your loan eligibility based on income & expenses.",
   "category": "Finance",
+  "tags": ["loan", "eligibility", "finance", "credit", "bank", "income", "approval", "calculator"],
   "fields": [
     {
       "key": "monthlyIncome",

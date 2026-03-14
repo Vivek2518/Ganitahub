@@ -3,6 +3,7 @@
   "name": "Lumpsum Investment Calculator",
   "description": "Project the future value of a one-time investment.",
   "category": "Investment",
+  "tags": ["lumpsum", "investment", "returns", "finance", "wealth", "growth", "fund", "calculator"],
   "fields": [
     {
       "key": "principal",

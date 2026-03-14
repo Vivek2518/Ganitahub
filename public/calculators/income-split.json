@@ -3,6 +3,7 @@
   "name": "Income Split Calculator",
   "description": "Split income based on percentage share.",
   "category": "Business",
+  "tags": ["income", "split", "salary", "tax", "finance", "distribution", "earnings", "calculator"],
   "fields": [
     {
       "key": "income",
@@ -18,7 +19,7 @@
     }
   ],
   "formula": "Share = Total Income * Share Percentage",
-  "computationType": "simple",
+  "computationType": "incomeSplit",
   "outputs": [
     {
       "key": "shareAmount",

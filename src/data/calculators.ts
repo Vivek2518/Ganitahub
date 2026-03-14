@@ -310,7 +310,7 @@ export const calculators: Calculator[] = [
   },
   {
     slug: "income-split",
-    name: "Content Creator Income Split Calculator",
+    name: "Income Split Calculator",
     description: "Split earnings across collaborators or partners.",
     category: "Business",
     added: "2026-02-23",

@@ -3,6 +3,7 @@
   "name": "Break-Even Calculator",
   "description": "Calculate units needed to cover fixed costs.",
   "category": "Business",
+  "tags": ["break-even", "profit", "cost", "revenue", "business", "finance", "analysis", "calculator"],
   "fields": [
     {
       "key": "fixed",
@@ -24,7 +25,7 @@
     }
   ],
   "formula": "Break-even Units = Fixed Costs / (Price - Variable Cost)",
-  "computationType": "simple",
+  "computationType": "breakEven",
   "outputs": [
     {
       "key": "breakEvenUnits",

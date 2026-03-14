@@ -3,6 +3,7 @@
   "name": "Affiliate Commission Calculator",
   "description": "Calculate affiliate payouts via conversion rate.",
   "category": "Creator Economy",
+  "tags": ["affiliate", "commission", "earnings", "calculator", "marketing", "revenue", "profit", "sales"],
   "fields": [
     {
       "key": "sales",
@@ -31,6 +32,12 @@
   ],
   "formula": "Earnings = Sales * ConversionRate * AOV * CommissionRate",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "monthlyEarnings",
+    "multipliers": {
+      "annualEarnings": 12
+    }
+  },
   "outputs": [
     {
       "key": "monthlyEarnings",

@@ -3,6 +3,7 @@
   "name": "Influencer Earnings Calculator",
   "description": "Project earnings based on audience and rates.",
   "category": "Creator Economy",
+   "tags": ["influencer", "earnings", "social-media", "income", "creator", "marketing", "revenue", "calculator"],
   "fields": [
     {
       "key": "followers",
@@ -25,6 +26,12 @@
   ],
   "formula": "Estimated Earnings = Followers * EngagementRate * RatePerEngagement",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "monthlyEarnings",
+    "multipliers": {
+      "annualEarnings": 12
+    }
+  },
   "outputs": [
     {
       "key": "monthlyEarnings",

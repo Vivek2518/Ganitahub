@@ -3,6 +3,7 @@
   "name": "Recurring Deposit (RD) Calculator",
   "description": "Compute returns on recurring deposits.",
   "category": "Savings",
+  "tags": ["rd", "recurring-deposit", "savings", "bank", "interest", "finance", "investment", "calculator"],
   "fields": [
     {
       "key": "monthly",

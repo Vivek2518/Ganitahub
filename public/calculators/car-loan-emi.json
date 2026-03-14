@@ -3,6 +3,7 @@
   "name": "Car Loan EMI Calculator",
   "description": "Find out your car loan monthly installments.",
   "category": "Finance",
+  "tags": ["car-loan", "emi", "auto-loan", "loan", "finance", "interest", "payment", "calculator"],
   "fields": [
     {
       "key": "principal",

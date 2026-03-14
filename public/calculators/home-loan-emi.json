@@ -3,6 +3,8 @@
   "name": "Home Loan EMI Calculator",
   "description": "Estimate monthly EMI payments for home loans.",
   "category": "Finance",
+  "subcategory": "home-loan",
+  "tags": ["home-loan", "emi", "mortgage", "loan", "interest", "finance", "housing", "calculator"],
   "popular": true,
   "fields": [
     {
