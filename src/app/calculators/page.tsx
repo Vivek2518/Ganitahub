@@ -40,7 +40,7 @@ export default async function CalculatorsPage() {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-10 lg:px-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">All Financial Calculators</h1>
+        <h1 className="text-3xl font-semibold">All Calculators</h1>
         <p className="text-sm text-muted-foreground">
           Search, filter, and explore all tools available at InsightCalculator.
         </p>

@@ -4,8 +4,12 @@
  */
 
 import { promises as fs } from "fs";
-import { join } from "path";
-import { getCategoryForSlug, getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
+import { join, basename } from "path";
+import {
+  getTopCategoryForSlug,
+  getSubCategoryForSlug,
+  getCalculatorPathFromSlug,
+} from "@/lib/calculatorCategories";
 
 export interface CalculatorField {
   key: string;
@@ -108,36 +112,52 @@ let calculatorCache: Record<string, CalculatorConfig> | null = null;
  * Load all calculator configurations from src/calculators
  * Caches them in memory for subsequent calls
  */
+async function walkDir(dir: string): Promise<string[]> {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const files: string[] = [];
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await walkDir(fullPath)));
+    } else if (entry.isFile() && entry.name.endsWith('.json')) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
 async function loadAllCalculators(): Promise<Record<string, CalculatorConfig>> {
   if (calculatorCache) {
     return calculatorCache;
   }
 
   const dirPath = join(process.cwd(), "src", "calculators");
-  const files = await fs.readdir(dirPath);
+  const filePaths = await walkDir(dirPath);
   const cache: Record<string, CalculatorConfig> = {};
 
-  for (const file of files) {
-    if (file.endsWith('.json')) {
-      const slug = file.replace('.json', '');
-      const filePath = join(dirPath, file);
-      try {
-        const content = await fs.readFile(filePath, 'utf-8');
-        const parsed = JSON.parse(content);
-        if (validateCalculatorConfig(parsed)) {
-          const category = getCategoryForSlug(slug);
-          cache[slug] = {
-            ...parsed,
-            slug,
-            category,
-            path: getCalculatorPathFromSlug(slug),
-          };
-        } else {
-          console.error(`Invalid calculator config for ${slug}: validation failed`);
-        }
-      } catch (error) {
-        console.error(`Error loading calculator ${slug}:`, error);
+  for (const filePath of filePaths) {
+    const slug = basename(filePath).replace('.json', '');
+    try {
+      const content = await fs.readFile(filePath, 'utf-8');
+      const parsed = JSON.parse(content);
+      if (validateCalculatorConfig(parsed)) {
+        const category = getTopCategoryForSlug(slug);
+        const subcategory = getSubCategoryForSlug(slug);
+        cache[slug] = {
+          ...parsed,
+          slug,
+          category,
+          subcategory,
+          path: getCalculatorPathFromSlug(slug),
+        };
+      } else {
+        console.error(`Invalid calculator config for ${slug}: validation failed`);
       }
+    } catch (error) {
+      console.error(`Error loading calculator ${slug}:`, error);
     }
   }
 

@@ -1,35 +1,73 @@
 // Helper utilities for calculator categories and routing
 
-export const CALCULATOR_CATEGORIES = [
+export const TOP_CATEGORIES = [
+  "finance",
+  "creator",
+  "health",
+  "math",
+  "physics",
+  "aerospace",
+  "everyday",
+] as const;
+
+export type TopCategoryKey = (typeof TOP_CATEGORIES)[number];
+
+export const SUBCATEGORIES = [
   "loans",
   "investment",
   "savings",
   "tax",
   "government",
   "business",
-  "creator",
-  "utility",
   "income",
+  "utility",
+  "creator",
   "health",
+  "math",
 ] as const;
 
-export type CalculatorCategoryKey = (typeof CALCULATOR_CATEGORIES)[number];
+export type SubCategoryKey = (typeof SUBCATEGORIES)[number];
 
-export const CALCULATOR_CATEGORY_DISPLAY_NAME: Record<CalculatorCategoryKey, string> = {
+export type CalculatorCategoryKey = TopCategoryKey | SubCategoryKey;
+
+export const CATEGORY_DISPLAY_NAME: Record<CalculatorCategoryKey, string> = {
+  // Top-level categories
+  finance: "Finance ",
+  creator: "Creator Economy ",
+  health: "Health ",
+  math: "Math ",
+  physics: "Physics ",
+  aerospace: "Aerospace ",
+  everyday: "Everyday",
+
+  // Subcategories
   loans: "Loan Calculators",
   investment: "Investment Calculators",
   savings: "Savings Calculators",
   tax: "Tax Calculators",
   government: "Government Scheme Calculators",
   business: "Business Calculators",
-  creator: "Creator Economy Calculators",
-  utility: "Utility Calculators",
   income: "Income & Salary Calculators",
-  health: "Health Calculators",
+  utility: "Utility Calculators",
 };
 
-// Mapping from calculator slug -> category key (based on SEO grouping rules)
-const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
+// Maps old subcategories to top-level categories
+const SUBCATEGORY_TO_TOP: Record<SubCategoryKey, TopCategoryKey> = {
+  loans: "finance",
+  investment: "finance",
+  savings: "finance",
+  tax: "finance",
+  government: "finance",
+  business: "finance",
+  income: "finance",
+  utility: "everyday",
+  creator: "creator",
+  health: "health",
+  math: "math",
+};
+
+// Mapping from calculator slug -> subcategory (based on SEO grouping rules)
+const SLUG_TO_SUBCATEGORY: Record<string, SubCategoryKey> = {
   // loans
   "car-loan-emi": "loans",
   "home-loan-emi": "loans",
@@ -90,16 +128,10 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "affiliate-commission": "creator",
   "instagram-engagement": "creator",
 
-  // utility
+  // utility (everyday tools)
   "age-calculator": "utility",
   "average-calculator": "utility",
   "test-grade-calculator": "utility",
-  "overtime-pay-calculator": "income",
-  "salary-hike-calculator": "income",
-  "take-home-salary-calculator": "income",
-  "in-hand-salary-calculator": "income",
-  "overtime-calculator": "income",
-  "hourly-to-salary-calculator": "income",
   "percentage-calculator": "utility",
   "discount-calculator": "utility",
   "date-difference-calculator": "utility",
@@ -107,34 +139,80 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "average-percentage-calculator": "utility",
   "ratio-calculator": "utility",
 
+  // income (within finance)
+  "overtime-pay-calculator": "income",
+  "salary-hike-calculator": "income",
+  "take-home-salary-calculator": "income",
+  "in-hand-salary-calculator": "income",
+  "overtime-calculator": "income",
+  "hourly-to-salary-calculator": "income",
+
   // health
   "calorie-calculator": "health",
 };
 
-export function getCategoryForSlug(slug: string): CalculatorCategoryKey {
+export function getSubCategoryForSlug(slug: string): SubCategoryKey | undefined {
   const normalized = slug?.trim().toLowerCase();
-  return SLUG_TO_CATEGORY[normalized] ?? "utility";
+  return SLUG_TO_SUBCATEGORY[normalized];
 }
 
-export function isValidCategory(category: string): category is CalculatorCategoryKey {
+export function getTopCategoryForSlug(slug: string): TopCategoryKey {
+  const normalized = slug?.trim().toLowerCase();
+  const subCategory = getSubCategoryForSlug(normalized);
+  if (subCategory && SUBCATEGORY_TO_TOP[subCategory]) {
+    return SUBCATEGORY_TO_TOP[subCategory];
+  }
+
+  // If the slug itself matches a top category, return it
+  if (TOP_CATEGORIES.includes(normalized as TopCategoryKey)) {
+    return normalized as TopCategoryKey;
+  }
+
+  // Default to everyday for unknown slugs
+  return "everyday";
+}
+
+export function getCategoryForSlug(slug: string): TopCategoryKey {
+  return getTopCategoryForSlug(slug);
+}
+
+export function isValidCategory(category: string): category is TopCategoryKey {
   const normalized = category?.trim().toLowerCase();
-  return CALCULATOR_CATEGORIES.includes(normalized as CalculatorCategoryKey);
+  return TOP_CATEGORIES.includes(normalized as TopCategoryKey);
 }
 
 export function getCalculatorPathFromSlug(slug: string): string {
-  const category = getCategoryForSlug(slug);
-  return `/calculators/${category}/${slug}-calculator`;
+  const topCategory = getTopCategoryForSlug(slug);
+  const subCategory = getSubCategoryForSlug(slug);
+  const calculatorSegment = `${slug}-calculator`;
+  if (subCategory && subCategory !== topCategory) {
+    return `/calculators/${topCategory}/${subCategory}/${calculatorSegment}`;
+  }
+  return `/calculators/${topCategory}/${calculatorSegment}`;
 }
 
 export function getCategoryPath(category: string): string {
   const normalized = category?.trim().toLowerCase();
+
+  // Top-level category
+  if (TOP_CATEGORIES.includes(normalized as TopCategoryKey)) {
+    return `/calculators/${normalized}`;
+  }
+
+  // Subcategory
+  if (SUBCATEGORIES.includes(normalized as SubCategoryKey)) {
+    const top = SUBCATEGORY_TO_TOP[normalized as SubCategoryKey];
+    return `/calculators/${top}/${normalized}`;
+  }
+
+  // Fallback
   return `/calculators/${normalized}`;
 }
 
 export function formatCategoryName(category: string): string {
   const key = category as CalculatorCategoryKey;
-  if (CALCULATOR_CATEGORY_DISPLAY_NAME[key]) {
-    return CALCULATOR_CATEGORY_DISPLAY_NAME[key];
+  if (CATEGORY_DISPLAY_NAME[key]) {
+    return CATEGORY_DISPLAY_NAME[key];
   }
   // Fallback: capitalise and add "Calculators"
   const formatted = category
@@ -145,15 +223,20 @@ export function formatCategoryName(category: string): string {
   return `${formatted} Calculators`;
 }
 
-export const CATEGORY_ORDER: CalculatorCategoryKey[] = [
+export const CATEGORY_ORDER: (TopCategoryKey | SubCategoryKey)[] = [
+  "finance",
+  "creator",
+  "health",
+  "math",
+  "physics",
+  "aerospace",
+  "everyday",
   "loans",
   "investment",
   "savings",
   "tax",
   "government",
   "business",
-  "creator",
-  "utility",
   "income",
-  "health",
+  "utility",
 ];

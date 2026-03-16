@@ -25,60 +25,114 @@ function buildSitemap(urls) {
 
 function getCalculatorCategory(slug) {
   const map = {
-    "car-loan-emi": "loans",
-    "home-loan-emi": "loans",
-    "personal-loan-emi": "loans",
-    "education-loan-emi": "loans",
-    "loan-eligibility": "loans",
-    "loan-interest-rate": "loans",
-    sip: "investment",
-    "step-up-sip": "investment",
-    swp: "investment",
-    "mutual-fund-return": "investment",
-    "lumpsum-investment": "investment",
-    cagr: "investment",
-    fd: "savings",
-    rd: "savings",
-    "compound-interest": "savings",
-    inflation: "savings",
-    "income-tax": "tax",
-    gst: "tax",
-    hra: "tax",
-    "capital-gains": "tax",
-    tds: "tax",
-    epf: "government",
-    ppf: "government",
-    nps: "government",
-    gratuity: "government",
-    "break-even": "business",
-    "margin-calculator": "business",
-    "saas-revenue": "business",
-    "startup-runway": "business",
-    "freelance-hourly-rate": "business",
-    "income-split": "business",
+    // loans
+    "car-loan-emi": "finance/loans",
+    "home-loan-emi": "finance/loans",
+    "personal-loan-emi": "finance/loans",
+    "education-loan-emi": "finance/loans",
+    "loan-eligibility": "finance/loans",
+    "loan-interest-rate": "finance/loans",
+    "emi-calculator": "finance/loans",
+    "loan-amortization-calculator": "finance/loans",
+    "credit-card-emi-calculator": "finance/loans",
+    "interest-rate-calculator": "finance/loans",
+    "prepayment-calculator": "finance/loans",
+
+    // investment
+    sip: "finance/investment",
+    "step-up-sip": "finance/investment",
+    swp: "finance/investment",
+    "mutual-fund-return": "finance/investment",
+    "lumpsum-investment": "finance/investment",
+    cagr: "finance/investment",
+    "stock-return-calculator": "finance/investment",
+    "dividend-yield-calculator": "finance/investment",
+    "retirement-corpus-calculator": "finance/investment",
+    "inflation-adjusted-return-calculator": "finance/investment",
+    "portfolio-return-calculator": "finance/investment",
+
+    // savings
+    fd: "finance/savings",
+    rd: "finance/savings",
+    "compound-interest": "finance/savings",
+    inflation: "finance/savings",
+
+    // tax
+    "income-tax": "finance/tax",
+    gst: "finance/tax",
+    hra: "finance/tax",
+    "capital-gains": "finance/tax",
+    tds: "finance/tax",
+
+    // government
+    epf: "finance/government",
+    ppf: "finance/government",
+    nps: "finance/government",
+    gratuity: "finance/government",
+
+    // business
+    "break-even": "finance/business",
+    "margin-calculator": "finance/business",
+    "saas-revenue": "finance/business",
+    "startup-runway": "finance/business",
+    "freelance-hourly-rate": "finance/business",
+    "income-split": "finance/business",
+
+    // creator
     "youtube-money": "creator",
     "youtube-thumbnail-ctr": "creator",
     "influencer-earnings": "creator",
     "affiliate-commission": "creator",
     "instagram-engagement": "creator",
-    "age-calculator": "utility",
-    "average-calculator": "utility",
-    "test-grade-calculator": "utility",
-    "overtime-pay-calculator": "utility",
+
+    // utility (everyday)
+    "age-calculator": "everyday",
+    "average-calculator": "everyday",
+    "test-grade-calculator": "everyday",
+    "percentage-calculator": "math",
+    "discount-calculator": "math",
+    "date-difference-calculator": "everyday",
+    "time-duration-calculator": "everyday",
+    "average-percentage-calculator": "math",
+    "ratio-calculator": "math",
+
+    // income (finance)
+    "overtime-pay-calculator": "finance/income",
+    "salary-hike-calculator": "finance/income",
+    "take-home-salary-calculator": "finance/income",
+    "in-hand-salary-calculator": "finance/income",
+    "overtime-calculator": "finance/income",
+    "hourly-to-salary-calculator": "finance/income",
+
+    // health
     "calorie-calculator": "health",
   };
-  return map[slug] || "utility";
+  return map[slug] || "everyday";
+}
+
+function getAllJsonFiles(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getAllJsonFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith('.json')) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
 }
 
 function getCalculatorUrls() {
-  const files = fs.readdirSync(CALCULATORS_DIR);
-  const slugs = files
-    .filter((file) => file.endsWith(".json"))
-    .map((file) => file.replace(/\.json$/, ""));
+  const files = getAllJsonFiles(CALCULATORS_DIR);
+  const slugs = files.map((file) => path.basename(file).replace(/\.json$/, ""));
 
   const calculatorUrls = slugs.map((slug) => {
-    const category = getCalculatorCategory(slug);
-    return `${CANONICAL_DOMAIN}/calculators/${category}/${slug}-calculator`;
+    const categoryPath = getCalculatorCategory(slug);
+    return `${CANONICAL_DOMAIN}/calculators/${categoryPath}/${slug}-calculator`;
   });
 
   return [CANONICAL_DOMAIN, ...calculatorUrls];

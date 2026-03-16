@@ -15,7 +15,7 @@ import {
   generateFaqSections,
   formatFaqForSchema,
 } from "@/lib/seoTemplates";
-import { CALCULATOR_CATEGORIES, getCalculatorPathFromSlug, isValidCategory, formatCategoryName, getCategoryPath } from "@/lib/calculatorCategories";
+import { TOP_CATEGORIES, getCalculatorPathFromSlug, isValidCategory, formatCategoryName, getCategoryPath } from "@/lib/calculatorCategories";
 
 const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
 
@@ -39,12 +39,26 @@ export async function generateStaticParams() {
     return { slug: parts };
   });
 
-  const categoryParams = [
-    // Render category landing pages under /calculators/{category}
-    ...CALCULATOR_CATEGORIES.map((category) => ({ slug: [category] })),
-  ];
+  const categoryParams = new Set<string>();
 
-  return [...calculatorParams, ...categoryParams];
+  // Top-level category pages (finance, creator, etc.)
+  TOP_CATEGORIES.forEach((category) => {
+    categoryParams.add(JSON.stringify([category]));
+  });
+
+  // Subcategory pages (e.g. /calculators/finance/loans)
+  calculators.forEach((calculator) => {
+    const parts = calculator.path.replace(/^\/calculators\//, "").split("/");
+    if (parts.length === 3) {
+      // [top, sub, slug]
+      categoryParams.add(JSON.stringify([parts[0], parts[1]]));
+    }
+  });
+
+  return [
+    ...calculatorParams,
+    ...Array.from(categoryParams).map((slug) => ({ slug: JSON.parse(slug) })),
+  ];
 }
 
 export const revalidate = 60; // ISR: regenerate pages every 60 seconds
@@ -53,7 +67,7 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
   const paramsObj = await params;
   const slugSegments = (paramsObj?.slug ?? []) as string[];
 
-  // Category landing page (e.g. /calculators/utility)
+  // Top-level category landing pages (e.g. /calculators/finance)
   if (slugSegments.length === 1 && isValidCategory(slugSegments[0])) {
     const category = slugSegments[0];
     const canonicalUrl = `${CANONICAL_DOMAIN}${getCategoryPath(category)}`;
@@ -80,7 +94,41 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
     };
   }
 
-  const calculatorSegment = slugSegments.length === 1 ? slugSegments[0] : slugSegments[1];
+  // Subcategory landing pages (e.g. /calculators/finance/loans)
+  if (slugSegments.length === 2 && isValidCategory(slugSegments[0])) {
+    const topCategory = slugSegments[0];
+    const possibleSubCategory = slugSegments[1];
+    const computedPath = getCategoryPath(possibleSubCategory);
+
+    // If this matches the expected URL for a subcategory, render a subcategory page
+    if (computedPath === `/calculators/${topCategory}/${possibleSubCategory}`) {
+      const title = formatCategoryName(possibleSubCategory);
+      const description = `Browse ${title} to find the right tool for your needs.`;
+      const canonicalUrl = `${CANONICAL_DOMAIN}${computedPath}`;
+
+      return {
+        title,
+        description,
+        alternates: {
+          canonical: canonicalUrl,
+        },
+        openGraph: {
+          title,
+          description,
+          type: "website",
+          url: canonicalUrl,
+        },
+        twitter: {
+          card: "summary_large_image",
+          title,
+          description,
+        },
+      };
+    }
+  }
+
+  // Calculator pages
+  const calculatorSegment = slugSegments[slugSegments.length - 1];
   const slug = (calculatorSegment ?? "").replace(/-calculator$/, "");
   const config = await loadCalculator(slug);
 
@@ -139,7 +187,7 @@ export default async function CalculatorPage({ params }: PageProps) {
     notFound();
   }
 
-  // Category landing pages (e.g. /calculators/utility)
+  // Top-level category landing pages (e.g. /calculators/finance)
   if (slugSegments.length === 1 && isValidCategory(slugSegments[0])) {
     const category = slugSegments[0];
     const calculators = await getCalculatorsByCategory(category);
@@ -147,21 +195,68 @@ export default async function CalculatorPage({ params }: PageProps) {
     const title = formatCategoryName(category);
     const description = `Browse ${title} to find the right tool for your needs.`;
 
+    // For categories with subgroups (like finance), show calculators grouped by subcategory
+    const groupedBySubcategory = calculators.reduce<Record<string, typeof calculators>>((acc, calc) => {
+      const sub = calc.subcategory || "other";
+      if (!acc[sub]) acc[sub] = [];
+      acc[sub].push(calc);
+      return acc;
+    }, {});
+
+    const subs = Object.keys(groupedBySubcategory);
+
+    // If the category is effectively just a single subcategory (e.g. creator), render it as a flat list.
+    if (subs.length === 1 && subs[0] === category) {
+      return (
+        <CalculatorLayout title={title} description={description}>
+          <CalculatorCategorySection title={title} calculators={calculators} showHeader={false} />
+        </CalculatorLayout>
+      );
+    }
+
     return (
       <CalculatorLayout title={title} description={description}>
-        <CalculatorCategorySection title={title} calculators={calculators} showHeader={false} />
+        {Object.entries(groupedBySubcategory).map(([sub, group]) => (
+          <CalculatorCategorySection
+            key={sub}
+            title={formatCategoryName(sub)}
+            calculators={group}
+            showHeader={true}
+          />
+        ))}
       </CalculatorLayout>
     );
   }
 
-  // legacy /calculators/{slug} -> redirect to new path
+  // Subcategory landing pages (e.g. /calculators/finance/loans)
+  if (slugSegments.length === 2 && isValidCategory(slugSegments[0])) {
+    const [topCategory, subCategory] = slugSegments;
+    const expectedPath = getCategoryPath(subCategory);
+
+    if (expectedPath === `/calculators/${topCategory}/${subCategory}`) {
+      const calculators = await getCalculatorsByCategory(topCategory);
+      const filtered = calculators.filter((calc) => calc.subcategory === subCategory);
+
+      const title = formatCategoryName(subCategory);
+      const description = `Browse ${title} to find the right tool for your needs.`;
+
+      return (
+        <CalculatorLayout title={title} description={description}>
+          <CalculatorCategorySection title={title} calculators={filtered} showHeader={false} />
+        </CalculatorLayout>
+      );
+    }
+  }
+
+  // Legacy single-segment calculator URL (e.g. /calculators/emi-calculator)
   if (slugSegments.length === 1) {
     const legacySlug = slugSegments[0];
     const calculatorPath = getCalculatorPathFromSlug(legacySlug);
     redirect(calculatorPath);
   }
 
-  const [categorySegment, calculatorSegment] = slugSegments;
+  // Calculator detail pages
+  const calculatorSegment = slugSegments[slugSegments.length - 1];
   const slug = calculatorSegment.replace(/-calculator$/, "");
   const config = await loadCalculator(slug);
 
@@ -169,9 +264,12 @@ export default async function CalculatorPage({ params }: PageProps) {
     notFound();
   }
 
-  // If URL category doesn't match canonical category, redirect.
-  if (categorySegment !== config.category) {
-    redirect(config.path);
+  const expectedPath = config.path;
+  const requestedPath = `/calculators/${slugSegments.join("/")}`;
+
+  // Redirect if URL doesn't match canonical path (handles old and new URL patterns)
+  if (requestedPath !== expectedPath) {
+    redirect(expectedPath);
   }
 
   const canonicalUrl = `${CANONICAL_DOMAIN}${config.path}`;

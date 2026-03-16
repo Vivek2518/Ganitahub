@@ -1,4 +1,4 @@
-﻿import { CALCULATOR_CATEGORY_DISPLAY_NAME, CATEGORY_ORDER } from '@/lib/calculatorCategories';
+﻿import { CATEGORY_DISPLAY_NAME, CATEGORY_ORDER } from '@/lib/calculatorCategories';
 
 /**
  * Convert category keys into human-readable titles
@@ -7,7 +7,7 @@
  */
 export function formatCategoryName(category: string): string {
   return (
-    CALCULATOR_CATEGORY_DISPLAY_NAME[category as keyof typeof CALCULATOR_CATEGORY_DISPLAY_NAME] ||
+    CATEGORY_DISPLAY_NAME[category as keyof typeof CATEGORY_DISPLAY_NAME] ||
     `${category.charAt(0).toUpperCase() + category.slice(1)} Calculators`
   );
 }
