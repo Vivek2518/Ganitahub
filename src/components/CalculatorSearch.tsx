@@ -79,12 +79,12 @@ export function CalculatorSearch({ className }: { className?: string }) {
               <Link
                 key={calculator.slug}
                 href={getCalculatorPathFromSlug(calculator.slug)}
-                className="rounded-lg border bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                className="rounded-lg border border-border bg-card p-4 shadow-sm transition hover:shadow-md hover:border-primary/50"
               >
-                <h3 className="font-semibold text-blue-600 mb-2 line-clamp-1">
+                <h3 className="font-semibold text-foreground mb-2 line-clamp-1">
                   {calculator.name}
                 </h3>
-                <p className="text-sm text-gray-600 line-clamp-2">
+                <p className="text-sm text-muted-foreground line-clamp-2">
                   {calculator.description}
                 </p>
               </Link>

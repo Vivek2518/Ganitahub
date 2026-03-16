@@ -1,0 +1,57 @@
+{
+  "slug": "ratio-calculator",
+  "name": "Ratio Calculator",
+  "description": "Simplify the ratio between two numbers.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "valueA",
+      "label": "Value A",
+      "type": "number",
+      "placeholder": "10"
+    },
+    {
+      "key": "valueB",
+      "label": "Value B",
+      "type": "number",
+      "placeholder": "15"
+    }
+  ],
+  "formula": "Ratio = A : B (simplified)",
+  "formulaDescription": "Finds the simplest ratio between the two values.",
+  "computationType": "ratio",
+  "computeParams": {
+    "aKey": "valueA",
+    "bKey": "valueB"
+  },
+  "outputs": [
+    {
+      "key": "ratio",
+      "label": "Ratio",
+      "format": "text"
+    },
+    {
+      "key": "simplifiedRatio",
+      "label": "Simplified Ratio",
+      "format": "text"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "valueA": 10,
+      "valueB": 15
+    },
+    "outputs": {
+      "ratio": "10:15",
+      "simplifiedRatio": "2:3"
+    },
+    "explanation": "10:15 simplifies to 2:3."
+  },
+  "faqs": [
+    {
+      "question": "What if one value is zero?",
+      "answer": "If one value is zero, the ratio will reflect that (e.g., 0:5)."
+    }
+  ]
+}

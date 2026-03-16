@@ -206,6 +206,80 @@ const solveAnnualRate = (
   return mid;
 };
 
+// Greatest common divisor (used for simplifying ratios)
+const gcd = (a: number, b: number): number => {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  if (a === 0) return b;
+  if (b === 0) return a;
+  while (b !== 0) {
+    const temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+};
+
+// Date difference helper
+const dateDifference = (start: string, end: string) => {
+  let startDate = new Date(start);
+  let endDate = new Date(end);
+  if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+    return { years: 0, months: 0, days: 0, totalDays: 0 };
+  }
+
+  if (endDate < startDate) {
+    const temp = startDate;
+    startDate = endDate;
+    endDate = temp;
+  }
+
+  let years = endDate.getFullYear() - startDate.getFullYear();
+  let months = endDate.getMonth() - startDate.getMonth();
+  let days = endDate.getDate() - startDate.getDate();
+
+  if (days < 0) {
+    months -= 1;
+    const prevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+  return { years, months, days, totalDays };
+};
+
+// Time duration helper
+const parseTime = (value: string) => {
+  const match = value.trim().match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+  if (!match) return null;
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  const seconds = match[3] ? Number(match[3]) : 0;
+  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) return null;
+  return { hours, minutes, seconds };
+};
+
+const timeDuration = (start: string, end: string) => {
+  const startTime = parseTime(start);
+  const endTime = parseTime(end);
+  if (!startTime || !endTime) {
+    return { hours: 0, minutes: 0, totalMinutes: 0 };
+  }
+
+  const startTotal = startTime.hours * 60 + startTime.minutes + startTime.seconds / 60;
+  const endTotal = endTime.hours * 60 + endTime.minutes + endTime.seconds / 60;
+  let diffMinutes = endTotal - startTotal;
+  if (diffMinutes < 0) diffMinutes += 24 * 60; // assume next day
+
+  const hours = Math.floor(diffMinutes / 60);
+  const minutes = Math.round(diffMinutes % 60);
+  return { hours, minutes, totalMinutes: Math.round(diffMinutes) };
+};
+
 // SWP Calculation
 const swpCalculation = (corpus: number, rate: number, years: number) => {
   const r = rate / 100 / 12;
@@ -349,6 +423,45 @@ export function evaluateCalculator(input: CalculatorInput): any {
       });
       const average = count > 0 ? sum / count : 0;
       return { average: round(average, 2) };
+    }
+
+    case "percentageOf": {
+      const part = values[input.computeParams?.partKey || "part"] || 0;
+      const whole = values[input.computeParams?.wholeKey || "whole"] || 0;
+      const percentage = whole !== 0 ? (part / whole) * 100 : 0;
+      return { percentage: round(percentage, 2) };
+    }
+
+    case "discount": {
+      const price = values[input.computeParams?.priceKey || "price"] || 0;
+      const discount = values[input.computeParams?.discountKey || "discountPercent"] || 0;
+      const discountAmount = round((price * discount) / 100, 2);
+      const finalPrice = round(price - discountAmount, 2);
+      return { discountAmount, finalPrice };
+    }
+
+    case "dateDifference": {
+      const start = String(values[input.computeParams?.startKey || "startDate"] || "");
+      const end = String(values[input.computeParams?.endKey || "endDate"] || "");
+      return dateDifference(start, end);
+    }
+
+    case "timeDuration": {
+      const start = String(values[input.computeParams?.startKey || "startTime"] || "");
+      const end = String(values[input.computeParams?.endKey || "endTime"] || "");
+      return timeDuration(start, end);
+    }
+
+    case "ratio": {
+      const a = values[input.computeParams?.aKey || "valueA"] || 0;
+      const b = values[input.computeParams?.bKey || "valueB"] || 0;
+      const common = gcd(a, b);
+      const simplifiedA = common === 0 ? 0 : a / common;
+      const simplifiedB = common === 0 ? 0 : b / common;
+      return {
+        ratio: `${a}:${b}`,
+        simplifiedRatio: `${simplifiedA}:${simplifiedB}`,
+      };
     }
 
     case "overtime": {

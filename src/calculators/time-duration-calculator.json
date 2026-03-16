@@ -1,0 +1,63 @@
+{
+  "slug": "time-duration-calculator",
+  "name": "Time Duration Calculator",
+  "description": "Calculate the duration between two times.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "startTime",
+      "label": "Start Time (HH:MM)",
+      "type": "text",
+      "placeholder": "09:00"
+    },
+    {
+      "key": "endTime",
+      "label": "End Time (HH:MM)",
+      "type": "text",
+      "placeholder": "17:30"
+    }
+  ],
+  "formula": "Duration = end time - start time",
+  "formulaDescription": "Computes the hours and minutes between two times. If end time is earlier, it assumes the next day.",
+  "computationType": "timeDuration",
+  "computeParams": {
+    "startKey": "startTime",
+    "endKey": "endTime"
+  },
+  "outputs": [
+    {
+      "key": "hours",
+      "label": "Hours",
+      "format": "number"
+    },
+    {
+      "key": "minutes",
+      "label": "Minutes",
+      "format": "number"
+    },
+    {
+      "key": "totalMinutes",
+      "label": "Total Minutes",
+      "format": "number"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "startTime": "09:00",
+      "endTime": "17:30"
+    },
+    "outputs": {
+      "hours": 8,
+      "minutes": 30,
+      "totalMinutes": 510
+    },
+    "explanation": "From 09:00 to 17:30 is 8 hours 30 minutes (510 minutes)."
+  },
+  "faqs": [
+    {
+      "question": "What if the end time is before the start time?",
+      "answer": "The calculator assumes the end time is on the next day."
+    }
+  ]
+}

@@ -83,6 +83,12 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "average-calculator": "utility",
   "test-grade-calculator": "utility",
   "overtime-pay-calculator": "utility",
+  "percentage-calculator": "utility",
+  "discount-calculator": "utility",
+  "date-difference-calculator": "utility",
+  "time-duration-calculator": "utility",
+  "average-percentage-calculator": "utility",
+  "ratio-calculator": "utility",
 
   // health
   "calorie-calculator": "health",

@@ -4,7 +4,7 @@ type CalculatorLayoutProps = {
   title: string;
   description: string;
   children: ReactNode;
-  aside: ReactNode;
+  aside?: ReactNode;
   actions?: ReactNode;
 };
 
@@ -25,10 +25,14 @@ export function CalculatorLayout({ title, description, children, aside, actions 
         </div>
       </header>
 
-      <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr]">
+      {aside ? (
+        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr]">
+          <main className="space-y-8">{children}</main>
+          <aside className="space-y-8">{aside}</aside>
+        </div>
+      ) : (
         <main className="space-y-8">{children}</main>
-        <aside className="space-y-8">{aside}</aside>
-      </div>
+      )}
     </div>
   );
 }

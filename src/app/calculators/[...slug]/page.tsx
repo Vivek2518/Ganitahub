@@ -148,8 +148,8 @@ export default async function CalculatorPage({ params }: PageProps) {
     const description = `Browse ${title} to find the right tool for your needs.`;
 
     return (
-      <CalculatorLayout title={title} description={description} aside={<> </>}>
-        <CalculatorCategorySection title={title} calculators={calculators} />
+      <CalculatorLayout title={title} description={description}>
+        <CalculatorCategorySection title={title} calculators={calculators} showHeader={false} />
       </CalculatorLayout>
     );
   }

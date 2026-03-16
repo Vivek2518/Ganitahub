@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { CalculatorSearch } from "@/components/CalculatorSearch";
-import { CalculatorCategorySection } from "@/components/CalculatorCategorySection";
 import { getCalculatorsGroupedByCategory } from "@/lib/getCalculatorsGroupedByCategory";
 import { formatCategoryName, getCategoryOrder } from "@/lib/formatCategoryName";
+import { getCategoryPath } from "@/lib/calculatorCategories";
 
 const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
 
@@ -49,15 +50,33 @@ export default async function CalculatorsPage() {
         <CalculatorSearch />
       </div>
 
-      <div className="mt-10 space-y-12">
-        {sortedCategories.map((category) => (
-          <CalculatorCategorySection
-            key={category}
-            title={formatCategoryName(category)}
-            calculators={calculatorsByCategory[category]}
-          />
-        ))}
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedCategories.map((category) => {
+          const calcCount = calculatorsByCategory[category]?.length ?? 0;
+          return (
+            <Link
+              key={category}
+              href={getCategoryPath(category)}
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary hover:bg-primary/5"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-lg font-semibold">
+                    {formatCategoryName(category)}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Browse {calcCount} calculator{calcCount !== 1 ? "s" : ""} in this category.
+                  </p>
+                </div>
+                <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold">
+                  {calcCount}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 }
+

@@ -1,0 +1,69 @@
+{
+  "slug": "date-difference-calculator",
+  "name": "Date Difference Calculator",
+  "description": "Calculate the difference between two dates in years, months, and days.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "startDate",
+      "label": "Start Date",
+      "type": "date",
+      "placeholder": "2024-01-01"
+    },
+    {
+      "key": "endDate",
+      "label": "End Date",
+      "type": "date",
+      "placeholder": "2026-03-16"
+    }
+  ],
+  "formula": "Difference = end date - start date",
+  "formulaDescription": "Computes the total years, months, and days between two calendar dates.",
+  "computationType": "dateDifference",
+  "computeParams": {
+    "startKey": "startDate",
+    "endKey": "endDate"
+  },
+  "outputs": [
+    {
+      "key": "years",
+      "label": "Years",
+      "format": "number"
+    },
+    {
+      "key": "months",
+      "label": "Months",
+      "format": "number"
+    },
+    {
+      "key": "days",
+      "label": "Days",
+      "format": "number"
+    },
+    {
+      "key": "totalDays",
+      "label": "Total Days",
+      "format": "number"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "startDate": "2020-01-01",
+      "endDate": "2023-03-16"
+    },
+    "outputs": {
+      "years": 3,
+      "months": 2,
+      "days": 15,
+      "totalDays": 1165
+    },
+    "explanation": "From 1 Jan 2020 to 16 Mar 2023 is 3 years, 2 months, 15 days (1165 days total)."
+  },
+  "faqs": [
+    {
+      "question": "How is the difference calculated?",
+      "answer": "It counts full years and months between the two dates and remaining days."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "discount-calculator",
+  "name": "Discount Calculator",
+  "description": "Calculate discounted price and savings based on an original price and discount percentage.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "price",
+      "label": "Original Price",
+      "type": "number",
+      "placeholder": "1000"
+    },
+    {
+      "key": "discountPercent",
+      "label": "Discount Percentage",
+      "type": "percentage",
+      "placeholder": "20"
+    }
+  ],
+  "formula": "Discounted Price = Price * (1 - Discount% / 100)",
+  "formulaDescription": "Calculates how much you save and how much you pay after applying the discount.",
+  "computationType": "discount",
+  "computeParams": {
+    "priceKey": "price",
+    "discountKey": "discountPercent"
+  },
+  "outputs": [
+    {
+      "key": "discountAmount",
+      "label": "Discount Amount",
+      "format": "currency"
+    },
+    {
+      "key": "finalPrice",
+      "label": "Final Price",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "price": 1000,
+      "discountPercent": 15
+    },
+    "outputs": {
+      "discountAmount": 150,
+      "finalPrice": 850
+    },
+    "explanation": "A 15% discount on ₹1000 saves ₹150 and you pay ₹850."
+  },
+  "faqs": [
+    {
+      "question": "What if the discount percentage is 0?",
+      "answer": "You pay the full original price and savings are zero."
+    }
+  ]
+}

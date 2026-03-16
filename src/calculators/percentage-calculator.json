@@ -1,0 +1,51 @@
+{
+  "slug": "percentage-calculator",
+  "name": "Percentage Calculator",
+  "description": "Calculate what percentage one number is of another.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "part",
+      "label": "Part Value",
+      "type": "number",
+      "placeholder": "50"
+    },
+    {
+      "key": "whole",
+      "label": "Whole Value",
+      "type": "number",
+      "placeholder": "200"
+    }
+  ],
+  "formula": "Percentage = (part / whole) * 100",
+  "formulaDescription": "Determines what percent the part is of the whole.",
+  "computationType": "percentageOf",
+  "computeParams": {
+    "partKey": "part",
+    "wholeKey": "whole"
+  },
+  "outputs": [
+    {
+      "key": "percentage",
+      "label": "Percentage (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "part": 50,
+      "whole": 200
+    },
+    "outputs": {
+      "percentage": 25
+    },
+    "explanation": "50 is 25% of 200."
+  },
+  "faqs": [
+    {
+      "question": "What does this calculator do?",
+      "answer": "It finds what percentage one number is of another."
+    }
+  ]
+}

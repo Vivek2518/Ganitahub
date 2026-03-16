@@ -1,0 +1,71 @@
+{
+  "slug": "average-percentage-calculator",
+  "name": "Average Percentage Calculator",
+  "description": "Calculate the average of multiple percentage values.",
+  "category": "Utility",
+  "popular": false,
+  "fields": [
+    {
+      "key": "percent1",
+      "label": "Percentage 1",
+      "type": "percentage",
+      "placeholder": "80"
+    },
+    {
+      "key": "percent2",
+      "label": "Percentage 2",
+      "type": "percentage",
+      "placeholder": "75"
+    },
+    {
+      "key": "percent3",
+      "label": "Percentage 3",
+      "type": "percentage",
+      "placeholder": "90"
+    },
+    {
+      "key": "percent4",
+      "label": "Percentage 4",
+      "type": "percentage",
+      "placeholder": "85"
+    },
+    {
+      "key": "percent5",
+      "label": "Percentage 5",
+      "type": "percentage",
+      "placeholder": "70"
+    }
+  ],
+  "formula": "Average = (p1 + p2 + p3 + p4 + p5) / 5",
+  "formulaDescription": "Finds the average of all entered percentage values.",
+  "computationType": "average",
+  "computeParams": {
+    "numbers": ["percent1", "percent2", "percent3", "percent4", "percent5"]
+  },
+  "outputs": [
+    {
+      "key": "average",
+      "label": "Average Percentage (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "percent1": 80,
+      "percent2": 75,
+      "percent3": 90,
+      "percent4": 85,
+      "percent5": 70
+    },
+    "outputs": {
+      "average": 80
+    },
+    "explanation": "The average of these percentages is 80%."
+  },
+  "faqs": [
+    {
+      "question": "Can I leave a field blank?",
+      "answer": "All fields must be filled in for the calculator to work."
+    }
+  ]
+}
