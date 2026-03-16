@@ -1,0 +1,67 @@
+{
+  "slug": "overtime-calculator",
+  "name": "Overtime Calculator",
+  "description": "Calculate pay including overtime for extra hours worked.",
+  "category": "Income",
+  "popular": false,
+  "fields": [
+    {
+      "key": "hourlyWage",
+      "label": "Hourly Wage (₹)",
+      "type": "number",
+      "placeholder": "200"
+    },
+    {
+      "key": "regularHours",
+      "label": "Regular Hours",
+      "type": "number",
+      "placeholder": "40"
+    },
+    {
+      "key": "overtimeHours",
+      "label": "Overtime Hours",
+      "type": "number",
+      "placeholder": "10"
+    },
+    {
+      "key": "overtimeRate",
+      "label": "Overtime Rate (e.g., 1.5)",
+      "type": "number",
+      "placeholder": "1.5"
+    }
+  ],
+  "formula": "Total Pay = (regularHours * hourlyWage) + (overtimeHours * hourlyWage * overtimeRate)",
+  "formulaDescription": "Calculates total pay including overtime earnings.",
+  "computationType": "overtime",
+  "computeParams": {
+    "wageKey": "hourlyWage",
+    "regularKey": "regularHours",
+    "overtimeKey": "overtimeHours",
+    "rateKey": "overtimeRate"
+  },
+  "outputs": [
+    {
+      "key": "totalPay",
+      "label": "Total Pay (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "hourlyWage": 200,
+      "regularHours": 40,
+      "overtimeHours": 10,
+      "overtimeRate": 1.5
+    },
+    "outputs": {
+      "totalPay": 11000
+    },
+    "explanation": "Regular pay ₹8,000 + overtime ₹3,000 = ₹11,000 total."
+  },
+  "faqs": [
+    {
+      "question": "What is overtime rate?",
+      "answer": "It’s the multiplier applied to the hourly wage for overtime hours (e.g., 1.5 for time-and-a-half)."
+    }
+  ]
+}

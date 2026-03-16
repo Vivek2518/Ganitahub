@@ -1,0 +1,66 @@
+{
+  "slug": "loan-amortization-calculator",
+  "name": "Loan Amortization Calculator",
+  "description": "Estimate your loan repayment schedule by calculating monthly payment, total interest, and total amount paid.",
+  "category": "Loans",
+  "popular": false,
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "7.5"
+    },
+    {
+      "key": "tenure",
+      "label": "Tenure (years)",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "EMI = P * r * (1+r)^n / ((1+r)^n - 1)",
+  "formulaDescription": "Calculates the monthly payment and the overall interest paid over the loan tenure.",
+  "computationType": "amortization",
+  "outputs": [
+    {
+      "key": "monthlyPayment",
+      "label": "Monthly Payment",
+      "format": "currency"
+    },
+    {
+      "key": "totalPaid",
+      "label": "Total Amount Paid",
+      "format": "currency"
+    },
+    {
+      "key": "totalInterest",
+      "label": "Total Interest Paid",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 500000,
+      "rate": 7.5,
+      "tenure": 10
+    },
+    "outputs": {
+      "monthlyPayment": 5934.68,
+      "totalPaid": 712161.6,
+      "totalInterest": 212161.6
+    },
+    "explanation": "A ₹5,00,000 loan at 7.5% for 10 years results in a monthly payment of ₹5,934.68."
+  },
+  "faqs": [
+    {
+      "question": "What's the difference between EMI and amortization?",
+      "answer": "EMI is the monthly payment; amortization refers to the full repayment schedule over time including interest."
+    }
+  ]
+}

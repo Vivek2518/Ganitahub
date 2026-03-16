@@ -1,0 +1,47 @@
+{
+  "slug": "dividend-yield-calculator",
+  "name": "Dividend Yield Calculator",
+  "description": "Calculate dividend yield as a percentage of the share price.",
+  "category": "Investment",
+  "popular": false,
+  "fields": [
+    {
+      "key": "dividend",
+      "label": "Annual Dividend per Share",
+      "type": "number",
+      "placeholder": "5"
+    },
+    {
+      "key": "price",
+      "label": "Share Price",
+      "type": "number",
+      "placeholder": "100"
+    }
+  ],
+  "formula": "Dividend Yield = (Annual Dividend / Share Price) * 100",
+  "formulaDescription": "Shows how much dividend income you get relative to share price.",
+  "computationType": "dividendYield",
+  "outputs": [
+    {
+      "key": "yieldPct",
+      "label": "Yield (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "dividend": 5,
+      "price": 100
+    },
+    "outputs": {
+      "yieldPct": 5
+    },
+    "explanation": "A ₹5 annual dividend on a ₹100 stock is a 5% yield."
+  },
+  "faqs": [
+    {
+      "question": "Does yield change with market price?",
+      "answer": "Yes, dividend yield rises if price falls (and vice versa) assuming dividend stays the same."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ export const CALCULATOR_CATEGORIES = [
   "business",
   "creator",
   "utility",
+  "income",
   "health",
 ] as const;
 
@@ -23,6 +24,7 @@ export const CALCULATOR_CATEGORY_DISPLAY_NAME: Record<CalculatorCategoryKey, str
   business: "Business Calculators",
   creator: "Creator Economy Calculators",
   utility: "Utility Calculators",
+  income: "Income & Salary Calculators",
   health: "Health Calculators",
 };
 
@@ -35,6 +37,11 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "education-loan-emi": "loans",
   "loan-eligibility": "loans",
   "loan-interest-rate": "loans",
+  "emi-calculator": "loans",
+  "loan-amortization-calculator": "loans",
+  "credit-card-emi-calculator": "loans",
+  "interest-rate-calculator": "loans",
+  "prepayment-calculator": "loans",
 
   // investment
   sip: "investment",
@@ -43,6 +50,11 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "mutual-fund-return": "investment",
   "lumpsum-investment": "investment",
   cagr: "investment",
+  "stock-return-calculator": "investment",
+  "dividend-yield-calculator": "investment",
+  "retirement-corpus-calculator": "investment",
+  "inflation-adjusted-return-calculator": "investment",
+  "portfolio-return-calculator": "investment",
 
   // savings
   fd: "savings",
@@ -82,7 +94,12 @@ const SLUG_TO_CATEGORY: Record<string, CalculatorCategoryKey> = {
   "age-calculator": "utility",
   "average-calculator": "utility",
   "test-grade-calculator": "utility",
-  "overtime-pay-calculator": "utility",
+  "overtime-pay-calculator": "income",
+  "salary-hike-calculator": "income",
+  "take-home-salary-calculator": "income",
+  "in-hand-salary-calculator": "income",
+  "overtime-calculator": "income",
+  "hourly-to-salary-calculator": "income",
   "percentage-calculator": "utility",
   "discount-calculator": "utility",
   "date-difference-calculator": "utility",
@@ -137,5 +154,6 @@ export const CATEGORY_ORDER: CalculatorCategoryKey[] = [
   "business",
   "creator",
   "utility",
+  "income",
   "health",
 ];

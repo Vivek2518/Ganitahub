@@ -8,6 +8,7 @@ export type CalculatorCategory =
   | "creator"
   | "utility"
   | "health"
+  | "income"
   | "Finance"
   | "Investment"
   | "Tax"
@@ -76,6 +77,47 @@ export const calculators: Calculator[] = [
     added: "2026-02-18",
     tags: ["interest", "loan"],
   },
+  {
+    slug: "emi-calculator",
+    name: "EMI Calculator",
+    description: "Calculate the monthly EMI payment for a loan.",
+    category: "loans",
+    popular: true,
+    added: "2026-03-16",
+    tags: ["emi", "loan"],
+  },
+  {
+    slug: "loan-amortization-calculator",
+    name: "Loan Amortization Calculator",
+    description: "Estimate your repayment schedule and total interest cost.",
+    category: "loans",
+    added: "2026-03-16",
+    tags: ["amortization", "loan"],
+  },
+  {
+    slug: "credit-card-emi-calculator",
+    name: "Credit Card EMI Calculator",
+    description: "Calculate EMI for credit card purchases converted into installments.",
+    category: "loans",
+    added: "2026-03-16",
+    tags: ["credit card", "emi"],
+  },
+  {
+    slug: "interest-rate-calculator",
+    name: "Interest Rate Calculator",
+    description: "Estimate the annual interest rate based on EMI, principal, and tenure.",
+    category: "loans",
+    added: "2026-03-16",
+    tags: ["interest", "rate"],
+  },
+  {
+    slug: "prepayment-calculator",
+    name: "Prepayment Calculator",
+    description: "See how a lump sum prepayment affects your loan balance.",
+    category: "loans",
+    added: "2026-03-16",
+    tags: ["prepayment", "loan"],
+  },
 
   // Investment Calculators
   {
@@ -126,6 +168,46 @@ export const calculators: Calculator[] = [
     category: "investment",
     added: "2026-02-02",
     tags: ["sip", "step-up"],
+  },
+  {
+    slug: "stock-return-calculator",
+    name: "Stock Return Calculator",
+    description: "Calculate percentage gain or loss on a stock investment.",
+    category: "investment",
+    added: "2026-03-16",
+    tags: ["stock", "return"],
+  },
+  {
+    slug: "dividend-yield-calculator",
+    name: "Dividend Yield Calculator",
+    description: "Calculate dividend yield based on dividend and share price.",
+    category: "investment",
+    added: "2026-03-16",
+    tags: ["dividend", "yield"],
+  },
+  {
+    slug: "retirement-corpus-calculator",
+    name: "Retirement Corpus Calculator",
+    description: "Estimate corpus required to fund retirement expenses.",
+    category: "investment",
+    added: "2026-03-16",
+    tags: ["retirement", "corpus"],
+  },
+  {
+    slug: "inflation-adjusted-return-calculator",
+    name: "Inflation Adjusted Return Calculator",
+    description: "Compute real return after accounting for inflation.",
+    category: "investment",
+    added: "2026-03-16",
+    tags: ["inflation", "return"],
+  },
+  {
+    slug: "portfolio-return-calculator",
+    name: "Portfolio Return Calculator",
+    description: "Calculate weighted average return for a portfolio.",
+    category: "investment",
+    added: "2026-03-16",
+    tags: ["portfolio", "return"],
   },
 
   // Tax Calculators
@@ -373,6 +455,46 @@ export const calculators: Calculator[] = [
     tags: ["calorie", "bmr"],
   },
   {
+    slug: "salary-hike-calculator",
+    name: "Salary Hike Calculator",
+    description: "Calculate your new salary after a percentage hike.",
+    category: "income",
+    added: "2026-03-16",
+    tags: ["salary", "raise"],
+  },
+  {
+    slug: "take-home-salary-calculator",
+    name: "Take Home Salary Calculator",
+    description: "Estimate take-home pay after tax and deductions.",
+    category: "income",
+    added: "2026-03-16",
+    tags: ["take home", "salary"],
+  },
+  {
+    slug: "in-hand-salary-calculator",
+    name: "In-Hand Salary Calculator",
+    description: "Estimate net in-hand pay after deductions.",
+    category: "income",
+    added: "2026-03-16",
+    tags: ["salary", "in-hand"],
+  },
+  {
+    slug: "overtime-calculator",
+    name: "Overtime Calculator",
+    description: "Calculate pay including overtime for extra hours worked.",
+    category: "income",
+    added: "2026-03-16",
+    tags: ["overtime", "pay"],
+  },
+  {
+    slug: "hourly-to-salary-calculator",
+    name: "Hourly to Salary Calculator",
+    description: "Convert hourly wage into annual salary based on hours worked.",
+    category: "income",
+    added: "2026-03-16",
+    tags: ["hourly", "salary"],
+  },
+  {
     slug: "percentage-calculator",
     name: "Percentage Calculator",
     description: "Calculate what percentage one number is of another.",
@@ -454,6 +576,10 @@ export const categories: { name: CalculatorCategory; description: string }[] = [
   {
     name: "utility",
     description: "Everyday utility calculators for quick checks.",
+  },
+  {
+    name: "income",
+    description: "Salary and income calculators for payroll and paychecks.",
   },
   {
     name: "health",

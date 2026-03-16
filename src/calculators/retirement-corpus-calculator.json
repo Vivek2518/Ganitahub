@@ -1,0 +1,47 @@
+{
+  "slug": "retirement-corpus-calculator",
+  "name": "Retirement Corpus Calculator",
+  "description": "Estimate the corpus required to fund retirement expenses based on a withdrawal rate.",
+  "category": "Investment",
+  "popular": false,
+  "fields": [
+    {
+      "key": "annualExpenses",
+      "label": "Annual Retirement Expenses (₹)",
+      "type": "number",
+      "placeholder": "600000"
+    },
+    {
+      "key": "withdrawalRate",
+      "label": "Withdrawal Rate (%)",
+      "type": "percentage",
+      "placeholder": "4"
+    }
+  ],
+  "formula": "Corpus = Annual Expenses / (Withdrawal Rate / 100)",
+  "formulaDescription": "Estimates the amount needed to sustainably withdraw a fixed amount each year.",
+  "computationType": "retirementCorpus",
+  "outputs": [
+    {
+      "key": "corpus",
+      "label": "Required Corpus (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "annualExpenses": 600000,
+      "withdrawalRate": 4
+    },
+    "outputs": {
+      "corpus": 15000000
+    },
+    "explanation": "At 4% withdrawal, ₹6L annual expense needs ₹1.5Cr corpus."
+  },
+  "faqs": [
+    {
+      "question": "What does withdrawal rate mean?",
+      "answer": "It's the percentage of your corpus you withdraw each year. Lower rates require a larger corpus."
+    }
+  ]
+}

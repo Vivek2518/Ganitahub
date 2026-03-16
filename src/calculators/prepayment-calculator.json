@@ -1,0 +1,80 @@
+{
+  "slug": "prepayment-calculator",
+  "name": "Prepayment Calculator",
+  "description": "See how a lump-sum prepayment impacts your loan balance and remaining payments.",
+  "category": "Loans",
+  "popular": false,
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "percentage",
+      "placeholder": "7.5"
+    },
+    {
+      "key": "tenure",
+      "label": "Original Tenure (years)",
+      "type": "number",
+      "placeholder": "10"
+    },
+    {
+      "key": "paidYears",
+      "label": "Years Paid",
+      "type": "number",
+      "placeholder": "3"
+    },
+    {
+      "key": "prepayment",
+      "label": "Prepayment Amount (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    }
+  ],
+  "formula": "Calculates remaining balance after making a prepayment, based on EMI amortization.",
+  "formulaDescription": "Estimates how much extra you reduce from your loan balance with a one-time prepayment after some years of repayment.",
+  "computationType": "prepayment",
+  "outputs": [
+    {
+      "key": "monthlyEmi",
+      "label": "Original Monthly EMI",
+      "format": "currency"
+    },
+    {
+      "key": "remainingBalance",
+      "label": "Remaining Balance",
+      "format": "currency"
+    },
+    {
+      "key": "afterPrepayment",
+      "label": "Balance After Prepayment",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 500000,
+      "rate": 7.5,
+      "tenure": 10,
+      "paidYears": 3,
+      "prepayment": 50000
+    },
+    "outputs": {
+      "monthlyEmi": 5934.68,
+      "remainingBalance": 363831.37,
+      "afterPrepayment": 313831.37
+    },
+    "explanation": "After 3 years of payments on a ₹5,00,000 loan at 7.5%, the balance is about ₹3.64L. A ₹50,000 prepayment lowers it to ₹3.14L."
+  },
+  "faqs": [
+    {
+      "question": "Does this change my EMI?",
+      "answer": "This calculator assumes EMI stays the same and shows how your remaining balance drops. Your lender may offer to reduce EMI or tenure."
+    }
+  ]
+}

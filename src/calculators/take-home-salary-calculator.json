@@ -1,0 +1,54 @@
+{
+  "slug": "take-home-salary-calculator",
+  "name": "Take Home Salary Calculator",
+  "description": "Estimate your take-home pay after tax and deductions.",
+  "category": "Income",
+  "popular": false,
+  "fields": [
+    {
+      "key": "grossSalary",
+      "label": "Gross Salary (₹)",
+      "type": "number",
+      "placeholder": "1200000"
+    },
+    {
+      "key": "taxRate",
+      "label": "Tax Rate (%)",
+      "type": "percentage",
+      "placeholder": "20"
+    },
+    {
+      "key": "deductions",
+      "label": "Other Deductions (₹)",
+      "type": "number",
+      "placeholder": "20000"
+    }
+  ],
+  "formula": "Take Home = Gross - (Gross * Tax%) - Deductions",
+  "formulaDescription": "Calculates estimated monthly or annual take-home pay after tax and other deductions.",
+  "computationType": "takeHomeSalary",
+  "outputs": [
+    {
+      "key": "takeHome",
+      "label": "Take Home Salary (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "grossSalary": 1200000,
+      "taxRate": 20,
+      "deductions": 20000
+    },
+    "outputs": {
+      "takeHome": 940000
+    },
+    "explanation": "After 20% tax and ₹20,000 deductions, take-home pay is ₹9,40,000."
+  },
+  "faqs": [
+    {
+      "question": "Is this exact?",
+      "answer": "This is an estimate; actual take-home depends on tax slabs, exemptions, and employer deductions."
+    }
+  ]
+}

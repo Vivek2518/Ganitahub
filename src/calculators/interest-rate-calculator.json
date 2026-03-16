@@ -1,0 +1,54 @@
+{
+  "slug": "interest-rate-calculator",
+  "name": "Interest Rate Calculator",
+  "description": "Estimate the annual interest rate for a loan given its EMI, principal, and tenure.",
+  "category": "Loans",
+  "popular": false,
+  "fields": [
+    {
+      "key": "principal",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "emi",
+      "label": "Monthly EMI (₹)",
+      "type": "number",
+      "placeholder": "6000"
+    },
+    {
+      "key": "tenure",
+      "label": "Tenure (years)",
+      "type": "number",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "Rate found using iterative approximation of the EMI formula.",
+  "formulaDescription": "Solves for the annual interest rate that matches the provided EMI, principal, and tenure.",
+  "computationType": "loanRate",
+  "outputs": [
+    {
+      "key": "rate",
+      "label": "Annual Interest Rate (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "principal": 500000,
+      "emi": 5935,
+      "tenure": 10
+    },
+    "outputs": {
+      "rate": 7.5
+    },
+    "explanation": "A ₹5,00,000 loan with a ₹5,935 EMI over 10 years corresponds to about 7.5% annual interest."
+  },
+  "faqs": [
+    {
+      "question": "How accurate is the rate estimate?",
+      "answer": "The rate is approximated via binary search and should be very close to the true rate."
+    }
+  ]
+}

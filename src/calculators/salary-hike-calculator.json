@@ -1,0 +1,53 @@
+{
+  "slug": "salary-hike-calculator",
+  "name": "Salary Hike Calculator",
+  "description": "Calculate your new salary after a percentage hike.",
+  "category": "Income",
+  "popular": false,
+  "fields": [
+    {
+      "key": "currentSalary",
+      "label": "Current Salary (₹)",
+      "type": "number",
+      "placeholder": "500000"
+    },
+    {
+      "key": "hikePercent",
+      "label": "Hike Percentage (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    }
+  ],
+  "formula": "New Salary = Current Salary * (1 + Hike%)",
+  "formulaDescription": "Calculates the new salary after applying the specified percentage raise.",
+  "computationType": "salaryHike",
+  "outputs": [
+    {
+      "key": "newSalary",
+      "label": "New Salary (₹)",
+      "format": "currency"
+    },
+    {
+      "key": "increment",
+      "label": "Increment (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "currentSalary": 500000,
+      "hikePercent": 10
+    },
+    "outputs": {
+      "newSalary": 550000,
+      "increment": 50000
+    },
+    "explanation": "A 10% raise on ₹5,00,000 gives ₹55,00,000 new salary (₹50,000 increment)."
+  },
+  "faqs": [
+    {
+      "question": "Does this include bonuses?",
+      "answer": "No, it only uses base salary and hike percentage."
+    }
+  ]
+}

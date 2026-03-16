@@ -1,0 +1,47 @@
+{
+  "slug": "inflation-adjusted-return-calculator",
+  "name": "Inflation Adjusted Return Calculator",
+  "description": "Calculate real return after adjusting for inflation.",
+  "category": "Investment",
+  "popular": false,
+  "fields": [
+    {
+      "key": "nominal",
+      "label": "Nominal Return (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    },
+    {
+      "key": "inflation",
+      "label": "Inflation Rate (%)",
+      "type": "percentage",
+      "placeholder": "6"
+    }
+  ],
+  "formula": "Real Return = ((1 + nominal) / (1 + inflation) - 1) * 100",
+  "formulaDescription": "Shows the return after removing the effect of inflation.",
+  "computationType": "inflationAdjustedReturn",
+  "outputs": [
+    {
+      "key": "realReturn",
+      "label": "Real Return (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "nominal": 10,
+      "inflation": 6
+    },
+    "outputs": {
+      "realReturn": 3.77
+    },
+    "explanation": "A 10% nominal return with 6% inflation is about 3.77% real return."
+  },
+  "faqs": [
+    {
+      "question": "Why is real return lower than nominal?",
+      "answer": "Inflation reduces purchasing power, so real return shows actual gain in value."
+    }
+  ]
+}

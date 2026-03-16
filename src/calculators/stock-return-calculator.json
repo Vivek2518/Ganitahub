@@ -1,0 +1,47 @@
+{
+  "slug": "stock-return-calculator",
+  "name": "Stock Return Calculator",
+  "description": "Calculate the percentage return on a stock investment based on initial and final prices.",
+  "category": "Investment",
+  "popular": false,
+  "fields": [
+    {
+      "key": "initial",
+      "label": "Initial Price",
+      "type": "number",
+      "placeholder": "100"
+    },
+    {
+      "key": "final",
+      "label": "Final Price",
+      "type": "number",
+      "placeholder": "150"
+    }
+  ],
+  "formula": "Return = ((Final - Initial) / Initial) * 100",
+  "formulaDescription": "Calculates the percentage gain or loss based on purchase and sale prices.",
+  "computationType": "stockReturn",
+  "outputs": [
+    {
+      "key": "returnPct",
+      "label": "Return (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "initial": 100,
+      "final": 150
+    },
+    "outputs": {
+      "returnPct": 50
+    },
+    "explanation": "A stock that increases from 100 to 150 delivers a 50% return."
+  },
+  "faqs": [
+    {
+      "question": "Does this include dividends?",
+      "answer": "No. This calculator only measures price return, not dividends."
+    }
+  ]
+}

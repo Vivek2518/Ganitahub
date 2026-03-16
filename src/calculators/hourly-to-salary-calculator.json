@@ -1,0 +1,54 @@
+{
+  "slug": "hourly-to-salary-calculator",
+  "name": "Hourly to Salary Calculator",
+  "description": "Convert hourly wage into annual salary based on hours per week and work weeks per year.",
+  "category": "Income",
+  "popular": false,
+  "fields": [
+    {
+      "key": "hourlyWage",
+      "label": "Hourly Wage (₹)",
+      "type": "number",
+      "placeholder": "500"
+    },
+    {
+      "key": "hoursPerWeek",
+      "label": "Hours per Week",
+      "type": "number",
+      "placeholder": "40"
+    },
+    {
+      "key": "weeksPerYear",
+      "label": "Weeks per Year",
+      "type": "number",
+      "placeholder": "52"
+    }
+  ],
+  "formula": "Annual Salary = hourly wage * hours per week * weeks per year",
+  "formulaDescription": "Estimates salary from an hourly rate based on work hours and weeks per year.",
+  "computationType": "hourlyToSalary",
+  "outputs": [
+    {
+      "key": "annualSalary",
+      "label": "Annual Salary (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "hourlyWage": 500,
+      "hoursPerWeek": 40,
+      "weeksPerYear": 52
+    },
+    "outputs": {
+      "annualSalary": 1040000
+    },
+    "explanation": "₹500/hr * 40 hours/week * 52 weeks = ₹10,40,000 per year."
+  },
+  "faqs": [
+    {
+      "question": "Does this account for vacation?",
+      "answer": "No, it assumes full weeks worked; adjust weeks per year for vacation."
+    }
+  ]
+}

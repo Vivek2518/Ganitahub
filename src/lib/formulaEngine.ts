@@ -184,6 +184,42 @@ const reverseEMI = (
   );
 };
 
+// Amortization helper (same as EMI but returns breakdown)
+const amortization = (principal: number, rate: number, tenureYears: number) => {
+  const monthlyPayment = EMI(principal, rate, tenureYears);
+  const months = tenureYears * 12;
+  const totalPaid = monthlyPayment * months;
+  const totalInterest = totalPaid - principal;
+  return {
+    monthlyPayment: round(monthlyPayment),
+    totalPaid: round(totalPaid),
+    totalInterest: round(totalInterest),
+  };
+};
+
+// Remaining balance after a given number of payments (used for prepayment)
+const remainingBalance = (
+  principal: number,
+  rate: number,
+  tenureYears: number,
+  paymentsMadeYears: number
+) => {
+  const monthlyRate = rate / 100 / 12;
+  const totalMonths = tenureYears * 12;
+  const paidMonths = paymentsMadeYears * 12;
+
+  if (monthlyRate === 0) {
+    const remainingPrincipal = Math.max(0, principal - (principal / totalMonths) * paidMonths);
+    return round(remainingPrincipal);
+  }
+
+  const monthlyPayment = EMI(principal, rate, tenureYears);
+  const factor = Math.pow(1 + monthlyRate, paidMonths);
+  const balance = principal * factor -
+    monthlyPayment * ((factor - 1) / monthlyRate);
+  return round(Math.max(0, balance));
+};
+
 // Solve Annual Rate (via binary search)
 const solveAnnualRate = (
   principal: number,
@@ -353,6 +389,45 @@ export function evaluateCalculator(input: CalculatorInput): any {
       };
     }
 
+    case "amortization": {
+      const principal = values.principal || 0;
+      const rate = values.rate || 0;
+      const tenure = values.tenure || 0;
+      return amortization(principal, rate, tenure);
+    }
+
+    case "creditCardEmi": {
+      const amount = values.amount || 0;
+      const rate = values.rate || 0;
+      const months = values.tenure || 0;
+      const emi = EMI(amount, rate, months / 12);
+      const totalPaid = emi * months;
+      const totalInterest = totalPaid - amount;
+      return {
+        emi: round(emi),
+        totalPaid: round(totalPaid),
+        totalInterest: round(totalInterest),
+      };
+    }
+
+    case "prepayment": {
+      const principal = values.principal || 0;
+      const rate = values.rate || 0;
+      const tenure = values.tenure || 0;
+      const paidYears = values.paidYears || 0;
+      const prepayment = values.prepayment || 0;
+
+      const monthlyEmi = EMI(principal, rate, tenure);
+      const remaining = remainingBalance(principal, rate, tenure, paidYears);
+      const afterPrepayment = Math.max(0, remaining - prepayment);
+
+      return {
+        monthlyEmi: round(monthlyEmi),
+        remainingBalance: round(remaining),
+        afterPrepayment: round(afterPrepayment),
+      };
+    }
+
     case "sip": {
       const monthly = values.monthly || 0;
       const rate = values.rate || 0;
@@ -425,6 +500,51 @@ export function evaluateCalculator(input: CalculatorInput): any {
       return { average: round(average, 2) };
     }
 
+    case "stockReturn": {
+      const initial = values.initial || 0;
+      const final = values.final || 0;
+      const returnPct = initial > 0 ? ((final - initial) / initial) * 100 : 0;
+      return { returnPct: round(returnPct, 2) };
+    }
+
+    case "dividendYield": {
+      const dividend = values.dividend || 0;
+      const price = values.price || 0;
+      const yieldPct = price > 0 ? (dividend / price) * 100 : 0;
+      return { yieldPct: round(yieldPct, 2) };
+    }
+
+    case "retirementCorpus": {
+      const annualExpenses = values.annualExpenses || 0;
+      const withdrawalRate = values.withdrawalRate || 0;
+      const corpus = withdrawalRate > 0 ? annualExpenses / (withdrawalRate / 100) : 0;
+      return { corpus: round(corpus) };
+    }
+
+    case "inflationAdjustedReturn": {
+      const nominal = values.nominal || 0;
+      const inflation = values.inflation || 0;
+      const real = (1 + nominal / 100) / (1 + inflation / 100) - 1;
+      return { realReturn: round(real * 100, 2) };
+    }
+
+    case "portfolioReturn": {
+      const returns = input.computeParams?.returns || [];
+      const weights = input.computeParams?.weights || [];
+      let total = 0;
+      let weightSum = 0;
+      for (let i = 0; i < returns.length; i++) {
+        const rKey = returns[i];
+        const wKey = weights[i];
+        const r = values[rKey] || 0;
+        const w = values[wKey] || 0;
+        total += (r * w) / 100;
+        weightSum += w;
+      }
+      const portfolio = weightSum > 0 ? (total / (weightSum / 100)) : 0;
+      return { portfolioReturn: round(portfolio, 2) };
+    }
+
     case "percentageOf": {
       const part = values[input.computeParams?.partKey || "part"] || 0;
       const whole = values[input.computeParams?.wholeKey || "whole"] || 0;
@@ -471,6 +591,41 @@ export function evaluateCalculator(input: CalculatorInput): any {
       const rate = values.overtimeRate || 1;
       const totalPay = regular * wage + overtime * wage * rate;
       return { totalPay: round(totalPay, 2) };
+    }
+
+    case "salaryHike": {
+      const currentSalary = values.currentSalary || 0;
+      const hikePercent = values.hikePercent || 0;
+      const newSalary = currentSalary * (1 + hikePercent / 100);
+      return {
+        newSalary: round(newSalary),
+        increment: round(newSalary - currentSalary),
+      };
+    }
+
+    case "takeHomeSalary": {
+      const gross = values.grossSalary || 0;
+      const taxRate = values.taxRate || 0;
+      const deductions = values.deductions || 0;
+      const net = gross - (gross * (taxRate / 100)) - deductions;
+      return { takeHome: round(net) };
+    }
+
+    case "inHandSalary": {
+      const basic = values.basicSalary || 0;
+      const hra = values.hra || 0;
+      const other = values.otherAllowances || 0;
+      const deductions = values.deductions || 0;
+      const inHand = basic + hra + other - deductions;
+      return { inHand: round(inHand) };
+    }
+
+    case "hourlyToSalary": {
+      const hourly = values.hourlyWage || 0;
+      const hoursPerWeek = values.hoursPerWeek || 0;
+      const weeksPerYear = values.weeksPerYear || 0;
+      const annual = hourly * hoursPerWeek * weeksPerYear;
+      return { annualSalary: round(annual) };
     }
 
     case "margin": {

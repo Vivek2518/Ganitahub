@@ -1,0 +1,79 @@
+{
+  "slug": "portfolio-return-calculator",
+  "name": "Portfolio Return Calculator",
+  "description": "Calculate weighted average return for a portfolio of investments.",
+  "category": "Investment",
+  "popular": false,
+  "fields": [
+    {
+      "key": "return1",
+      "label": "Return 1 (%)",
+      "type": "percentage",
+      "placeholder": "8"
+    },
+    {
+      "key": "weight1",
+      "label": "Weight 1 (%)",
+      "type": "percentage",
+      "placeholder": "40"
+    },
+    {
+      "key": "return2",
+      "label": "Return 2 (%)",
+      "type": "percentage",
+      "placeholder": "10"
+    },
+    {
+      "key": "weight2",
+      "label": "Weight 2 (%)",
+      "type": "percentage",
+      "placeholder": "40"
+    },
+    {
+      "key": "return3",
+      "label": "Return 3 (%)",
+      "type": "percentage",
+      "placeholder": "6"
+    },
+    {
+      "key": "weight3",
+      "label": "Weight 3 (%)",
+      "type": "percentage",
+      "placeholder": "20"
+    }
+  ],
+  "formula": "Portfolio Return = sum(return_i * weight_i) / sum(weight_i)",
+  "formulaDescription": "Calculates the weighted average return of the portfolio.",
+  "computationType": "portfolioReturn",
+  "computeParams": {
+    "returns": ["return1", "return2", "return3"],
+    "weights": ["weight1", "weight2", "weight3"]
+  },
+  "outputs": [
+    {
+      "key": "portfolioReturn",
+      "label": "Portfolio Return (%)",
+      "format": "percentage"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "return1": 8,
+      "weight1": 40,
+      "return2": 10,
+      "weight2": 40,
+      "return3": 6,
+      "weight3": 20
+    },
+    "outputs": {
+      "portfolioReturn": 8.4
+    },
+    "explanation": "Weighted average return: (8*40 + 10*40 + 6*20) / 100 = 8.4%."
+  },
+  "faqs": [
+    {
+      "question": "Do weights need to add up to 100?",
+      "answer": "Weights should ideally sum to 100; otherwise the formula normalizes them."
+    }
+  ]
+}

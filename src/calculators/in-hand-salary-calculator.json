@@ -1,0 +1,61 @@
+{
+  "slug": "in-hand-salary-calculator",
+  "name": "In-Hand Salary Calculator",
+  "description": "Estimate your net salary received after standard deductions.",
+  "category": "Income",
+  "popular": false,
+  "fields": [
+    {
+      "key": "basicSalary",
+      "label": "Basic Salary (₹)",
+      "type": "number",
+      "placeholder": "50000"
+    },
+    {
+      "key": "hra",
+      "label": "HRA (₹)",
+      "type": "number",
+      "placeholder": "20000"
+    },
+    {
+      "key": "otherAllowances",
+      "label": "Other Allowances (₹)",
+      "type": "number",
+      "placeholder": "10000"
+    },
+    {
+      "key": "deductions",
+      "label": "Deductions (₹)",
+      "type": "number",
+      "placeholder": "5000"
+    }
+  ],
+  "formula": "In-hand = Basic + HRA + Other Allowances - Deductions",
+  "formulaDescription": "Estimates net salary received in hand after subtracting deductions.",
+  "computationType": "inHandSalary",
+  "outputs": [
+    {
+      "key": "inHand",
+      "label": "In-Hand Salary (₹)",
+      "format": "currency"
+    }
+  ],
+  "example": {
+    "inputs": {
+      "basicSalary": 50000,
+      "hra": 20000,
+      "otherAllowances": 10000,
+      "deductions": 5000
+    },
+    "outputs": {
+      "inHand": 75000
+    },
+    "explanation": "Basic + HRA + allowances minus deductions gives ₹75,000 in-hand."
+  },
+  "faqs": [
+    {
+      "question": "Does this include tax?",
+      "answer": "Only if you include tax under deductions; this calculator uses whatever deductions you enter."
+    }
+  ]
+}
