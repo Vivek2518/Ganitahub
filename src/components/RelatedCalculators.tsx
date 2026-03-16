@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 
 type RelatedCalculatorsProps = {
   slug: string;
@@ -52,7 +53,7 @@ export function RelatedCalculators({ slug, category }: RelatedCalculatorsProps) 
         {related.map((calculator) => (
           <Link
             key={calculator.slug}
-            href={`/calculators/${calculator.slug}`}
+            href={getCalculatorPathFromSlug(calculator.slug)}
             className="block p-3 border rounded-lg hover:shadow-md transition-shadow hover:border-blue-400"
           >
             <h4 className="font-medium text-blue-600 hover:text-blue-700">

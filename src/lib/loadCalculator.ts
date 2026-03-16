@@ -5,6 +5,7 @@
 
 import { promises as fs } from "fs";
 import { join } from "path";
+import { getCategoryForSlug, getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 
 export interface CalculatorField {
   key: string;
@@ -36,6 +37,7 @@ export interface CalculatorConfig {
   name: string;
   description: string;
   category: string;
+  path: string;
   subcategory?: string;
   popular?: boolean;
   tags?: string[];
@@ -123,7 +125,13 @@ async function loadAllCalculators(): Promise<Record<string, CalculatorConfig>> {
         const content = await fs.readFile(filePath, 'utf-8');
         const parsed = JSON.parse(content);
         if (validateCalculatorConfig(parsed)) {
-          cache[slug] = parsed;
+          const category = getCategoryForSlug(slug);
+          cache[slug] = {
+            ...parsed,
+            slug,
+            category,
+            path: getCalculatorPathFromSlug(slug),
+          };
         } else {
           console.error(`Invalid calculator config for ${slug}: validation failed`);
         }
@@ -181,6 +189,7 @@ export async function getCalculatorSummary(slug: string) {
     name: config.name,
     description: config.description,
     category: config.category,
+    path: config.path,
     popular: config.popular || false,
   };
 }

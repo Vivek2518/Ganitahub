@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 
 interface SearchResult {
   slug: string;
@@ -77,7 +78,7 @@ export function CalculatorSearch({ className }: { className?: string }) {
             {results.map((calculator) => (
               <Link
                 key={calculator.slug}
-                href={`/calculators/${calculator.slug}`}
+                href={getCalculatorPathFromSlug(calculator.slug)}
                 className="rounded-lg border bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h3 className="font-semibold text-blue-600 mb-2 line-clamp-1">

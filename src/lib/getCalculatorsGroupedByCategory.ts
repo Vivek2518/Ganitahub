@@ -1,15 +1,5 @@
 import { getAllCalculators, CalculatorConfig } from "@/lib/loadCalculator";
-
-function normalizeCategory(category: string): string {
-  const key = category?.trim().toLowerCase();
-  const map: Record<string, string> = {
-    finance: "loan",
-    savings: "personal-finance",
-    government: "personal-finance",
-    "creator economy": "business",
-  };
-  return map[key] || key || "general";
-}
+import { getCategoryForSlug } from "@/lib/calculatorCategories";
 
 /**
  * Group calculators by their category
@@ -19,7 +9,7 @@ export async function getCalculatorsGroupedByCategory(): Promise<Record<string, 
   const calculators = await getAllCalculators();
 
   return calculators.reduce((groups, calculator) => {
-    const category = normalizeCategory(calculator.category);
+    const category = getCategoryForSlug(calculator.slug);
     if (!groups[category]) {
       groups[category] = [];
     }
@@ -35,6 +25,6 @@ export async function getCalculatorsGroupedByCategory(): Promise<Record<string, 
  */
 export async function getCalculatorsByCategory(category: string): Promise<CalculatorConfig[]> {
   const grouped = await getCalculatorsGroupedByCategory();
-  const normalized = normalizeCategory(category);
+  const normalized = category?.trim().toLowerCase();
   return grouped[normalized] || [];
 }

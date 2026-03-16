@@ -86,10 +86,10 @@ export async function getRelatedCalculators(
  */
 function isRelatedCategory(category1: string, category2: string): boolean {
   const relatedGroups = [
-    ["Finance", "Investment", "Savings"],
-    ["Tax", "Income", "Government"],
-    ["Creator Economy", "Business"],
-    ["Government", "Savings"],
+    ["loans", "investment", "savings"],
+    ["tax", "government"],
+    ["business", "creator"],
+    ["utility", "health"],
   ];
 
   return relatedGroups.some(

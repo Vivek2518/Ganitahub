@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { categories, calculators } from "@/data/calculators";
+import { getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 import { Badge } from "@/components/ui/badge";
 
 export function CategorySection() {
@@ -38,7 +39,7 @@ export function CategorySection() {
                   {categoryItems.map((calculator) => (
                     <Link
                       key={calculator.slug}
-                      href={`/calculators/${calculator.slug}`}
+                      href={getCalculatorPathFromSlug(calculator.slug)}
                       className="rounded-xl border border-border bg-background/50 p-4 text-sm transition hover:border-primary hover:bg-primary/10"
                     >
                       <div className="font-medium">{calculator.name}</div>

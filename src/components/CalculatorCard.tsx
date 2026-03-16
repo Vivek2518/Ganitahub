@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Calculator } from "@/data/calculators";
 import { CalculatorConfig } from "@/lib/loadCalculator";
+import { getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 import {
   Card,
   CardContent,
@@ -20,10 +21,12 @@ type CalculatorCardProps = {
 };
 
 export function CalculatorCard({ calculator }: CalculatorCardProps) {
+  const calculatorPath = (calculator as any).path ?? getCalculatorPathFromSlug(calculator.slug);
+
   return (
     <Card className="transition hover:-translate-y-0.5 hover:shadow-lg">
       {/* Clickable header */}
-      <Link href={`/calculators/${calculator.slug}`} className="block">
+      <Link href={calculatorPath} className="block">
         <CardHeader className="cursor-pointer">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -44,7 +47,7 @@ export function CalculatorCard({ calculator }: CalculatorCardProps) {
           className="ml-auto"
           variant="secondary"
           onClick={() => {
-            window.location.href = `/calculators/${calculator.slug}`;
+            window.location.href = calculatorPath;
           }}
         >
           Open

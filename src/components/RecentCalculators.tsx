@@ -2,6 +2,7 @@
 
 import { calculators } from "@/data/calculators";
 import Link from "next/link";
+import { getCalculatorPathFromSlug } from "@/lib/calculatorCategories";
 
 export function RecentCalculators() {
   const recent = [...calculators]
@@ -22,7 +23,7 @@ export function RecentCalculators() {
         {recent.map((calculator) => (
           <Link
             key={calculator.slug}
-            href={`/calculators/${calculator.slug}`}
+            href={getCalculatorPathFromSlug(calculator.slug)}
             className="rounded-lg border bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
           >
             <h3 className="font-semibold text-blue-600 mb-2 line-clamp-1">

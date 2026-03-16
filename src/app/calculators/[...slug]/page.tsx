@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { CalculatorEngine } from "@/components/CalculatorEngine";
 import { FavoriteToggle } from "@/components/FavoriteToggle";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
 import { CalculatorIntro } from "@/components/CalculatorIntro";
-import { loadCalculator } from "@/lib/loadCalculator";
-import { getPopularCalculators } from "@/lib/getRelatedCalculators";
+import { CalculatorCategorySection } from "@/components/CalculatorCategorySection";
+import { loadCalculator, getAllCalculators, getCalculatorsByCategory } from "@/lib/loadCalculator";
 import type { CalculatorConfig } from "@/lib/loadCalculator";
 import {
   generateIntro,
@@ -15,6 +15,7 @@ import {
   generateFaqSections,
   formatFaqForSchema,
 } from "@/lib/seoTemplates";
+import { CALCULATOR_CATEGORIES, getCalculatorPathFromSlug, isValidCategory, formatCategoryName, getCategoryPath } from "@/lib/calculatorCategories";
 
 const CANONICAL_DOMAIN = "https://www.insightcalculator.com";
 
@@ -31,25 +32,65 @@ function buildMetaDescription(config: CalculatorConfig): string {
 }
 
 export async function generateStaticParams() {
-  const popular = await getPopularCalculators(10);
-  return popular.map((calculator) => ({
-    slug: calculator.slug,
-  }));
+  const calculators = await getAllCalculators();
+
+  const calculatorParams = calculators.map((calculator) => {
+    const parts = calculator.path.replace(/^\/calculators\//, "").split("/");
+    return { slug: parts };
+  });
+
+  const categoryParams = [
+    // Render category landing pages under /calculators/{category}
+    ...CALCULATOR_CATEGORIES.map((category) => ({ slug: [category] })),
+  ];
+
+  return [...calculatorParams, ...categoryParams];
 }
 
 export const revalidate = 60; // ISR: regenerate pages every 60 seconds
 
 export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
-  const { slug } = await params;
+  const paramsObj = await params;
+  const slugSegments = (paramsObj?.slug ?? []) as string[];
+
+  // Category landing page (e.g. /calculators/utility)
+  if (slugSegments.length === 1 && isValidCategory(slugSegments[0])) {
+    const category = slugSegments[0];
+    const canonicalUrl = `${CANONICAL_DOMAIN}${getCategoryPath(category)}`;
+    const title = `${formatCategoryName(category)} | Insight Calculator`;
+    const description = `Browse ${formatCategoryName(category)} with calculators to help you solve common problems and make better decisions.`;
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      openGraph: {
+        title,
+        description,
+        type: "website",
+        url: canonicalUrl,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+    };
+  }
+
+  const calculatorSegment = slugSegments.length === 1 ? slugSegments[0] : slugSegments[1];
+  const slug = (calculatorSegment ?? "").replace(/-calculator$/, "");
   const config = await loadCalculator(slug);
-  
+
   if (!config) {
     return {
       title: "Calculator not found",
     };
   }
 
-  const canonicalUrl = `${CANONICAL_DOMAIN}/calculators/${slug}`;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${config.path}`;
   const keywords = [
     "free online calculator",
     "financial calculator",
@@ -87,26 +128,59 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
 }
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export default async function CalculatorPage({ params }: PageProps) {
-  const { slug } = await params;
+  const paramsObj = await params;
+  const slugSegments = paramsObj.slug;
+
+  if (!Array.isArray(slugSegments) || slugSegments.length === 0) {
+    notFound();
+  }
+
+  // Category landing pages (e.g. /calculators/utility)
+  if (slugSegments.length === 1 && isValidCategory(slugSegments[0])) {
+    const category = slugSegments[0];
+    const calculators = await getCalculatorsByCategory(category);
+
+    const title = formatCategoryName(category);
+    const description = `Browse ${title} to find the right tool for your needs.`;
+
+    return (
+      <CalculatorLayout title={title} description={description} aside={<> </>}>
+        <CalculatorCategorySection title={title} calculators={calculators} />
+      </CalculatorLayout>
+    );
+  }
+
+  // legacy /calculators/{slug} -> redirect to new path
+  if (slugSegments.length === 1) {
+    const legacySlug = slugSegments[0];
+    const calculatorPath = getCalculatorPathFromSlug(legacySlug);
+    redirect(calculatorPath);
+  }
+
+  const [categorySegment, calculatorSegment] = slugSegments;
+  const slug = calculatorSegment.replace(/-calculator$/, "");
   const config = await loadCalculator(slug);
 
   if (!config) {
     notFound();
   }
 
-  const canonicalUrl = `${CANONICAL_DOMAIN}/calculators/${slug}`;
+  // If URL category doesn't match canonical category, redirect.
+  if (categorySegment !== config.category) {
+    redirect(config.path);
+  }
 
-  // Generate SEO content from calculator metadata
+  const canonicalUrl = `${CANONICAL_DOMAIN}${config.path}`;
+
   const intro = generateIntro(config);
   const formulaExplanation = generateFormulaExplanation(config);
   const example = generateExample(config);
   const faqs = generateFaqSections(config);
 
-  // Enhanced structured data with additional fields
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -134,10 +208,8 @@ export default async function CalculatorPage({ params }: PageProps) {
     },
   };
 
-  // FAQ structured data
   const faqStructuredData = formatFaqForSchema(faqs);
 
-  // SoftwareApplication structured data
   const softwareAppData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
