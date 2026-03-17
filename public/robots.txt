@@ -1,6 +1,4 @@
 User-agent: *
-Allow: /calculators/
-Allow: /assets/
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /admin/
