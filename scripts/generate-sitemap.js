@@ -164,7 +164,8 @@ function getCalculatorUrls() {
 
   const calculatorUrls = slugs.map((slug) => {
     const categoryPath = getCalculatorCategory(slug);
-    return `${CANONICAL_DOMAIN}/calculators/${categoryPath}/${slug}-calculator`;
+    const calculatorSegment = slug.endsWith("-calculator") ? slug : `${slug}-calculator`;
+    return `${CANONICAL_DOMAIN}/calculators/${categoryPath}/${calculatorSegment}`;
   });
 
   return [CANONICAL_DOMAIN, ...calculatorUrls];

@@ -188,6 +188,14 @@ export default async function CalculatorPage({ params }: PageProps) {
     notFound();
   }
 
+  // Normalize accidental duplicate "-calculator-calculator" URLs (older sitemap output)
+  const lastSegment = slugSegments[slugSegments.length - 1];
+  if (lastSegment.endsWith("-calculator-calculator")) {
+    const correctedSegment = lastSegment.replace(/-calculator-calculator$/, "-calculator");
+    const correctedPath = `/calculators/${[...slugSegments.slice(0, -1), correctedSegment].join("/")}`;
+    redirect(correctedPath);
+  }
+
   // Top-level category landing pages (e.g. /calculators/finance)
   if (slugSegments.length === 1 && isValidCategory(slugSegments[0])) {
     const category = slugSegments[0];
@@ -258,8 +266,18 @@ export default async function CalculatorPage({ params }: PageProps) {
 
   // Calculator detail pages
   const calculatorSegment = slugSegments[slugSegments.length - 1];
-  const slug = calculatorSegment.replace(/-calculator$/, "");
-  const config = await loadCalculator(slug);
+  const candidateSlug = calculatorSegment.replace(/-calculator$/, "");
+
+  // Prefer the normalized slug (without the "/-calculator" suffix) for most calculators.
+  // If that doesn't exist (e.g. "emi-calculator" where the slug itself ends with "-calculator"),
+  // fall back to using the segment as-is.
+  let slug = candidateSlug;
+  let config = await loadCalculator(slug);
+
+  if (!config && calculatorSegment !== candidateSlug) {
+    slug = calculatorSegment;
+    config = await loadCalculator(slug);
+  }
 
   if (!config) {
     notFound();

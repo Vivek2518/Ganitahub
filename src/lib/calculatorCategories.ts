@@ -233,7 +233,7 @@ export function isValidCategory(category: string): category is TopCategoryKey {
 export function getCalculatorPathFromSlug(slug: string): string {
   const topCategory = getTopCategoryForSlug(slug);
   const subCategory = getSubCategoryForSlug(slug);
-  const calculatorSegment = `${slug}-calculator`;
+  const calculatorSegment = slug.endsWith("-calculator") ? slug : `${slug}-calculator`;
   if (subCategory && subCategory !== topCategory) {
     return `/calculators/${topCategory}/${subCategory}/${calculatorSegment}`;
   }
