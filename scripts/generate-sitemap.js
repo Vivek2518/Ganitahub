@@ -114,6 +114,30 @@ function getCalculatorCategory(slug) {
   "bmi-women": "health/bmi",
   "bmi-weight-loss": "health/bmi",
   "bmi-geriatric": "health/bmi",
+
+  // aerospace
+  "mach-number": "aerospace/atmosphere",
+  "speed-of-sound": "aerospace/atmosphere",
+  "air-density": "aerospace/atmosphere",
+  "pressure-vs-altitude": "aerospace/atmosphere",
+  "temperature-lapse-rate": "aerospace/atmosphere",
+
+  "lift-force": "aerospace/flight-mechanics",
+  "drag-force": "aerospace/flight-mechanics",
+  "lift-to-drag-ratio": "aerospace/flight-mechanics",
+  "stall-speed": "aerospace/flight-mechanics",
+  "wing-loading": "aerospace/flight-mechanics",
+  "glide-ratio": "aerospace/flight-mechanics",
+
+  "thrust": "aerospace/propulsion",
+  "thrust-to-weight": "aerospace/propulsion",
+  "fuel-consumption": "aerospace/propulsion",
+  "specific-impulse": "aerospace/propulsion",
+
+  "escape-velocity": "aerospace/orbital-mechanics",
+  "orbital-velocity": "aerospace/orbital-mechanics",
+  "orbital-period": "aerospace/orbital-mechanics",
+  "circular-orbit-speed": "aerospace/orbital-mechanics",
   };
   return map[slug] || "everyday";
 }
