@@ -6,15 +6,15 @@ export function HeroSection() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <div className="space-y-5 text-left">
           <p className="inline-flex rounded-full bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-            Smart calculators, instant answers
+            Powerful Online Calculators
           </p>
 
           <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">
-            Smart Online Calculators for Finance, Business and Creators
+            Calculate Anything, Instantly
           </h1>
 
           <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Free powerful tools to help you make better financial and business decisions.
+            Accurate calculations for any need. Fast, free, and no sign-up required. Your trusted calculator for work, school, and everyday use.
           </p>
         </div>
 
