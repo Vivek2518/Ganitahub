@@ -24,6 +24,8 @@ export function ThemeToggle() {
       size="sm"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="inline-flex items-center gap-2"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
         <Sun className="h-4 w-4" />

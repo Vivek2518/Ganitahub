@@ -48,7 +48,13 @@ export function Navbar() {
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="sm" className="md:hidden">
+              <Button
+                variant="outline"
+                size="sm"
+                className="md:hidden"
+                aria-label="Open navigation menu"
+                title="Open navigation menu"
+              >
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
