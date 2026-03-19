@@ -20,6 +20,10 @@
   ],
   "formula": "CTR = (Clicks / Impressions) * 100",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "ctr",
+    "expression": "(clicks / impressions) * 100"
+  },
   "outputs": [
     {
       "key": "ctr",

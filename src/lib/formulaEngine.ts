@@ -19,6 +19,20 @@ const round = (value: number, decimals = 2): number => {
   return Math.round(value * factor) / factor;
 };
 
+// Evaluate a simple arithmetic expression using provided values.
+// The expression can reference variables by name, and has access to Math.
+const evaluateExpression = (expression: string, values: Record<string, number>): number => {
+  try {
+    const keys = Object.keys(values);
+    const args = keys.map((k) => values[k]);
+    const fn = new Function(...keys, "Math", `return ${expression};`);
+    const result = fn(...args, Math);
+    return typeof result === "number" && Number.isFinite(result) ? result : 0;
+  } catch {
+    return 0;
+  }
+};
+
 // EMI Calculation
 const EMI = (principal: number, rate: number, tenureYears: number) => {
   const monthlyRate = rate / 100 / 12;
@@ -550,6 +564,28 @@ export function evaluateCalculator(input: CalculatorInput): any {
       const whole = values[input.computeParams?.wholeKey || "whole"] || 0;
       const percentage = whole !== 0 ? (part / whole) * 100 : 0;
       return { percentage: round(percentage, 2) };
+    }
+
+    case "simple": {
+      const baseKey = input.computeParams?.baseKey || "result";
+      const expression = input.computeParams?.expression;
+
+      // Evaluate a custom expression when provided (e.g., "(clicks / impressions) * 100").
+      // This keeps the JSON schema flexible and avoids hardcoding formulas in the engine.
+      const baseValue = expression
+        ? evaluateExpression(expression, values)
+        : values[baseKey] ?? 0;
+
+      const result: Record<string, number> = {
+        [baseKey]: round(baseValue),
+      };
+
+      const multipliers = input.computeParams?.multipliers || {};
+      for (const [key, multiplier] of Object.entries(multipliers)) {
+        result[key] = round(baseValue * multiplier);
+      }
+
+      return result;
     }
 
     case "discount": {

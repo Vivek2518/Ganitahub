@@ -20,6 +20,10 @@
   ],
   "formula": "Runway (months) = Cash Balance / Monthly Burn",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "months",
+    "expression": "cash / burn"
+  },
   "outputs": [
     {
       "key": "months",

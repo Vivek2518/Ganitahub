@@ -22,6 +22,7 @@
   "computationType": "simple",
   "computeParams": {
     "baseKey": "mrr",
+    "expression": "customers * arpu",
     "multipliers": {
       "arr": 12
     }

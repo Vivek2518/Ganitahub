@@ -32,6 +32,10 @@
   ],
   "formula": "Engagement Rate (%) = (Likes + Comments + Shares) / Followers * 100",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "engagementRate",
+    "expression": "((likes + comments + shares) / followers) * 100"
+  },
   "outputs": [
     {
       "key": "engagementRate",

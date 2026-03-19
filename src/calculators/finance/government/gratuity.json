@@ -20,6 +20,10 @@
   ],
   "formula": "Gratuity = (Last Salary * Years * 15) / 26",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "gratuity",
+    "expression": "(salary * years * 15) / 26"
+  },
   "outputs": [
     {
       "key": "gratuity",

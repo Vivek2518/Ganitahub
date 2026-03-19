@@ -32,6 +32,10 @@
   ],
   "formula": "Rate = (Target + Expenses) / Billable Hours",
   "computationType": "simple",
+  "computeParams": {
+    "baseKey": "hourlyRate",
+    "expression": "(target + expenses) / (hours * weeks)"
+  },
   "outputs": [
     {
       "key": "hourlyRate",

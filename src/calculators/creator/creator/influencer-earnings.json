@@ -28,6 +28,7 @@
   "computationType": "simple",
   "computeParams": {
     "baseKey": "monthlyEarnings",
+    "expression": "followers * (engagement / 100) * rate",
     "multipliers": {
       "annualEarnings": 12
     }

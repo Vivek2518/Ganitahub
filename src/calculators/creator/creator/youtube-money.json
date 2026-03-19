@@ -24,6 +24,7 @@
   "computationType": "simple",
   "computeParams": {
     "baseKey": "earnings",
+    "expression": "(views / 1000) * rpm",
     "multipliers": {
       "annualEarnings": 12
     }
