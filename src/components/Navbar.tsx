@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -23,9 +24,15 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            G
-          </span>
+          <div className="relative h-9 w-9">
+            <Image
+              src="/logo.jpeg"
+              alt="InsightCalculator logo"
+              fill
+              className="rounded-2xl object-cover"
+              priority
+            />
+          </div>
           <span className="text-lg">InsightCalculator</span>
         </Link>
 
