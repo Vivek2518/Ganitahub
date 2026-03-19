@@ -3,7 +3,16 @@
   "name": "NPS Calculator",
   "description": "Estimate growth of National Pension Scheme investments.",
   "category": "Government",
-   "tags": ["nps", "retirement", "pension", "investment", "india", "finance", "savings", "calculator"],
+  "tags": [
+    "nps",
+    "retirement",
+    "pension",
+    "investment",
+    "india",
+    "finance",
+    "savings",
+    "calculator"
+  ],
   "fields": [
     {
       "key": "contribution",
@@ -58,16 +67,43 @@
   },
   "faqs": [
     {
-      "question": "Can I withdraw before retirement?",
-      "answer": "Withdrawals are limited before retirement; most funds are locked in until retirement."
+      "question": "How is Gratuity calculated?",
+      "answer": "15 days salary × completed years (max ₹20L). Requires minimum 5 years service."
     },
     {
-      "question": "What is the tax benefit?",
-      "answer": "NPS contributions can qualify for tax deductions under Section 80C and 80CCD."
+      "question": "Can I withdraw EPF before retirement?",
+      "answer": "Partial withdrawal at 50+ years or for specific reasons (home, education, medical). Full withdrawal at age 60."
     },
     {
-      "question": "What tax treatment does NPS have?",
-      "answer": "NPS offers EEE (Exempt-Exempt-Exempt) tax treatment in many cases."
+      "question": "Which is better: NPS vs PPF?",
+      "answer": "NPS: flexible investor choice, open-ended, tax deduction. PPF: fixed returns, simpler, lower risk."
+    },
+    {
+      "question": "What's the NPS contribution limit?",
+      "answer": "Additional tax benefit (80CCD(1B)): ₹50K/year. Through employer: 14% of salary covered in 80C."
+    },
+    {
+      "question": "Is EPF money really yours?",
+      "answer": "Yes, it's your account. Employer contribution (12%) + your 8% = total corpus. Government doesn't take it."
+    },
+    {
+      "question": "What's the VPF lock-in period?",
+      "answer": "VPF contribution locked till 5 years or retirement, whichever is earlier. Interest rate same as regular EPF."
     }
+  ],
+  "concept": "Government scheme calculators help you plan for retirements, benefits, and mandated payouts under Indian laws (Gratuity, EPF, NPS, PPF).",
+  "guideSteps": [
+    "Enter your salary, tenure, or contribution details as required.",
+    "Input your age and expected retirement age if relevant.",
+    "Select the scheme or benefit type.",
+    "Click Calculate to see your projected payout or corpus.",
+    "Note down the results for your retirement and financial planning."
+  ],
+  "standards": [
+    "Gratuity: ₹15 days salary × completed years (max ₹20 lakhs)",
+    "EPF: Both employer and employee contribute 12% (employee gets 8-12% match)",
+    "NPS: You contribute to a personal retirement account; min ₹500/month.",
+    "PPF: 15-year scheme with 7.1-7.25% interest, tax-free maturity.",
+    "VPF: Can contribute up to 100% of salary; rolled into regular EPF."
   ]
 }

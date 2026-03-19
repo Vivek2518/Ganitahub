@@ -3,7 +3,16 @@
   "name": "Personal Loan EMI Calculator",
   "description": "Calculate EMI for personal loans across rates and tenures.",
   "category": "Finance",
-  "tags": ["personal-loan", "emi", "loan", "finance", "interest", "credit", "repayment", "calculator"] ,
+  "tags": [
+    "personal-loan",
+    "emi",
+    "loan",
+    "finance",
+    "interest",
+    "credit",
+    "repayment",
+    "calculator"
+  ],
   "fields": [
     {
       "key": "principal",
@@ -52,22 +61,49 @@
     "outputs": {
       "emi": 11370.49,
       "totalAmount": 682229.4,
-      "totalInterest": 182229.40
+      "totalInterest": 182229.4
     },
     "explanation": "A personal loan of ₹5,00,000 at 14% per annum for 5 years gives an EMI of ₹11,370.49 per month."
   },
   "faqs": [
     {
-      "question": "What affects my EMI?",
-      "answer": "The loan amount, interest rate, and tenure determine the monthly EMI."
+      "question": "What's a good interest rate for a home loan?",
+      "answer": "Rates vary: typically 6.5-8.5% based on credit score, tenure, and market conditions."
     },
     {
-      "question": "Can I pay off the loan early?",
-      "answer": "Early repayment may reduce interest but could include prepayment charges depending on the lender."
+      "question": "How does repayment schedule change interest paid?",
+      "answer": "Shorter tenure pays less total interest but higher EMI. Longer tenure has lower EMI but more total interest."
     },
     {
-      "question": "Is the interest rate fixed?",
-      "answer": "This calculator assumes a fixed rate. Floating rates can change, affecting your EMI."
+      "question": "Can I prepay my loan?",
+      "answer": "Yes, most banks allow prepayment. Prepaying reduces total interest and loan tenure significantly."
+    },
+    {
+      "question": "What affects my loan eligibility?",
+      "answer": "Credit score, income, debt-to-income ratio, employment history, and collateral (for secured loans)."
+    },
+    {
+      "question": "Is fixed or floating rate better?",
+      "answer": "Fixed = predictable EMI (good in rising rate environment); Floating = lower initial rate but uncertainty."
+    },
+    {
+      "question": "How much should I borrow?",
+      "answer": "Limit to 3-4× your annual income. Ensure EMI ≤ 40% of monthly income."
     }
+  ],
+  "concept": "Loan calculators break down your borrowing costs, showing EMI, total interest, and amortization schedules for informed financial planning.",
+  "guideSteps": [
+    "Enter the loan principal amount (₹).",
+    "Input the annual interest rate (% p.a.).",
+    "Specify the loan tenure in months or years.",
+    "Click Calculate to see your monthly EMI, total interest, and repayment schedule.",
+    "Use the amortization table to track principal vs interest payments over time."
+  ],
+  "standards": [
+    "Home loans: 6.5-8.5% interest, 15-20 year tenure.",
+    "Personal loans: 10-16% interest, 2-5 year tenure.",
+    "Car loans: 7-10% interest, 3-5 year tenure.",
+    "Education loans: 4-10% interest, 5-15 year tenure.",
+    "EMI is calculated using: [P × r × (1+r)^n] / [(1+r)^n - 1]"
   ]
 }

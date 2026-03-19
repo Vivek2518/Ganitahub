@@ -49,10 +49,11 @@ export interface CalculatorConfig {
   formula: string;
   formulaDescription?: string;
   introduction?: string;
-  eligibilityCriteria?: string;
+  concept?: string; // Short definition (for featured snippet style)
+  guideSteps?: string[];
+  standards?: string[];
   calculationNotes?: string[];
   benefits?: string[];
-  howToUse?: string[];
   computationType: string;
   computeParams?: Record<string, string>;
   outputs: CalculatorOutput[];

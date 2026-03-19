@@ -20,9 +20,22 @@
   ],
   "formula": "Gratuity = (Last Drawn Salary × Years of Service × 15) / 26",
   "formulaDescription": "This formula is prescribed under the Payment of Gratuity Act, 1972. The 15/26 factor represents 15 days of salary for each year of service, divided by 26 working days in a month.",
-  "introduction": "Gratuity is a retirement benefit paid by employers to employees who have completed at least 5 years of continuous service. It's a statutory benefit governed by the Payment of Gratuity Act, 1972, and provides financial security to employees upon retirement, resignation, or death.",
-  "eligibilityCriteria": "To be eligible for gratuity, an employee must have completed at least 5 years of continuous service with the same employer. This applies to all establishments with 10 or more employees. Service includes periods of leave, maternity leave, and layoff, but excludes periods of unauthorized absence.",
-  "calculationNotes": [
+  "concept": "Gratuity is a legally mandated lump-sum payout that employers must pay after 5+ years of service, designed to give you a financial cushion when you leave a job.",
+  "introduction": "This calculator turns your last drawn basic salary and years served into the gratuity amount you should receive under Indian law.",
+  "guideSteps": [
+    "Enter your last drawn basic salary + dearness allowance.",
+    "Enter completed years of service (round up if you crossed 6 months).",
+    "Click Calculate and compare with the ₹20 lakh cap.",
+    "Keep the result handy for exit settlement and planning your next move."
+  ],
+  "eligibilityCriteria": "You must have completed at least 5 years of continuous service with the same employer to qualify. This includes authorized leave, maternity leave, and layoff, but not unauthorized absence.",
+  "standards": [
+    "Minimum 5 years of service to qualify",
+    "Service is rounded up if you complete 6+ months in the last year",
+    "Only basic salary + dearness allowance counts (no HRA, bonus, or allowances)",
+    "Maximum payable amount is capped at ₹20 lakh",
+    "Payment must be made within 30 days of exit or interest applies"
+  ],  "calculationNotes": [
     "Minimum service requirement: 5 years of continuous service",
     "Service rounding: Any period of 6 months or more in a year counts as a full year",
     "Maximum gratuity limit: ₹20 lakh (as per latest amendments)",

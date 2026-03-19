@@ -4,7 +4,11 @@
   "description": "Calculate motor efficiency based on electrical power input and mechanical power output.",
   "category": "Drone",
   "subcategory": "flight-time-energy",
-  "tags": ["motor efficiency", "drone motors", "power loss"],
+  "tags": [
+    "motor efficiency",
+    "drone motors",
+    "power loss"
+  ],
   "fields": [
     {
       "key": "inputPower",
@@ -47,12 +51,43 @@
   },
   "faqs": [
     {
-      "question": "What is typical drone motor efficiency?",
-      "answer": "Good quality brushless motors typically achieve 85-95% efficiency. ESC losses add another 5-10%."
+      "question": "How do I extend flight time?",
+      "answer": "Lighter payload, lower wind, optimal hover altitude, match propeller size to motor, reduce maneuvers."
     },
     {
-      "question": "How is mechanical power measured?",
-      "answer": "Mechanical power is calculated from thrust and velocity. Use test data or motor simulation tools."
+      "question": "What's the max altitude for drones?",
+      "answer": "Legally: 120 meters (400 ft) in India. Higher altitudes allowed only with special permission."
+    },
+    {
+      "question": "How does temperature affect battery life?",
+      "answer": "Cold reduces capacity ~50%; hot reduces lifespan. Ideal: 15-25°C. Always warm batteries before cold-weather flights."
+    },
+    {
+      "question": "What's the safest glide descend rate?",
+      "answer": "1-2 m/s descent is safe and controlable. > 3 m/s risks hard landing or loss of control."
+    },
+    {
+      "question": "How often should I replace batteries?",
+      "answer": "Every 200-300 charge cycles. Capacity drops to 80% by then. Swollen batteries = immediate replacement."
+    },
+    {
+      "question": "Does motor efficiency change with wear?",
+      "answer": "Yes, worn motors draw more current for same thrust. Replace if efficiency drops > 20%."
     }
+  ],
+  "concept": "Drone calculators help you estimate flight time, power requirements, battery capacity needed, and energy efficiency for your UAV missions.",
+  "guideSteps": [
+    "Enter your drone's specifications (weight, motor power, battery capacity).",
+    "Input mission parameters (flight mode, payload, wind conditions).",
+    "Specify hovering time, cruise speed, or distance to cover.",
+    "Click Calculate to get estimated flight time, power draw, and battery endurance.",
+    "Compare with actual battery capacity to ensure safe operations."
+  ],
+  "standards": [
+    "Hover efficiency: Most drones consume 15-25W per kg of weight.",
+    "Max flight time: Typically 15-30 minutes in ideal conditions.",
+    "Safety margin: Always keep 25-30% battery buffer for landing.",
+    "Battery discharge rate: Follows C-rating (1C = discharge in 1 hour).",
+    "Wind resistance: Each 5 m/s wind reduces flight time by ~10%."
   ]
 }

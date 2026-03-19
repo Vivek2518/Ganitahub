@@ -126,290 +126,279 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
     }
   };
 
+  const effectiveConcept = config.concept || config.introduction || config.description;
+  const guideSteps = config.guideSteps || [
+    "Enter your values into the fields above.",
+    "Click Calculate.",
+    "Review the results and compare with your expectations.",
+    "Adjust inputs if you want to test different scenarios.",
+  ];
+
+  const standards = config.standards || config.calculationNotes || [];
+
   return (
-    <div className="space-y-6">
-      {/* Inputs Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Calculator Inputs</CardTitle>
-          <CardDescription>
-            Enter your values and click Calculate to see results
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            {config.fields.map((field) => (
-              <div key={field.key} className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
-                  {field.label}
-                </label>
-                {field.type === "select" && field.options ? (
-                  <Select
-                    value={values[field.key]}
-                    onValueChange={(value) => handleInputChange(field.key, value)}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {field.options.map((opt) => (
-                        <SelectItem key={opt.value} value={String(opt.value)}>
-                          {opt.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                ) : field.type === "text" || field.type === "date" ? (
-                  <Input
-                    type={field.type === "date" ? "date" : "text"}
-                    placeholder={field.placeholder || field.label}
-                    value={values[field.key]}
-                    onChange={(e) => handleInputChange(field.key, e.target.value)}
-                    className="w-full"
-                  />
-                ) : (
-                  <Input
-                    type="number"
-                    placeholder={field.placeholder || field.label}
-                    value={values[field.key]}
-                    onChange={(e) => handleInputChange(field.key, e.target.value)}
-                    inputMode="decimal"
-                    className="w-full"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+    <div className="space-y-10">
+      {/* Table of Contents */}
+      <nav className="rounded-lg border border-secondary/30 bg-secondary/5 p-4">
+        <p className="text-sm font-semibold text-foreground">Table of Contents</p>
+        <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+          <li>
+            <a href="#calculator" className="text-primary hover:underline">
+              Calculator
+            </a>
+          </li>
+          <li>
+            <a href="#guide" className="text-primary hover:underline">
+              Quick Guide
+            </a>
+          </li>
+          <li>
+            <a href="#concept" className="text-primary hover:underline">
+              What is {config.name}?
+            </a>
+          </li>
+          <li>
+            <a href="#formula" className="text-primary hover:underline">
+              Formula
+            </a>
+          </li>
+          <li>
+            <a href="#standards" className="text-primary hover:underline">
+              Key Standards
+            </a>
+          </li>
+          <li>
+            <a href="#faq" className="text-primary hover:underline">
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-          <Button
-            onClick={handleCalculate}
-            disabled={!isComplete}
-            size="lg"
-            className="w-full mt-6"
-          >
-            Calculate
-          </Button>
-        </CardContent>
-      </Card>
+      <section id="calculator" className="space-y-6">
+        <h2 className="text-2xl font-semibold">Calculator</h2>
+        <p className="text-sm text-muted-foreground">
+          Enter your values below and get instant results.
+        </p>
 
-      {/* Results Card */}
-      {hasCalculated && result !== null && (
-        <Card className="border-green-500 bg-gradient-to-br from-green-900 to-green-950">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-green-50">Results</CardTitle>
+            <CardTitle>Inputs & Outputs</CardTitle>
+            <CardDescription>
+              What you enter vs what you get back.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-6 md:grid-cols-2">
+            <div>
+              <p className="text-sm font-medium text-foreground">Inputs</p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                {config.fields.map((field) => (
+                  <li key={field.key}>• {field.label}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-foreground">Outputs</p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                {config.outputs.map((output) => (
+                  <li key={output.key}>• {output.label}</li>
+                ))}
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Inputs Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Calculator Inputs</CardTitle>
+            <CardDescription>
+              Enter your values and click Calculate to see results
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
-              {config.outputs.map((output) => {
-const value = (() => {
-                if (result === null || result === undefined) return null;
-
-                // If the calculation produced a single scalar value and the UI expects
-                // just one output, use that scalar directly.
-                if (typeof result === "number" || typeof result === "string") {
-                  if (config.outputs.length === 1) return result;
-                  return null;
-                }
-
-                if (Array.isArray(result)) {
-                  return result[0];
-                }
-
-                return (result as any)[output.key];
-              })();
-
-              const displayLabel = (() => {
-                if (
-                  config.computationType === "bmiWeightLoss" &&
-                  output.key === "weightToLose" &&
-                  result?.direction
-                ) {
-                  return result.direction === "Gain"
-                    ? "Weight to Gain (kg)"
-                    : result.direction === "Lose"
-                    ? "Weight to Lose (kg)"
-                    : "Weight change (kg)";
-                }
-                return output.label;
-              })();
-
-                return (
-                  <div
-                    key={output.key}
-                    className="flex justify-between items-center p-4 bg-green-800/40 rounded border border-green-700"
-                  >
-                    <span className="text-sm font-medium text-green-100">
-                      {displayLabel}
-                    </span>
-                    <span className="text-lg font-bold text-green-300">
-                      {formatValue(value, output.format)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Introduction */}
-      {config.introduction && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">What is Gratuity?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {config.introduction}
-            </p>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Eligibility Criteria */}
-      {config.eligibilityCriteria && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Eligibility Criteria</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {config.eligibilityCriteria}
-            </p>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Formula Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Gratuity Calculation Formula</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <p className="font-mono text-sm text-muted-foreground">{config.formula}</p>
-          {config.formulaDescription && (
-            <p className="text-sm text-muted-foreground">{config.formulaDescription}</p>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Calculation Notes */}
-      {config.calculationNotes && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Important Notes</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              {config.calculationNotes.map((note, idx) => (
-                <li key={idx} className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
-                  {note}
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Benefits */}
-      {config.benefits && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Benefits of Using This Calculator</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              {config.benefits.map((benefit, idx) => (
-                <li key={idx} className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* How to Use */}
-      {config.howToUse && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">How to Use the Calculator</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ol className="text-sm text-muted-foreground space-y-1">
-              {config.howToUse.map((step, idx) => (
-                <li key={idx} className="flex items-start">
-                  <span className="text-primary mr-2 font-medium">{idx + 1}.</span>
-                  {step}
-                </li>
-              ))}
-            </ol>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Example Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Example</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="bg-background p-3 rounded border">
-            <p className="text-sm font-medium mb-2">Input:</p>
-            <div className="text-sm text-muted-foreground space-y-1">
-              {Object.entries(config.example.inputs).map(([key, value]) => (
-                <div key={key} className="flex justify-between">
-                  <span>{key}:</span>
-                  <span className="font-mono">{value}</span>
+              {config.fields.map((field) => (
+                <div key={field.key} className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">
+                    {field.label}
+                  </label>
+                  {field.type === "select" && field.options ? (
+                    <Select
+                      value={values[field.key]}
+                      onValueChange={(value) => handleInputChange(field.key, value)}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {field.options.map((opt) => (
+                          <SelectItem key={opt.value} value={String(opt.value)}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : field.type === "text" || field.type === "date" ? (
+                    <Input
+                      type={field.type === "date" ? "date" : "text"}
+                      placeholder={field.placeholder || field.label}
+                      value={values[field.key]}
+                      onChange={(e) => handleInputChange(field.key, e.target.value)}
+                      className="w-full"
+                    />
+                  ) : (
+                    <Input
+                      type="number"
+                      placeholder={field.placeholder || field.label}
+                      value={values[field.key]}
+                      onChange={(e) => handleInputChange(field.key, e.target.value)}
+                      inputMode="decimal"
+                      className="w-full"
+                    />
+                  )}
                 </div>
               ))}
             </div>
-          </div>
-          <div className="bg-background p-3 rounded border">
-            <p className="text-sm font-medium mb-2">Output:</p>
-            <div className="text-sm text-foreground space-y-1">
-              {Object.entries(config.example.outputs).map(([key, value]) => {
-                const outputConfig = config.outputs.find((o) => o.key === key);
-                const format = outputConfig?.format || "number";
-                return (
-                  <div key={key} className="flex justify-between">
-                    <span>{key}:</span>
-                    <span className="font-mono">
-                      {formatValue(value, format)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground italic">
-            {config.example.explanation}
-          </p>
-        </CardContent>
-      </Card>
 
-      {/* FAQs */}
-      {config.faqs.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Frequently Asked Questions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {config.faqs.map((faq, idx) => (
-                <div key={idx}>
-                  <p className="text-sm font-medium text-foreground mb-1">
-                    {idx + 1}. {faq.question}
-                  </p>
-                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
+            <Button
+              onClick={handleCalculate}
+              disabled={!isComplete}
+              size="lg"
+              className="w-full mt-6"
+            >
+              Calculate
+            </Button>
           </CardContent>
         </Card>
-      )}
+
+        {/* Results Card */}
+        {hasCalculated && result !== null && (
+          <Card className="border-green-500 bg-gradient-to-br from-green-900 to-green-950">
+            <CardHeader>
+              <CardTitle className="text-green-50">Results</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                {config.outputs.map((output) => {
+                  const value = (() => {
+                    if (result === null || result === undefined) return null;
+
+                    // If the calculation produced a single scalar value and the UI expects
+                    // just one output, use that scalar directly.
+                    if (typeof result === "number" || typeof result === "string") {
+                      if (config.outputs.length === 1) return result;
+                      return null;
+                    }
+
+                    if (Array.isArray(result)) {
+                      return result[0];
+                    }
+
+                    return (result as any)[output.key];
+                  })();
+
+                  const displayLabel = (() => {
+                    if (
+                      config.computationType === "bmiWeightLoss" &&
+                      output.key === "weightToLose" &&
+                      result?.direction
+                    ) {
+                      return result.direction === "Gain"
+                        ? "Weight to Gain (kg)"
+                        : result.direction === "Lose"
+                        ? "Weight to Lose (kg)"
+                        : "Weight change (kg)";
+                    }
+                    return output.label;
+                  })();
+
+                  return (
+                    <div
+                      key={output.key}
+                      className="flex justify-between items-center p-4 bg-green-800/40 rounded border border-green-700"
+                    >
+                      <span className="text-sm font-medium text-green-100">
+                        {displayLabel}
+                      </span>
+                      <span className="text-lg font-bold text-green-300">
+                        {formatValue(value, output.format)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </section>
+
+      <section id="guide" className="space-y-6">
+        <h2 className="text-2xl font-semibold">Quick Guide</h2>
+        <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+          {guideSteps.map((step, idx) => (
+            <li key={idx}>{step}</li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="concept" className="space-y-6">
+        <h2 className="text-2xl font-semibold">What is {config.name}?</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">{effectiveConcept}</p>
+      </section>
+
+      <section id="formula" className="space-y-6">
+        <h2 className="text-2xl font-semibold">The Formula</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Formula Used</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="font-mono text-sm text-muted-foreground">{config.formula}</p>
+            {config.formulaDescription && (
+              <p className="text-sm text-muted-foreground">{config.formulaDescription}</p>
+            )}
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="standards" className="space-y-6">
+        <h2 className="text-2xl font-semibold">Key Standards & Benchmarks</h2>
+        {standards.length > 0 ? (
+          <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+            {standards.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-muted-foreground">No specific benchmarks available for this tool.</p>
+        )}
+      </section>
+
+      <section id="faq" className="space-y-6">
+        <h2 className="text-2xl font-semibold">FAQ</h2>
+        {config.faqs.length > 0 ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Frequently Asked Questions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {config.faqs.map((faq, idx) => (
+                  <div key={idx}>
+                    <p className="text-sm font-medium text-foreground mb-1">
+                      {idx + 1}. {faq.question}
+                    </p>
+                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <p className="text-sm text-muted-foreground">No FAQs available for this calculator.</p>
+        )}
+      </section>
     </div>
   );
 }

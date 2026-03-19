@@ -87,6 +87,21 @@
     }
   ],
   "formula": "Actual CTR = (Clicks / Impressions) * 100; Thumbnail Score = (Design factors + Performance vs niche benchmark) * 10",
+  "concept": "Thumbnail CTR measures the percentage of viewers who click your video after seeing the thumbnail. It’s the first thing YouTube uses to decide if your video deserves more reach.",
+  "introduction": "Plug in your impressions, clicks, and thumbnail design signals to get an instant score, CTR estimate, and revenue impact projection for your channel.",
+  "guideSteps": [
+    "Use real impressions and click counts from YouTube Analytics.",
+    "Select your niche and channel size for a benchmark-based score.",
+    "Answer the design questions honestly (face, contrast, text).",
+    "Review the output to decide whether to redo or keep your thumbnail."
+  ],
+  "standards": [
+    "Small channels (0–1K) need 8–12% CTR to trigger growth.",
+    "Major channels (1M+) often settle at 4–6% CTR.",
+    "Face thumbnails typically increase CTR by 15–25%.",
+    "Don’t exceed 5 words on overlay text; shorter reads better on mobile.",
+    "High contrast thumbnails generally outperform low contrast by 20–30%."
+  ],
   "computationType": "youtubeThumbnailCtr",
   "outputs": [
     {
