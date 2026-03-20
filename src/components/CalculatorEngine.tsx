@@ -70,10 +70,29 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
     return parsed;
   }, [values, config.fields]);
 
+  const isFieldVisible = (field: typeof config.fields[number], currentValues: Record<string, string>) => {
+    if (!field.dependsOn) return true;
+
+    const dependencies = Array.isArray(field.dependsOn)
+      ? field.dependsOn
+      : [field.dependsOn];
+
+    return dependencies.every((dep) => {
+      const selected = currentValues[dep.key];
+      if (selected === undefined || selected === "") return false;
+      return String(selected) === String(dep.value);
+    });
+  };
+
+  // Determine visibility of fields for conditional logic
+  const visibleFields = useMemo(() => {
+    return config.fields.filter((field) => isFieldVisible(field, values));
+  }, [config.fields, values]);
+
   // Check if all required fields are filled
   const isComplete = useMemo(() => {
-    return config.fields.every((field) => values[field.key] !== "");
-  }, [values, config.fields]);
+    return visibleFields.every((field) => values[field.key] !== "");
+  }, [values, visibleFields]);
 
   // Handle calculation
   const handleCalculate = () => {
@@ -95,7 +114,24 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
   };
 
   const handleInputChange = (key: string, value: string) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
+    setValues((prev) => {
+      let next = { ...prev, [key]: value };
+
+      // Clear fields that are no longer visible due to changed dependency
+      config.fields.forEach((field) => {
+        if (!field.dependsOn) return;
+
+        const dependentFields = Array.isArray(field.dependsOn) ? field.dependsOn : [field.dependsOn];
+        const dependsOnKey = dependentFields.map((dep) => dep.key);
+
+        if (dependsOnKey.includes(key) && !isFieldVisible(field, { ...next })) {
+          next[field.key] = "";
+        }
+      });
+
+      return next;
+    });
+
     // Reset result when inputs change
     if (hasCalculated) {
       setResult(null);
@@ -193,7 +229,7 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
             <div>
               <p className="text-sm font-medium text-foreground">Inputs</p>
               <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                {config.fields.map((field) => (
+                {visibleFields.map((field) => (
                   <li key={field.key}>• {field.label}</li>
                 ))}
               </ul>
@@ -219,7 +255,7 @@ export function CalculatorEngine({ config, addToRecent }: CalculatorEngineProps)
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
-              {config.fields.map((field) => (
+              {visibleFields.map((field) => (
                 <div key={field.key} className="space-y-2">
                   <label className="text-sm font-medium text-foreground">
                     {field.label}

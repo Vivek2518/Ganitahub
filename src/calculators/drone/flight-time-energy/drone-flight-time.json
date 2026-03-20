@@ -55,19 +55,31 @@
       "key": "averagePower",
       "label": "Average Power Consumption (W)",
       "type": "number",
-      "placeholder": "500"
+      "placeholder": "500",
+      "dependsOn": {
+        "key": "powerMode",
+        "value": "direct"
+      }
     },
     {
       "key": "droneWeight",
       "label": "All-Up Weight - AUW (kg)",
       "type": "number",
-      "placeholder": "2.5"
+      "placeholder": "2.5",
+      "dependsOn": {
+        "key": "powerMode",
+        "value": "weight"
+      }
     },
     {
       "key": "powerPerKg",
       "label": "Power Required per kg (W/kg)",
       "type": "number",
-      "placeholder": "150"
+      "placeholder": "150",
+      "dependsOn": {
+        "key": "powerMode",
+        "value": "weight"
+      }
     },
     {
       "key": "flightProfile",

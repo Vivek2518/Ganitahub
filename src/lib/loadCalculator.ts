@@ -11,12 +11,18 @@ import {
   getCalculatorPathFromSlug,
 } from "@/lib/calculatorCategories";
 
+export interface FieldDependency {
+  key: string;
+  value: any;
+}
+
 export interface CalculatorField {
   key: string;
   label: string;
   type: "number" | "percentage" | "text" | "date" | "select";
   placeholder?: string;
   options?: Array<{ value: any; label: string }>;
+  dependsOn?: FieldDependency | FieldDependency[];
 }
 
 export interface CalculatorOutput {
